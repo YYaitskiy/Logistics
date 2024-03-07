@@ -1,6 +1,7 @@
 package ua.yura.models;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -9,7 +10,6 @@ public class Lot {
     private String status;
     private LocalDate shippingDate;
     private List<Package> packageList;
-
 
     public Lot(UUID id, String status, LocalDate shippingDate, List<Package> packageList) {
         this.id = id;
@@ -22,28 +22,28 @@ public class Lot {
         return id;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public LocalDate getShippingDate() {
-        return shippingDate;
-    }
-
-    public List<Package> getPackageList() {
-        return packageList;
-    }
-
     public void setId(UUID id) {
         this.id = id;
+    }
+
+    public String getStatus() {
+        return status;
     }
 
     public void setStatus(String status) {
         this.status = status;
     }
 
+    public LocalDate getShippingDate() {
+        return shippingDate;
+    }
+
     public void setShippingDate(LocalDate shippingDate) {
         this.shippingDate = shippingDate;
+    }
+
+    public List<Package> getPackageList() {
+        return packageList;
     }
 
     public void setPackageList(List<Package> packageList) {

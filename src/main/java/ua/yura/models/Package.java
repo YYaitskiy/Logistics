@@ -23,44 +23,44 @@ public class Package {
         return id;
     }
 
-    public long getParcelTrackingNumber() {
-        return parcelTrackingNumber;
-    }
-
-    public int getCardNumber() {
-        return cardNumber;
-    }
-
-    public String getClient() {
-        return client;
-    }
-
-    public String getDescriptions() {
-        return descriptions;
-    }
-
-    public int getDeliveryPrice() {
-        return deliveryPrice;
-    }
-
     public void setId(UUID id) {
         this.id = id;
+    }
+
+    public long getParcelTrackingNumber() {
+        return parcelTrackingNumber;
     }
 
     public void setParcelTrackingNumber(long parcelTrackingNumber) {
         this.parcelTrackingNumber = parcelTrackingNumber;
     }
 
+    public int getCardNumber() {
+        return cardNumber;
+    }
+
     public void setCardNumber(int cardNumber) {
         this.cardNumber = cardNumber;
+    }
+
+    public String getClient() {
+        return client;
     }
 
     public void setClient(String client) {
         this.client = client;
     }
 
+    public String getDescriptions() {
+        return descriptions;
+    }
+
     public void setDescriptions(String descriptions) {
         this.descriptions = descriptions;
+    }
+
+    public int getDeliveryPrice() {
+        return deliveryPrice;
     }
 
     public void setDeliveryPrice(int deliveryPrice) {
