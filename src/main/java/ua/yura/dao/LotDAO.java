@@ -32,5 +32,9 @@ public class LotDAO {
 
     }
 
+    public List<Lot> show(){
+        return lotList;
+    }
+
 
 }
