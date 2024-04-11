@@ -11,6 +11,9 @@ public class Lot {
     private LocalDate shippingDate;
     private List<Package> packageList;
 
+    public Lot() {
+    }
+
     public Lot(UUID id, String status, LocalDate shippingDate, List<Package> packageList) {
         this.id = id;
         this.status = status;

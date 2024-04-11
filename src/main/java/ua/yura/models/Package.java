@@ -19,6 +19,9 @@ public class Package {
         this.deliveryPrice = deliveryPrice;
     }
 
+    public Package() {
+    }
+
     public UUID getId() {
         return id;
     }

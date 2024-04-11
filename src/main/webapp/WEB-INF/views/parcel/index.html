@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+</head>
+<body>
+<div th:each="parcel : ${parcel}">
+
+    <hr/>
+<!--    <p th:text="${parcel.getParcelTrackingNumber()}">VALUE</p>-->
+<!--    <p th:text="${parcel.getCardNumber()}">VALUE</p>-->
+<!--    <p th:text="${parcel.getClient()}">VALUE</p>-->
+<!--    <p th:text="${parcel.getDescriptions()}">VALUE</p>-->
+<!--    <p th:text="${parcel.getDeliveryPrice()}">VALUE</p>-->
+
+
+    <p th:text="${parcel.getParcelTrackingNumber()} + ' - ' + ${parcel.getCardNumber()} + ' - ' + ${parcel.getClient()} + ' - ' + ${parcel.getDescriptions()}"></p>
+    <p th:text="${parcel.getDeliveryPrice()} + 'грн'">VALUE</p>
+<!--    <p th:text="'Parcel Tracking Number: ' + ${parcel.getParcelTrackingNumber()} + ', Card Number: ' + ${parcel.getCardNumber()} + ', Client: ' + ${parcel.getClient()} + ', Descriptions: ' + ${parcel.getDescriptions()} + ', Delivery Price: ' + ${parcel.getDeliveryPrice()}"></p>-->
+</div>
+<hr/>
+<!--&lt;!&ndash;<p th:text="${package.getCardNumber()}">VALUE</p>&ndash;&gt;-->
+
+<!--<p th:text="${parcel}">VALUE</p>-->
+
+</body>
+</html>
