@@ -9,10 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import ua.yura.dao.LotDAO;
 import ua.yura.dao.PackageDAO;
 import ua.yura.models.Lot;
-import ua.yura.models.Package;
-
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 @Controller
@@ -22,14 +18,10 @@ public class ParcelController {
     private LotDAO lotDAO;
     private PackageDAO packageDAO;
 
-
-
-
     @Autowired
     public ParcelController(LotDAO lotDAO, PackageDAO packageDAO) {
         this.lotDAO = lotDAO;
         this.packageDAO = packageDAO;
-
     }
 
     @GetMapping()
@@ -40,12 +32,8 @@ public class ParcelController {
 
     @GetMapping("/{id}")
     public String id(@PathVariable("id") UUID uuid, Model model){
-        List<Package> packageList;
         Lot lot1 = lotDAO.index(uuid);
         model.addAttribute("parcel", packageDAO.listIndexPackage(lot1));
-        packageList = packageDAO.listIndexPackage(lot1);
-//        model.addAttribute("parcel", "Hello world");
-        System.out.println(packageList.get(0).getParcelTrackingNumber());
         return "parcel/index";
     }
 }
