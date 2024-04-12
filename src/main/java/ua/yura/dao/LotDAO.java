@@ -21,12 +21,11 @@ public class LotDAO {
         this.lotList = lotList;
 
         lotList.add(new Lot(UUID.randomUUID(), "Відправлені", LocalDate.of(2024, 3, 6), packageDAO.getPackageList()));
+        lotList.add(new Lot(UUID.randomUUID(), "Отримані", LocalDate.of(2024, 4, 9), packageDAO.getPackageList4()));
         lotList.add(new Lot(UUID.randomUUID(), "Відправлені", LocalDate.of(2024, 3, 7), packageDAO.getPackageList2()));
         lotList.add(new Lot(UUID.randomUUID(), "Відправлені", LocalDate.of(2024, 3, 5), packageDAO.getPackageList3()));
+        lotList.add(new Lot(UUID.randomUUID(), "Отримані", LocalDate.of(2024, 4, 8), packageDAO.getPackageList5()));
 
-        lotList.add(new Lot(UUID.randomUUID(), "Відправлені", LocalDate.of(2024, 3, 6), packageDAO.getPackageList()));
-        lotList.add(new Lot(UUID.randomUUID(), "Відправлені", LocalDate.of(2024, 3, 7), packageDAO.getPackageList2()));
-        lotList.add(new Lot(UUID.randomUUID(), "Відправлені", LocalDate.of(2024, 3, 5), packageDAO.getPackageList3()));
     }
 
     public List<Lot> show(){
@@ -42,6 +41,26 @@ public class LotDAO {
             }
         }
         return lotId;
+    }
+
+    public List<Lot> sentStatus(){
+        List<Lot> lotList1 = new ArrayList<>();
+        for (Lot lot:lotList){
+            if(lot.getStatus().equals("Відправлені")){
+                lotList1.add(lot);
+            }
+        }
+        return lotList1;
+    }
+
+    public List<Lot> receiveStatus(){
+        List<Lot> lotList1 = new ArrayList<>();
+        for (Lot lot:lotList){
+            if(lot.getStatus().equals("Отримані")){
+                lotList1.add(lot);
+            }
+        }
+        return lotList1;
     }
 
 

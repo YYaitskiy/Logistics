@@ -2,12 +2,9 @@
 <html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Show</title>
+    <title>Отримані</title>
 </head>
 <body>
-
-<a th:href="@{/parcel/{id}(id=${parcel.getId()})}" >Відправлені</a>
-
 <div th:each="parcel : ${parcel}">
     <hr/>
     <a th:href="@{/parcel/{id}(id=${parcel.getId()})}" th:text="${parcel.getStatus()} + ' ' +  ${parcel.getShippingDate()}">user</a>

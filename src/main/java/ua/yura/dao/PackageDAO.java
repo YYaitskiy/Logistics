@@ -13,13 +13,19 @@ public class PackageDAO {
 
     private List<Package> packageList;
     private List<Package> packageList2;
-
     private List<Package> packageList3;
 
-    public PackageDAO(List<Package> packageList, List<Package> packageList2, List<Package> packageList3) {
+    private List<Package> packageList4;
+
+    private List<Package> packageList5;
+
+    public PackageDAO(List<Package> packageList, List<Package> packageList2, List<Package> packageList3,
+                      List<Package> packageList4, List<Package> packageList5) {
         this.packageList = packageList;
         this.packageList2 = packageList2;
         this.packageList3 = packageList3;
+        this.packageList4 = packageList4;
+        this.packageList5 = packageList5;
 
         packageList.add(new Package(UUID.randomUUID(),20450883238699L, 106391, "Глобал Київ", "Панч", 80));
         packageList.add(new Package(UUID.randomUUID(),20450883238698L, 106385, "Опера", "пейджеры-5шт", 130));
@@ -33,6 +39,13 @@ public class PackageDAO {
 
         packageList3.add(new Package(UUID.randomUUID(),20450883238691L, 104979, "Смілянська", "монитор", 208));
         packageList3.add(new Package(UUID.randomUUID(),20450883238690L, 105021, "Стрийський", "кнопки", 130));
+
+        packageList4.add(new Package(UUID.randomUUID(),20450883234537L, 111439, "Мост сіті", "Тонкий клієнт", 95));
+        packageList4.add(new Package(UUID.randomUUID(),20450883362398L, 109645, "Вокзал Одеса", "старі atrast", 140));
+
+        packageList5.add(new Package(UUID.randomUUID(),20450883664490L, 111064, "ЦУМ", "переопломбування РРО", 55));
+        packageList5.add(new Package(UUID.randomUUID(),20450883373892L, 111208, "95 квартал", "Atrust", 95));
+        packageList5.add(new Package(UUID.randomUUID(),20450883373473L, 111564, "Глобал Житомир", "таблет 2шт", 100));
     }
 
     public List<Package> getPackageList() {
@@ -47,6 +60,14 @@ public class PackageDAO {
         return packageList3;
     }
 
+    public List<Package> getPackageList4() {
+        return packageList4;
+    }
+
+    public List<Package> getPackageList5() {
+        return packageList5;
+    }
+
     public List<Package> listIndexPackage (Lot lot){
         List<Package> list = new ArrayList<>();
        if (lot.getPackageList()==packageList){
@@ -57,6 +78,14 @@ public class PackageDAO {
        }
        else if (lot.getPackageList()==packageList3){
            list=packageList3;
+       }
+
+       else if (lot.getPackageList()==packageList4){
+           list=packageList4;
+       }
+
+       else if (lot.getPackageList()==packageList5){
+           list=packageList5;
        }
        return list;
     }

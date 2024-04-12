@@ -36,4 +36,16 @@ public class ParcelController {
         model.addAttribute("parcel", packageDAO.listIndexPackage(lot1));
         return "parcel/index";
     }
+
+    @GetMapping("/sent")
+    public String sent(Model model){
+        model.addAttribute("parcel", lotDAO.sentStatus());
+        return "parcel/sent";
+    }
+
+    @GetMapping("/receive")
+    public String receive(Model model){
+        model.addAttribute("parcel", lotDAO.receiveStatus());
+        return "parcel/receive";
+    }
 }
