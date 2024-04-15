@@ -63,5 +63,9 @@ public class LotDAO {
         return lotList1;
     }
 
+    public void save(Lot lot){
+        lotList.add(lot);
+    }
+
 
 }

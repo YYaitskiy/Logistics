@@ -6,7 +6,9 @@
 </head>
 <body>
 
-<a th:href="@{/parcel/{id}(id=${parcel.getId()})}" >Відправлені</a>
+<h3><a href="/parcel/sent" >Відправлені</a> <a href="/parcel/receive" style="margin-left: 25px">Отримані</a></h3>
+
+
 
 <div th:each="parcel : ${parcel}">
     <hr/>

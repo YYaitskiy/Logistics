@@ -3,12 +3,14 @@ package ua.yura.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import ua.yura.dao.LotDAO;
 import ua.yura.dao.PackageDAO;
 import ua.yura.models.Lot;
+import ua.yura.models.Package;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Controller
@@ -47,5 +49,17 @@ public class ParcelController {
     public String receive(Model model){
         model.addAttribute("parcel", lotDAO.receiveStatus());
         return "parcel/receive";
+    }
+
+    @GetMapping("/new")
+    public String newParcel(Model model){
+        model.addAttribute("lot", new Lot(new ArrayList<>()));
+        return "parcel/new";
+    }
+
+    @PostMapping()
+    public String create (@ModelAttribute("lot") Lot lot){
+        lotDAO.save(lot);
+        return "redirect:/parcel";
     }
 }
