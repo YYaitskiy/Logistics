@@ -19,13 +19,16 @@ public class PackageDAO {
 
     private List<Package> packageList5;
 
+    private List<List<Package>> allPackageList;
+
     public PackageDAO(List<Package> packageList, List<Package> packageList2, List<Package> packageList3,
-                      List<Package> packageList4, List<Package> packageList5) {
+                      List<Package> packageList4, List<Package> packageList5, List<List<Package>> allPackageList) {
         this.packageList = packageList;
         this.packageList2 = packageList2;
         this.packageList3 = packageList3;
         this.packageList4 = packageList4;
         this.packageList5 = packageList5;
+        this.allPackageList=allPackageList;
 
         packageList.add(new Package(UUID.randomUUID(),20450883238699L, 106391, "Глобал Київ", "Панч", 80));
         packageList.add(new Package(UUID.randomUUID(),20450883238698L, 106385, "Опера", "пейджеры-5шт", 130));
@@ -68,26 +71,6 @@ public class PackageDAO {
         return packageList5;
     }
 
-    public List<Package> listIndexPackage (Lot lot){
-        List<Package> list = new ArrayList<>();
-       if (lot.getPackageList()==packageList){
-           list=packageList;
-       }
-       else if (lot.getPackageList()==packageList2){
-           list=packageList2;
-       }
-       else if (lot.getPackageList()==packageList3){
-           list=packageList3;
-       }
 
-       else if (lot.getPackageList()==packageList4){
-           list=packageList4;
-       }
-
-       else if (lot.getPackageList()==packageList5){
-           list=packageList5;
-       }
-       return list;
-    }
 
 }

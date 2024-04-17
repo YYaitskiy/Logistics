@@ -7,6 +7,7 @@ import ua.yura.models.Package;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -32,7 +33,7 @@ public class LotDAO {
         return lotList;
     }
 
-    public Lot index (UUID uuid){
+    public List<Package> index (UUID uuid){
         Lot lotId = new Lot();
         for(Lot lot:lotList){
             if (lot.getId().equals(uuid)){
@@ -40,7 +41,7 @@ public class LotDAO {
                break;
             }
         }
-        return lotId;
+        return lotId.getPackageList();
     }
 
     public List<Lot> sentStatus(){
@@ -64,7 +65,7 @@ public class LotDAO {
     }
 
     public void save(Lot lot){
-        lotList.add(lot);
+        lotList.add(0,lot);
     }
 
 

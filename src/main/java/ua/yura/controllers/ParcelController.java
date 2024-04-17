@@ -9,7 +9,9 @@ import ua.yura.dao.PackageDAO;
 import ua.yura.models.Lot;
 import ua.yura.models.Package;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -20,6 +22,8 @@ public class ParcelController {
     private LotDAO lotDAO;
     private PackageDAO packageDAO;
 
+
+
     @Autowired
     public ParcelController(LotDAO lotDAO, PackageDAO packageDAO) {
         this.lotDAO = lotDAO;
@@ -28,14 +32,15 @@ public class ParcelController {
 
     @GetMapping()
     public String show(Model model){
+
         model.addAttribute("parcel", lotDAO.show());
         return "parcel/show";
     }
 
     @GetMapping("/{id}")
     public String id(@PathVariable("id") UUID uuid, Model model){
-        Lot lot1 = lotDAO.index(uuid);
-        model.addAttribute("parcel", packageDAO.listIndexPackage(lot1));
+        List<Package> list = lotDAO.index(uuid);
+        model.addAttribute("parcel",  list);
         return "parcel/index";
     }
 
@@ -53,7 +58,7 @@ public class ParcelController {
 
     @GetMapping("/new")
     public String newParcel(Model model){
-        model.addAttribute("lot", new Lot(new ArrayList<>()));
+        model.addAttribute("lot", new Lot());
         return "parcel/new";
     }
 
