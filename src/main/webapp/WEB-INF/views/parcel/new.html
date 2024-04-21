@@ -5,11 +5,20 @@
     <title>Нове відправленя</title>
 </head>
 <body>
-<form th:method="POST" th:action="@{/parcel}" th:object="${lot}">
-    <label for="status">Enter status</label>
-    <input type="text" th:field="*{status}" id="status"/>
+<form th:method="POST" th:action="@{/parcel}" th:object="${lot}" >
+
+
     <br/>
-    <input type="submit" value="Створити">
+    <label for="status" style="font-size: 25px; margin-right: 5px">Посилки:  </label>
+    <select name="status" id="status" style="font-size: 20px; margin-right: 10px" >
+        <option value="Відправлені">Відправлені</option>
+        <option value="Отримані">Отримані</option>
+    </select>
+
+    <label for="shippingDate" style="font-size: 25px" >дата:</label>
+    <input type="date" id="shippingDate" name="trip-start" value="2018-07-22" min="2018-01-01" max="2300-12-31"  style="font-size: 20px; margin-right: 10px" />
+
+    <input type="submit" value="Створити" style="font-size: 20px">
 </form>
 
 </body>

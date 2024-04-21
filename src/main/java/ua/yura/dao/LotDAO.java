@@ -66,7 +66,7 @@ public class LotDAO {
 
     public void save(Lot lot){
         lot.setId(UUID.randomUUID());
-        lot.setShippingDate(LocalDate.now());
+//        lot.setShippingDate(LocalDate.now());
         lot.setPackageList(new ArrayList<>());
         lotList.add(0,lot);
     }
