@@ -7,7 +7,6 @@ import ua.yura.models.Package;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -65,9 +64,6 @@ public class LotDAO {
     }
 
     public void save(Lot lot){
-        lot.setId(UUID.randomUUID());
-//        lot.setShippingDate(LocalDate.now());
-        lot.setPackageList(new ArrayList<>());
         lotList.add(0,lot);
     }
 

@@ -9,9 +9,8 @@ import ua.yura.dao.PackageDAO;
 import ua.yura.models.Lot;
 import ua.yura.models.Package;
 
-import javax.servlet.http.HttpSession;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -64,6 +63,8 @@ public class ParcelController {
 
     @PostMapping()
     public String create (@ModelAttribute("lot") Lot lot){
+        lot.setPackageList(new ArrayList<>());
+        lot.setId(UUID.randomUUID());
         lotDAO.save(lot);
         return "redirect:/parcel";
     }

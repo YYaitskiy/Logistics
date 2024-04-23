@@ -1,15 +1,18 @@
 package ua.yura.models;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 public class Lot {
     private UUID id;
     private String status;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate shippingDate;
     private List<Package> packageList;
+
 
     public Lot() {
     }
@@ -56,4 +59,6 @@ public class Lot {
     public void setPackageList(List<Package> packageList) {
         this.packageList = packageList;
     }
+
+
 }

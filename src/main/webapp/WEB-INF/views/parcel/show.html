@@ -6,13 +6,14 @@
 </head>
 <body>
 
-<h3><a href="/parcel/sent" >Відправлені</a> <a href="/parcel/receive" style="margin-left: 25px">Отримані</a> <a href="/parcel/new" style="margin-left: 25px">Створити</a></h3>
+<h2><a  href="/parcel/sent" >Відправлені</a> <a href="/parcel/receive" style="margin-left: 25px">Отримані</a> <a href="/parcel/new" style="margin-left: 25px">Створити</a></h2>
 
 
 
-<div th:each="parcel : ${parcel}">
+
+<div th:each="parcel : ${parcel}" >
     <hr/>
-    <a th:href="@{/parcel/{id}(id=${parcel.getId()})}" th:text="${parcel.getStatus()} + ' ' +  ${parcel.getShippingDate()}">user</a>
+    <a th:href="@{/parcel/{id}(id=${parcel.getId()})}" th:text="${parcel.getStatus() } + ' ' +  ${parcel.getShippingDate()}">user</a>
 </div>
 
 
