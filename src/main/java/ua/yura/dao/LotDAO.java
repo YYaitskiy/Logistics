@@ -32,16 +32,17 @@ public class LotDAO {
         return lotList;
     }
 
-    public List<Package> index (UUID uuid){
+    public Lot indexLot (UUID uuid){
         Lot lotId = new Lot();
         for(Lot lot:lotList){
             if (lot.getId().equals(uuid)){
-               lotId=lot;
-               break;
+                lotId=lot;
+                break;
             }
         }
-        return lotId.getPackageList();
+        return lotId;
     }
+
 
     public List<Lot> sentStatus(){
         List<Lot> lotList1 = new ArrayList<>();

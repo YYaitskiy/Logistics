@@ -5,7 +5,10 @@
     <title>Index</title>
 </head>
 <body>
-<div th:each="parcel : ${parcel}">
+<h3 th:text="${parcel.getStatus()} + ' ' + ${parcel.getShippingDate()}">VALUE</h3>
+
+
+<div th:each="parcel : ${parcel.getPackageList()}">
 
     <hr/>
     <p th:text="${parcel.getParcelTrackingNumber()} + ' - ' + ${parcel.getCardNumber()} + ' - ' + ${parcel.getClient()} + ' - ' + ${parcel.getDescriptions()}"></p>

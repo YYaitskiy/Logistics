@@ -38,8 +38,7 @@ public class ParcelController {
 
     @GetMapping("/{id}")
     public String id(@PathVariable("id") UUID uuid, Model model){
-        List<Package> list = lotDAO.index(uuid);
-        model.addAttribute("parcel",  list);
+        model.addAttribute("parcel", lotDAO.indexLot(uuid));
         return "parcel/index";
     }
 
@@ -56,16 +55,22 @@ public class ParcelController {
     }
 
     @GetMapping("/new")
-    public String newParcel(Model model){
+    public String newLot(Model model){
         model.addAttribute("lot", new Lot());
         return "parcel/new";
     }
 
     @PostMapping()
-    public String create (@ModelAttribute("lot") Lot lot){
+    public String createLot (@ModelAttribute("lot") Lot lot){
         lot.setPackageList(new ArrayList<>());
         lot.setId(UUID.randomUUID());
         lotDAO.save(lot);
         return "redirect:/parcel";
+    }
+
+    @GetMapping("/{id}/new")
+    public String newPackage(@PathVariable("id") UUID uuid, Model model){
+        model.addAttribute("package", new Package());
+        return "parcel/newPackage";
     }
 }

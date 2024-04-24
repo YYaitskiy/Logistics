@@ -5,6 +5,7 @@
     <title>Відправлені</title>
 </head>
 <body>
+<h3>Відправлені:</h3>
 <div th:each="parcel : ${parcel}">
     <hr/>
     <a th:href="@{/parcel/{id}(id=${parcel.getId()})}" th:text="${parcel.getStatus()} + ' ' +  ${parcel.getShippingDate()}">user</a>
