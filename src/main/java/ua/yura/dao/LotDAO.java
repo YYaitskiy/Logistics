@@ -68,5 +68,15 @@ public class LotDAO {
         lotList.add(0,lot);
     }
 
+    public void savePackage(Lot lot){
+        for (Lot lot1:lotList) {
+            if (lot.getId()==lot1.getId()){
+                lotList.remove(lot1);
+                lotList.add(lot);
+                break;
+            }
+        }
+    }
+
 
 }

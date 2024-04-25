@@ -9,9 +9,6 @@ import ua.yura.dao.PackageDAO;
 import ua.yura.models.Lot;
 import ua.yura.models.Package;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 @Controller
@@ -54,15 +51,15 @@ public class ParcelController {
         return "parcel/receive";
     }
 
-    @GetMapping("/new")
+    @GetMapping("/newLot")
     public String newLot(Model model){
         model.addAttribute("lot", new Lot());
-        return "parcel/new";
+        return "parcel/newLot";
     }
 
     @PostMapping()
     public String createLot (@ModelAttribute("lot") Lot lot){
-        lot.setPackageList(new ArrayList<>());
+
         lot.setId(UUID.randomUUID());
         lotDAO.save(lot);
         return "redirect:/parcel";
@@ -70,7 +67,16 @@ public class ParcelController {
 
     @GetMapping("/{id}/new")
     public String newPackage(@PathVariable("id") UUID uuid, Model model){
-        model.addAttribute("package", new Package());
+        lotDAO.indexLot(uuid);
+        model.addAttribute("package", new Package(uuid));
         return "parcel/newPackage";
+    }
+
+    @PostMapping("/{id}")
+    public String createPackage(@ModelAttribute("package")  Package p){
+        Lot lot = lotDAO.indexLot(p.getMotherListLot());
+        lot.getPackageList().add(p);
+        lotDAO.savePackage(lot);
+        return "redirect:/parcel";
     }
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -7,7 +7,26 @@
 <body>
 <p>Текст</p>
 
-<form th:method="POST" th:action="@{/parcel/{id}}" th:object="${package}">
+<form th:method="POST" th:action="@{/parcel/{id}(id=${package.getId()})}" th:object="${package}">
+
+
+
+    <label for="parcelTrackingNumber">Введіть TTN</label>
+    <input type="number" th:field="*{parcelTrackingNumber}" id="parcelTrackingNumber"/>
+
+    <label for="cardNumber">Номер заявки</label>
+    <input type="number" th:field="*{cardNumber}" id="cardNumber"/>
+
+    <label for="client">Замовник</label>
+    <input type="text" th:field="*{client}" id="client"/>
+
+    <label for="descriptions">Опис</label>
+    <input type="text" th:field="*{descriptions}" id="descriptions"/>
+
+    <label for="deliveryPrice">Ціна</label>
+    <input type="number" th:field="*{deliveryPrice}" id="deliveryPrice"/>
+
+    <input type="submit" value="Створити" style="font-size: 20px">
 
 
 </form>

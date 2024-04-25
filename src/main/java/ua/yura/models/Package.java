@@ -4,6 +4,8 @@ import java.util.UUID;
 
 public class Package {
     private UUID id;
+
+    private UUID motherListLot;
     private long parcelTrackingNumber;
     private int cardNumber;
     private String client;
@@ -17,6 +19,20 @@ public class Package {
         this.client = client;
         this.descriptions = descriptions;
         this.deliveryPrice = deliveryPrice;
+    }
+
+    public Package(UUID id, UUID motherListLot, long parcelTrackingNumber, int cardNumber, String client, String descriptions, int deliveryPrice) {
+        this.id = id;
+        this.motherListLot = motherListLot;
+        this.parcelTrackingNumber = parcelTrackingNumber;
+        this.cardNumber = cardNumber;
+        this.client = client;
+        this.descriptions = descriptions;
+        this.deliveryPrice = deliveryPrice;
+    }
+
+    public Package(UUID motherListLot) {
+        this.motherListLot = motherListLot;
     }
 
     public Package() {
@@ -69,4 +85,13 @@ public class Package {
     public void setDeliveryPrice(int deliveryPrice) {
         this.deliveryPrice = deliveryPrice;
     }
+
+    public UUID getMotherListLot() {
+        return motherListLot;
+    }
+
+    public void setMotherListLot(UUID motherListLot) {
+        this.motherListLot = motherListLot;
+    }
 }
+
