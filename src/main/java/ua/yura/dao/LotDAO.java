@@ -68,15 +68,32 @@ public class LotDAO {
         lotList.add(0,lot);
     }
 
-    public void savePackage(Lot lot){
-        for (Lot lot1:lotList) {
-            if (lot.getId()==lot1.getId()){
-                lotList.remove(lot1);
-                lotList.add(lot);
-                break;
+    public void savePackage(Package p){
+        System.out.println("Проверка LotDaoSavePackage 0");
+        System.out.println("Проверка LotDaoSavePackage " + p.getId());
+        System.out.println("Проверка LotDaoSavePackage " + p.getParcelTrackingNumber());
+        System.out.println("Проверка LotDaoSavePackage " + p.getCardNumber());
+        System.out.println("Проверка LotDaoSavePackage " + p.getClient());
+        System.out.println("Проверка LotDaoSavePackage " + p.getDescriptions());
+        System.out.println("Проверка LotDaoSavePackage " + p.getDeliveryPrice());
+        for (int i=0; i<lotList.size(); i++){
+            if (lotList.get(i).getId().equals(p.getId())){
+                if(lotList.get(i).getPackageList()==null){
+                    lotList.get(i).setPackageList(new ArrayList<>());
+                }
+
+                lotList.get(i).getPackageList().add(p);
+
+                System.out.println("Проверка LotDaoSavePackage");
+                System.out.println(lotList.get(i).getPackageList().get(0).getId());
+                System.out.println(lotList.get(i).getPackageList().get(0).getParcelTrackingNumber());
+                System.out.println(lotList.get(i).getPackageList().get(0).getCardNumber());
+                System.out.println(lotList.get(i).getPackageList().get(0).getClient());
+                System.out.println(lotList.get(i).getPackageList().get(0).getDescriptions());
+                System.out.println(lotList.get(i).getPackageList().get(0).getDeliveryPrice());
             }
         }
-    }
 
 
+        }
 }
