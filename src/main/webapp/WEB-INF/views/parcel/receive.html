@@ -5,7 +5,8 @@
     <title>Отримані</title>
 </head>
 <body>
-<h3>Отримані:</h3>
+<h3><a th:href="@{/parcel}"><span style="font-size: 30px">&larr;</span> Повернутись на головну</a></h3>
+<h2>Отримані:</h2>
 <div th:each="parcel : ${parcel}">
     <hr/>
     <a th:href="@{/parcel/{id}(id=${parcel.getId()})}" th:text="${parcel.getStatus()} + ' ' +  ${parcel.getShippingDate()}">user</a>

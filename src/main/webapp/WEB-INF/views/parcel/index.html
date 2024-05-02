@@ -5,18 +5,17 @@
     <title>Index</title>
 </head>
 <body>
-<h3 th:text="${parcel.getStatus()} + ' ' + ${parcel.getShippingDate()}">VALUE</h3>
-
+<h3><a th:href="@{/parcel}"><span style="font-size: 30px">&larr;</span> Повернутись на головну</a></h3> <h2 th:text="${parcel.getStatus()} + ' ' + ${parcel.getShippingDate()}">VALUE</h2>
 
 <div th:each="parcel : ${parcel.getPackageList()}">
 
     <hr/>
-    <p th:text="${parcel.getParcelTrackingNumber()} + ' - ' + ${parcel.getCardNumber()} + ' - ' + ${parcel.getClient()} + ' - ' + ${parcel.getDescriptions()}"></p>
-    <p th:text="${parcel.getDeliveryPrice()} + 'грн'">VALUE</p>
+    <p th:text="'Номер ТТН: ' + ${parcel.getParcelTrackingNumber()} + ' - ' + ${parcel.getCardNumber()} + ' - ' + ${parcel.getClient()} + ' - ' + ${parcel.getDescriptions()}" ></p>
+    <p th:text="${parcel.getDeliveryPrice()} + 'грн' + ' ' +&#8372;">VALUE</p>
 
 </div>
 <hr/>
-
+<h3><a th:href="@{/parcel/{id}/new(id=${parcel.getId()})}">Додати посилку &#10010;</a></h3>
 
 
 

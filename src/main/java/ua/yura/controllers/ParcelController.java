@@ -54,35 +54,24 @@ public class ParcelController {
     @GetMapping("/newLot")
     public String newLot(Model model){
         model.addAttribute("lot", new Lot());
-        System.out.println("Проверка newLot");
         return "parcel/newLot";
     }
 
     @PostMapping()
     public String createLot (@ModelAttribute("lot") Lot lot){
-
         lot.setId(UUID.randomUUID());
         lotDAO.save(lot);
-        System.out.println("Проверка createLot");
-        return "redirect:/parcel";
+        return "redirect:/parcel/" + lot.getId();
     }
 
     @GetMapping("/{id}/new")
     public String newPackage (Model model, @PathVariable("id") UUID uuid){
         model.addAttribute("package", new Package(uuid));
-        System.out.println("Проверка newPackage");
         return "parcel/newPackage";
     }
 
     @PostMapping("/{id}")
     public String createPackage(@ModelAttribute("package")  Package p, @PathVariable("id") UUID uuid){
-        System.out.println("Проверка createPackage");
-        System.out.println(p.getId());
-        System.out.println(p.getParcelTrackingNumber());
-        System.out.println(p.getCardNumber());
-        System.out.println(p.getClient());
-        System.out.println(p.getDescriptions());
-        System.out.println(p.getDeliveryPrice());
         lotDAO.savePackage(p);
         return "redirect:/parcel/" + uuid;
     }

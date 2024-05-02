@@ -7,9 +7,13 @@
     <title>Нове відправленя</title>
 </head>
 <body>
+
+<h3><a th:href="@{/parcel}"><span style="font-size: 30px">&larr;</span> Повернутись на головну</a></h3>
+
+
+
 <form th:method="POST" th:action="@{/parcel}" th:object="${lot}">
-
-
+    <h2>Створити:</h2>
     <br/>
 
     <label for="status" style="font-size: 25px; margin-right: 5px">Посилки: </label>

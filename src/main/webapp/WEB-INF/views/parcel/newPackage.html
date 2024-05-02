@@ -5,14 +5,13 @@
     <title>Title</title>
 </head>
 <body>
-<p>Текст</p>
+<h3><a th:href="@{/parcel/{id}(id=${package.getId()})}" ><span style="font-size: 30px">&larr;</span> Повернутись</a>
+<a th:href="@{/parcel}" style="margin-left: 25px"><span style="font-size: 30px">&larr;</span> Повернутись на головну</a></h3>
 
-<!--<form th:method="POST" th:action="@{'/parcel/' + package.getMotherListLot()}" th:object="${package}">-->
+<h2>Додати посилку:</h2>
+
+
 <form th:method="POST" th:action="@{/parcel/{id}(id=${package.getId()})}" th:object="${package}">
-
-<!--    @{'/parcel/' + ${package.getMotherListLot()}}-->
-<!--    @{/parcel/{id}(id=${package.getMotherListLot()})}-->
-
 
     <label for="parcelTrackingNumber">Введіть TTN</label>
     <input type="number" th:field="*{parcelTrackingNumber}" id="parcelTrackingNumber"/>
