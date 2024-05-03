@@ -10,8 +10,21 @@
 <div th:each="parcel : ${parcel.getPackageList()}">
 
     <hr/>
-    <p th:text="'Номер ТТН: ' + ${parcel.getParcelTrackingNumber()} + ' - ' + ${parcel.getCardNumber()} + ' - ' + ${parcel.getClient()} + ' - ' + ${parcel.getDescriptions()}" ></p>
-    <p th:text="${parcel.getDeliveryPrice()} + 'грн' + ' ' +&#8372;">VALUE</p>
+<!--    <b>Номер ТТН:</b><p th:text="${parcel.getParcelTrackingNumber()} + ' - ' + ${parcel.getCardNumber()} + ' - ' + ${parcel.getClient()} + ' - ' + ${parcel.getDescriptions()}" ></p >-->
+    <p>
+        <b>Номер ТТН:</b>
+        <span th:text="${parcel.getParcelTrackingNumber() + '&nbsp; --- &nbsp;'}"></span>
+        <b>Номер заявки:</b>
+        <span th:text="${parcel.getCardNumber() + '&nbsp; --- &nbsp;'}"></span>
+        <b>Замовник:</b>
+        <span th:text="${parcel.getClient() + '&nbsp; --- &nbsp;'}"></span>
+        <b>Опис:</b>
+        <span th:text="${parcel.getDescriptions()}"></span>
+    </p>
+    <p>
+    <b>Сумма:</b>
+    <span th:text="${parcel.getDeliveryPrice()} + 'грн' + ' ' +&#8372;"></span>
+    </p>
 
 </div>
 <hr/>
