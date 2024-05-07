@@ -9,7 +9,7 @@
 <h2>Відправлені:</h2>
 <div th:each="parcel : ${parcel}">
     <hr/>
-    <a th:href="@{/parcel/{id}(id=${parcel.getId()})}" th:text="${parcel.getStatus()} + ' ' +  ${parcel.getShippingDate()}">user</a>
+    <a th:href="@{/parcel/{id}(id=${parcel.getId()})}" th:text="${parcel.getStatus()} + ' ' +  ${#temporals.format(parcel.getShippingDate(), 'dd-MM-yyyy')}">user</a>
 </div>
 <hr/>
 

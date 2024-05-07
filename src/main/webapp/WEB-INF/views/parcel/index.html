@@ -5,12 +5,12 @@
     <title>Index</title>
 </head>
 <body>
-<h3><a th:href="@{/parcel}"><span style="font-size: 30px">&larr;</span> Повернутись на головну</a></h3> <h2 th:text="${parcel.getStatus()} + ' ' + ${parcel.getShippingDate()}">VALUE</h2>
+<h3><a th:href="@{/parcel}"><span style="font-size: 30px">&larr;</span> Повернутись на головну</a></h3> <h2 th:text="${parcel.getStatus()} + ' ' + ${#temporals.format(parcel.getShippingDate(), 'dd-MM-yyyy')}">VALUE</h2>
 
 <div th:each="parcel : ${parcel.getPackageList()}">
 
     <hr/>
-<!--    <b>Номер ТТН:</b><p th:text="${parcel.getParcelTrackingNumber()} + ' - ' + ${parcel.getCardNumber()} + ' - ' + ${parcel.getClient()} + ' - ' + ${parcel.getDescriptions()}" ></p >-->
+
     <p>
         <b>Номер ТТН:</b>
         <span th:text="${parcel.getParcelTrackingNumber() + '&nbsp; --- &nbsp;'}"></span>

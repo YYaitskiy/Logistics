@@ -1,11 +1,13 @@
 package ua.yura.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 import ua.yura.models.Lot;
 import ua.yura.models.Package;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -26,7 +28,12 @@ public class LotDAO {
         lotList.add(new Lot(UUID.randomUUID(), "Відправлені", LocalDate.of(2024, 3, 5), packageDAO.getPackageList3()));
         lotList.add(new Lot(UUID.randomUUID(), "Отримані", LocalDate.of(2024, 4, 8), packageDAO.getPackageList5()));
 
+
+
     }
+
+
+
 
     public List<Lot> show(){
         return lotList;

@@ -3,6 +3,7 @@ package ua.yura.models;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.UUID;
 
@@ -44,9 +45,12 @@ public class Lot {
         this.status = status;
     }
 
+
+
     public LocalDate getShippingDate() {
         return shippingDate;
     }
+
 
     public void setShippingDate(LocalDate shippingDate) {
         this.shippingDate = shippingDate;
