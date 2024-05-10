@@ -15,6 +15,8 @@
     <hr/>
 
     <a th:href="@{/parcel/{id}(id=${parcel.getId()})}" th:text="${parcel.getStatus() } + ' ' +  ${#temporals.format(parcel.getShippingDate(), 'dd-MM-yyyy')}">user</a>
+    <a th:href="@{/parcel/{id}/editLot(id=${parcel.getId()})}" >Редагувати</a>
+
 
 </div>
 

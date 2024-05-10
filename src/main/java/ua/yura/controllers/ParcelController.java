@@ -28,13 +28,14 @@ public class ParcelController {
 
     @GetMapping()
     public String show(Model model){
-
+        System.out.println("Выполнился show контроллер");
         model.addAttribute("parcel", lotDAO.show());
         return "parcel/show";
     }
 
     @GetMapping("/{id}")
     public String id(@PathVariable("id") UUID uuid, Model model){
+        System.out.println("Выполнился id контроллер");
         model.addAttribute("parcel", lotDAO.indexLot(uuid));
         return "parcel/index";
     }
@@ -57,12 +58,13 @@ public class ParcelController {
         return "parcel/newLot";
     }
 
-    @PostMapping()
-    public String createLot (@ModelAttribute("lot") Lot lot){
-        lot.setId(UUID.randomUUID());
-        lotDAO.save(lot);
-        return "redirect:/parcel/" + lot.getId();
-    }
+//    @PostMapping()
+//    public String createLot (@ModelAttribute("lot") Lot lot){
+//        System.out.println("Выполнился createLot контроллер");
+//        lot.setId(UUID.randomUUID());
+//        lotDAO.save(lot);
+//        return "redirect:/parcel/" + lot.getId();
+//    }
 
     @GetMapping("/{id}/new")
     public String newPackage (Model model, @PathVariable("id") UUID uuid){
@@ -72,7 +74,31 @@ public class ParcelController {
 
     @PostMapping("/{id}")
     public String createPackage(@ModelAttribute("package")  Package p, @PathVariable("id") UUID uuid){
+        System.out.println("Выполнился createPackage контроллер");
         lotDAO.savePackage(p);
         return "redirect:/parcel/" + uuid;
     }
+
+    @GetMapping("/{id}/editLot")
+    public String editLot (@PathVariable("id") UUID uuid, Model model){
+        System.out.println("Выполнился editLot контроллер" + uuid);
+        Lot lot = lotDAO.indexLot(uuid);
+        System.out.println("Выполнился editLot контроллер после метода indexLot");
+        System.out.println(lot.getId());
+        model.addAttribute("lot", lot);
+        return "parcel/editLot";
+    }
+
+    @PostMapping()
+    public String updateLot(@ModelAttribute("lot") Lot lot){
+        System.out.println("Проверка ввыполнения Обновления Lot");
+        System.out.println(lot.getStatus());
+        System.out.println(lot.getShippingDate());
+        System.out.println(lot.getId());
+       lotDAO.updateLot(lot);
+        return "redirect:/parcel";
+    }
+
+
+
 }

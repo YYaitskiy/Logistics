@@ -32,18 +32,17 @@ public class LotDAO {
 
     }
 
-
-
-
     public List<Lot> show(){
         return lotList;
     }
 
     public Lot indexLot (UUID uuid){
         Lot lotId = new Lot();
+
         for(Lot lot:lotList){
             if (lot.getId().equals(uuid)){
                 lotId=lot;
+                System.out.println("Проверка ввыполнения метода indexLot " + lotId.getId());
                 break;
             }
         }
@@ -84,7 +83,22 @@ public class LotDAO {
                 lotList.get(i).getPackageList().add(p);
             }
         }
+    }
 
-
+    public void updateLot(Lot lot){
+        System.out.println("Выполняется updateLot метод");
+        System.out.println(lot.getStatus());
+        System.out.println(lot.getShippingDate());
+        int i=0;
+        for (Lot lotUpdate:lotList) {
+            System.out.println(lotUpdate.getId() + " " + lot.getId() + "проверка lotUpdat в цыкле");
+            if (lotUpdate.getId().equals(lot.getId())){
+                System.out.println("Выполняется проверка в методе updateLot метод&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
+                lotList.set(i,lot);
+                break;
+            }
+            i++;
         }
+
+    }
 }
