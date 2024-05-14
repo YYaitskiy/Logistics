@@ -11,15 +11,22 @@
 
 
 
-<div th:each="parcel : ${parcel}" >
+<div th:each="parcel : ${parcel}">
     <hr/>
 
-    <a th:href="@{/parcel/{id}(id=${parcel.getId()})}" th:text="${parcel.getStatus() } + ' ' +  ${#temporals.format(parcel.getShippingDate(), 'dd-MM-yyyy')}">user</a>
-    <a th:href="@{/parcel/{id}/editLot(id=${parcel.getId()})}" >Редагувати</a>
+    <div>
+        <a th:href="@{/parcel/{id}(id=${parcel.getId()})}" th:text="${parcel.getStatus() } + ' ' +  ${#temporals.format(parcel.getShippingDate(), 'dd-MM-yyyy')}">user</a>
+    </div>
 
-    <form th:method="DELETE" th:action="@{/parcel/{id}(id=${parcel.getId()})}">
-        <input type="submit" value="Delete"/>
-    </form>
+    <div>
+        <form th:method="GET" th:action="@{/parcel/{id}/editLot(id=${parcel.getId()})}" style="display: inline-block;">
+            <input type="submit" value="Редагувати"/>
+        </form>
+
+        <form th:method="DELETE" th:action="@{/parcel/{id}(id=${parcel.getId()})}" style="display: inline-block;">
+            <input type="submit" value="Видалити"/>
+        </form>
+    </div>
 
 </div>
 
