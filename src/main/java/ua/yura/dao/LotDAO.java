@@ -1,13 +1,9 @@
 package ua.yura.dao;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 import ua.yura.models.Lot;
 import ua.yura.models.Package;
-
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -27,9 +23,6 @@ public class LotDAO {
         lotList.add(new Lot(UUID.randomUUID(), "Відправлені", LocalDate.of(2024, 3, 7), packageDAO.getPackageList2()));
         lotList.add(new Lot(UUID.randomUUID(), "Відправлені", LocalDate.of(2024, 3, 5), packageDAO.getPackageList3()));
         lotList.add(new Lot(UUID.randomUUID(), "Отримані", LocalDate.of(2024, 4, 8), packageDAO.getPackageList5()));
-
-
-
     }
 
     public List<Lot> show(){
@@ -42,7 +35,6 @@ public class LotDAO {
         for(Lot lot:lotList){
             if (lot.getId().equals(uuid)){
                 lotId=lot;
-                System.out.println("Проверка ввыполнения метода indexLot " + lotId.getId());
                 break;
             }
         }
@@ -86,15 +78,26 @@ public class LotDAO {
     }
 
     public void updateLot(Lot lot){
-        System.out.println("Выполняется updateLot метод");
-        System.out.println(lot.getStatus());
-        System.out.println(lot.getShippingDate());
         int i=0;
         for (Lot lotUpdate:lotList) {
-            System.out.println(lotUpdate.getId() + " " + lot.getId() + "проверка lotUpdat в цыкле");
             if (lotUpdate.getId().equals(lot.getId())){
-                System.out.println("Выполняется проверка в методе updateLot метод&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
+                lot.setPackageList(lotUpdate.getPackageList());
                 lotList.set(i,lot);
+                break;
+            }
+            i++;
+        }
+
+    }
+
+    public void delete(UUID uuid){
+        System.out.println("Проверка выполнения метода delete");
+        int i=0;
+        for (Lot lot: lotList) {
+            System.out.println(lot.getId() + " " + uuid);
+            System.out.println("Проверка выполнения цыкла в методе delete");
+            if(lot.getId().equals(uuid)){
+                lotList.remove(i);
                 break;
             }
             i++;

@@ -28,7 +28,10 @@ public class MySpringMvcDispatcherServletInitializer extends AbstractAnnotationC
     public void onStartup(ServletContext aServletContext) throws ServletException {
         super.onStartup(aServletContext);
         registerCharacterEncodingFilter(aServletContext);
+        registerHiddenFieldFilter(aServletContext);
     }
+
+
 
     private void registerCharacterEncodingFilter(ServletContext aContext) {
         FilterRegistration.Dynamic characterEncodingFilter = aContext.addFilter("encodingFilter", new CharacterEncodingFilter());
@@ -37,5 +40,12 @@ public class MySpringMvcDispatcherServletInitializer extends AbstractAnnotationC
         characterEncodingFilter.addMappingForUrlPatterns(null, false, "/*");
 
     }
+
+    private void registerHiddenFieldFilter(ServletContext aContext) {
+        aContext.addFilter("hiddenHttpMethodFilter",
+                new HiddenHttpMethodFilter()).addMappingForUrlPatterns(null ,true, "/*");
+    }
+
+
 
 }

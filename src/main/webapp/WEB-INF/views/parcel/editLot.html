@@ -6,7 +6,7 @@
 </head>
 <body>
 
-<form th:method="PATCH" th:action="@{/parcel}" th:object="${lot}">
+<form th:method="PATCH" th:action="@{/parcel/{id}(id=${lot.getId()})}" th:object="${lot}">
     <h2>Обновити:</h2>
     <br/>
 
