@@ -91,11 +91,8 @@ public class LotDAO {
     }
 
     public void delete(UUID uuid){
-        System.out.println("Проверка выполнения метода delete");
         int i=0;
         for (Lot lot: lotList) {
-            System.out.println(lot.getId() + " " + uuid);
-            System.out.println("Проверка выполнения цыкла в методе delete");
             if(lot.getId().equals(uuid)){
                 lotList.remove(i);
                 break;

@@ -14,28 +14,28 @@
 <form th:method="POST" th:action="@{/parcel/{id}(id=${package.getId()})}" th:object="${package}">
 
     <p>
-    <label for="parcelTrackingNumber" style="font-size: 20px">Введіть TTN:&nbsp;&nbsp;</label>
-    <input type="number" th:field="*{parcelTrackingNumber}" id="parcelTrackingNumber" style="font-size: 20px" />
+    <label for="parcelTrackingNumber" style="font-size: 20px">Введіть TTN:</label>
+    <input type="number" th:field="*{parcelTrackingNumber}" id="parcelTrackingNumber" style="font-size: 20px; display: inline-block; position: absolute; left: 135px;" />
     </p>
 
     <p>
     <label for="cardNumber" style="font-size: 20px">Номер заявки:</label>
-    <input type="number" th:field="*{cardNumber}" id="cardNumber" style="font-size: 20px"/>
+    <input type="number" th:field="*{cardNumber}" id="cardNumber" style="font-size: 20px; display: inline-block; position: absolute; left: 135px;"/>
     </p>
 
     <p>
-    <label for="client" style="font-size: 20px">Замовник:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-    <input type="text" th:field="*{client}" id="client" style="font-size: 20px"/>
+    <label for="client" style="font-size: 20px">Замовник:</label>
+    <input type="text" th:field="*{client}" id="client" style="font-size: 20px; display: inline-block; position: absolute; left: 135px;"/>
     </p>
 
     <p>
-    <label for="descriptions" style="font-size: 20px">Опис:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-    <input type="text" th:field="*{descriptions}" id="descriptions" style="font-size: 20px"/>
+    <label for="descriptions" style="font-size: 20px">Опис:</label>
+    <input type="text" th:field="*{descriptions}" id="descriptions" style="font-size: 20px; display: inline-block; position: absolute; left: 135px;"/>
     </p>
 
     <p>
-    <label for="deliveryPrice" style="font-size: 20px">Ціна:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-    <input type="number" th:field="*{deliveryPrice}" id="deliveryPrice" style="font-size: 20px"/>
+    <label for="deliveryPrice" style="font-size: 20px">Ціна:</label>
+    <input type="number" th:field="*{deliveryPrice}" id="deliveryPrice" style="font-size: 20px; display: inline-block; position: absolute; left: 135px;"/>
     </p>
 
     <p>

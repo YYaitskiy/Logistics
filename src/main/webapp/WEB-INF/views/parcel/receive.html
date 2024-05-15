@@ -5,11 +5,22 @@
     <title>Отримані</title>
 </head>
 <body>
-<h3><a th:href="@{/parcel}"><span style="font-size: 30px">&larr;</span> Повернутись на головну</a></h3>
+<h3><a href="/parcel"><span style="font-size: 30px">&larr;</span> Повернутись на головну</a> <a  href="/parcel/sent" style="margin-left: 25px">Відправлені &#11014;</a> </h3>
 <h2>Отримані:</h2>
 <div th:each="parcel : ${parcel}">
     <hr/>
-    <a th:href="@{/parcel/{id}(id=${parcel.getId()})}" th:text="${parcel.getStatus()} + ' ' +  ${#temporals.format(parcel.getShippingDate(), 'dd-MM-yyyy')}">user</a>
+    <div style="margin-bottom: 15px; margin-top: 10px;">
+        <a th:href="@{/parcel/{id}(id=${parcel.getId()})}" th:text="${parcel.getStatus()} + ' ' +  ${#temporals.format(parcel.getShippingDate(), 'dd-MM-yyyy')}" style="font-size: 18px;">user</a>
+
+        <form th:method="GET" th:action="@{/parcel/{id}/editLot(id=${parcel.getId()})}" style="display: inline-block; position: absolute; left: 250px;">
+            <input type="submit" value="Редагувати" style="font-size: 17px"/>
+        </form>
+
+        <form th:method="DELETE" th:action="@{/parcel/{id}(id=${parcel.getId()})}" style="display: inline-block; position: absolute; left: 90vw; ">
+            <input type="submit" value="Видалити" style="font-size: 17px"/>
+        </form>
+
+    </div>
 </div>
 <hr/>
 </body>

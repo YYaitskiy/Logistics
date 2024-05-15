@@ -6,8 +6,11 @@
 </head>
 <body>
 
+<h3><a th:href="@{/parcel}"><span style="font-size: 30px">&larr;</span> Повернутись на головну</a></h3>
+
 <form th:method="PATCH" th:action="@{/parcel/{id}(id=${lot.getId()})}" th:object="${lot}">
     <h2>Обновити:</h2>
+
     <br/>
 
     <label for="status" style="font-size: 25px; margin-right: 5px">Посилки: </label>

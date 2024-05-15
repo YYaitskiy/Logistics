@@ -90,7 +90,6 @@ public class ParcelController {
 
     @DeleteMapping("/{id}")
     public String delete(@PathVariable("id") UUID uuid){
-        System.out.println("Проверка выполнения delete контроллера");
         lotDAO.delete(uuid);
         return "redirect:/parcel";
     }
