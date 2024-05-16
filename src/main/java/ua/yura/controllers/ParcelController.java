@@ -82,10 +82,17 @@ public class ParcelController {
         return "parcel/editLot";
     }
 
-    @PatchMapping("/{id}")
+    @PatchMapping("/{id}/update")
     public String updateLot(@ModelAttribute("lot") Lot lot){
         lotDAO.updateLot(lot);
         return "redirect:/parcel";
+    }
+
+    @GetMapping("/{id}/deleteLot")
+    public String getDelete(@PathVariable("id") UUID uuid, Model model){
+        Lot lot = lotDAO.indexLot(uuid);
+        model.addAttribute("lot", lot);
+        return "parcel/deleteLot";
     }
 
     @DeleteMapping("/{id}")
