@@ -95,7 +95,7 @@ public class ParcelController {
         return "parcel/deleteLot";
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{id}/deleteLot")
     public String delete(@PathVariable("id") UUID uuid){
         lotDAO.delete(uuid);
         return "redirect:/parcel";
