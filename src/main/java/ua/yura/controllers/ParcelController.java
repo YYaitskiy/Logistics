@@ -88,6 +88,34 @@ public class ParcelController {
         return "redirect:/parcel";
     }
 
+    @GetMapping("sent/{id}/editLot")
+    public String sentEditLot (@PathVariable("id") UUID uuid, Model model){
+        Lot lot = lotDAO.indexLot(uuid);
+        model.addAttribute("lot", lot);
+        return "parcel/sentEditLot";
+    }
+
+    @PatchMapping("sent/{id}/update")
+    public String sentUpdateLot(@ModelAttribute("lot") Lot lot){
+        lotDAO.updateLot(lot);
+        return "redirect:/parcel/sent";
+    }
+
+    @GetMapping("receive/{id}/editLot")
+    public String receiveSentEditLot (@PathVariable("id") UUID uuid, Model model){
+        Lot lot = lotDAO.indexLot(uuid);
+        model.addAttribute("lot", lot);
+        return "parcel/receiveEditLot";
+    }
+
+    @PatchMapping("receive/{id}/update")
+    public String receiveUpdateLot(@ModelAttribute("lot") Lot lot){
+        lotDAO.updateLot(lot);
+        return "redirect:/parcel/receive";
+    }
+
+
+
     @GetMapping("/{id}/deleteLot")
     public String getDelete(@PathVariable("id") UUID uuid, Model model){
         Lot lot = lotDAO.indexLot(uuid);
@@ -99,6 +127,32 @@ public class ParcelController {
     public String delete(@PathVariable("id") UUID uuid){
         lotDAO.delete(uuid);
         return "redirect:/parcel";
+    }
+
+    @DeleteMapping("sent/{id}/deleteLot")
+    public String sentDelete(@PathVariable("id") UUID uuid){
+        lotDAO.delete(uuid);
+        return "redirect:/parcel/sent";
+    }
+
+    @DeleteMapping("receive/{id}/deleteLot")
+    public String receiveDelete(@PathVariable("id") UUID uuid){
+        lotDAO.delete(uuid);
+        return "redirect:/parcel/receive";
+    }
+
+    @GetMapping("/sent/{id}/deleteLot")
+    public String getSentDelete(@PathVariable("id") UUID uuid, Model model){
+        Lot lot = lotDAO.indexLot(uuid);
+        model.addAttribute("lot", lot);
+        return "parcel/sentDeleteLot";
+    }
+
+    @GetMapping("/receive/{id}/deleteLot")
+    public String getReceiveDelete(@PathVariable("id") UUID uuid, Model model){
+        Lot lot = lotDAO.indexLot(uuid);
+        model.addAttribute("lot", lot);
+        return "parcel/receiveDeleteLot";
     }
 
 }

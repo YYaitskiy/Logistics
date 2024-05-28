@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Обновити отримані</title>
+</head>
+<body>
+
+<h3><a th:href="@{/parcel/receive}" ><span style="font-size: 30px">&larr;</span> Повернутись</a>
+    <a th:href="@{/parcel}" style="margin-left: 25px"><span style="font-size: 30px">&larr;</span> Повернутись на головну</a></h3>
+
+<form th:method="PATCH" th:action="@{/parcel/receive/{id}/update(id=${lot.getId()})}" th:object="${lot}">
+    <h2>Обновити:</h2>
+
+    <br/>
+
+    <label for="status" style="font-size: 25px; margin-right: 5px">Посилки: </label>
+    <select name="status" th:field="*{status}" id="status" style="font-size: 20px; margin-right: 10px">
+        <option value="Відправлені">Відправлені</option>
+        <option value="Отримані">Отримані</option>
+    </select>
+
+    <label for="shippingDate" style="font-size: 25px">дата:</label>
+    <input type="date"  th:field="*{shippingDate}" id="shippingDate" style="font-size: 20px; margin-right: 10px"/>
+
+
+    <input type="submit" value="Обновити" style="font-size: 20px">
+</form>
+
+</body>
+</html>

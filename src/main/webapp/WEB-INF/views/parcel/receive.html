@@ -12,11 +12,11 @@
     <div style="margin-bottom: 15px; margin-top: 10px;">
         <a th:href="@{/parcel/{id}(id=${parcel.getId()})}" th:text="${parcel.getStatus()} + ' ' +  ${#temporals.format(parcel.getShippingDate(), 'dd-MM-yyyy')}" style="font-size: 18px;">user</a>
 
-        <form th:method="GET" th:action="@{/parcel/{id}/editLot(id=${parcel.getId()})}" style="display: inline-block; position: absolute; left: 250px;">
+        <form th:method="GET" th:action="@{/parcel/receive/{id}/editLot(id=${parcel.getId()})}" style="display: inline-block; position: absolute; left: 250px;">
             <input type="submit" value="Редагувати" style="font-size: 17px"/>
         </form>
 
-        <form th:method="DELETE" th:action="@{/parcel/{id}(id=${parcel.getId()})}" style="display: inline-block; position: absolute; left: 90vw; ">
+        <form th:method="GET" th:action="@{/parcel/receive/{id}/deleteLot(id=${parcel.getId()})}" style="display: inline-block; position: absolute; left: 90vw; ">
             <input type="submit" value="Видалити" style="font-size: 17px"/>
         </form>
 
