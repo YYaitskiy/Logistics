@@ -25,64 +25,81 @@ public class LotDAO {
         lotList.add(new Lot(UUID.randomUUID(), "Отримані", LocalDate.of(2024, 4, 8), packageDAO.getPackageList5()));
     }
 
-    public List<Lot> show(){
+    public List<Lot> show() {
         return lotList;
     }
 
-    public Lot indexLot (UUID uuid){
+    public Lot indexLot(UUID uuid) {
         Lot lotId = new Lot();
 
-        for(Lot lot:lotList){
-            if (lot.getId().equals(uuid)){
-                lotId=lot;
+        for (Lot lot : lotList) {
+            if (lot.getId().equals(uuid)) {
+                lotId = lot;
                 break;
             }
         }
         return lotId;
     }
 
+    public Package indexPackage(UUID idLot, UUID idPackage) {
+        Package packageId = new Package();
+        for (Lot lot : lotList) {
+            if (lot.getId().equals(idLot)) {
+                for (Package p : lot.getPackageList()) {
+                    if (p.getId().equals(idPackage)) {
+                        packageId = p;
+                        break;
+                    }
+                }
+                break;
+            }
+        }
+        return packageId;
+    }
 
-    public List<Lot> sentStatus(){
+
+    public List<Lot> sentStatus() {
         List<Lot> lotList1 = new ArrayList<>();
-        for (Lot lot:lotList){
-            if(lot.getStatus().equals("Відправлені")){
+        for (Lot lot : lotList) {
+            if (lot.getStatus().equals("Відправлені")) {
                 lotList1.add(lot);
             }
         }
         return lotList1;
     }
 
-    public List<Lot> receiveStatus(){
+    public List<Lot> receiveStatus() {
         List<Lot> lotList1 = new ArrayList<>();
-        for (Lot lot:lotList){
-            if(lot.getStatus().equals("Отримані")){
+        for (Lot lot : lotList) {
+            if (lot.getStatus().equals("Отримані")) {
                 lotList1.add(lot);
             }
         }
         return lotList1;
     }
 
-    public void save(Lot lot){
-        lotList.add(0,lot);
+    public void save(Lot lot) {
+        lotList.add(0, lot);
     }
 
-    public void savePackage(Package p){
-        for (int i=0; i<lotList.size(); i++){
-            if (lotList.get(i).getId().equals(p.getId())){
-                if(lotList.get(i).getPackageList()==null){
+    public void savePackage(Package p) {
+        for (int i = 0; i < lotList.size(); i++) {
+            if (lotList.get(i).getId().equals(p.getId())) {
+                if (lotList.get(i).getPackageList() == null) {
                     lotList.get(i).setPackageList(new ArrayList<>());
                 }
+                p.setId(UUID.randomUUID());
                 lotList.get(i).getPackageList().add(p);
             }
         }
     }
 
-    public void updateLot(Lot lot){
-        int i=0;
-        for (Lot lotUpdate:lotList) {
-            if (lotUpdate.getId().equals(lot.getId())){
+    public void updateLot(Lot lot) {
+        int i = 0;
+        for (Lot lotUpdate : lotList) {
+            if (lotUpdate.getId().equals(lot.getId())) {
                 lot.setPackageList(lotUpdate.getPackageList());
-                lotList.set(i,lot);
+                lotList.set(i, lot);
                 break;
             }
             i++;
@@ -90,10 +107,10 @@ public class LotDAO {
 
     }
 
-    public void delete(UUID uuid){
-        int i=0;
-        for (Lot lot: lotList) {
-            if(lot.getId().equals(uuid)){
+    public void delete(UUID uuid) {
+        int i = 0;
+        for (Lot lot : lotList) {
+            if (lot.getId().equals(uuid)) {
                 lotList.remove(i);
                 break;
             }
@@ -101,4 +118,19 @@ public class LotDAO {
         }
 
     }
+
+//    public void updatePackage(Package p, UUID idLot, UUID idPackage) {
+//
+//        for (Lot lot : lotList) {
+//            if (lot.getId().equals(idLot)) {
+//                for (Package p1 : lot.getPackageList()) {
+//                    if (p1.getId().equals(idPackage)) {
+//
+//                        break;
+//                    }
+//                }
+//                break;
+//            }
+//        }
+//    }
 }

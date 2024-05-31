@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Обновити</title>
+</head>
+<body>
+
+Проверка Package edit
+
+<form th:method="PATCH" th:action="@{/parcel/{id}(id=${package.getId()})}" th:object="${package}">
+
+    <p>
+        <label for="parcelTrackingNumber" style="font-size: 20px">Введіть TTN:</label>
+        <input type="number" th:field="*{parcelTrackingNumber}" id="parcelTrackingNumber" style="font-size: 20px; display: inline-block; position: absolute; left: 135px;" />
+    </p>
+
+    <p>
+        <label for="cardNumber" style="font-size: 20px">Номер заявки:</label>
+        <input type="number" th:field="*{cardNumber}" id="cardNumber" style="font-size: 20px; display: inline-block; position: absolute; left: 135px;"/>
+    </p>
+
+    <p>
+        <label for="client" style="font-size: 20px">Замовник:</label>
+        <input type="text" th:field="*{client}" id="client" style="font-size: 20px; display: inline-block; position: absolute; left: 135px;"/>
+    </p>
+
+    <p>
+        <label for="descriptions" style="font-size: 20px">Опис:</label>
+        <input type="text" th:field="*{descriptions}" id="descriptions" style="font-size: 20px; display: inline-block; position: absolute; left: 135px;"/>
+    </p>
+
+    <p>
+        <label for="deliveryPrice" style="font-size: 20px">Ціна:</label>
+        <input type="number" th:field="*{deliveryPrice}" id="deliveryPrice" style="font-size: 20px; display: inline-block; position: absolute; left: 135px;"/>
+    </p>
+
+    <p>
+        <input type="submit" value="Створити" style="font-size: 20px">
+    </p>
+
+</form>
+
+Проверка Package edit, после form
+
+
+</body>
+</html>

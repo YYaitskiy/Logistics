@@ -7,24 +7,36 @@
 <body>
 <h3><a th:href="@{/parcel}"><span style="font-size: 30px">&larr;</span> Повернутись на головну</a></h3> <h2 th:text="${parcel.getStatus()} + ' ' + ${#temporals.format(parcel.getShippingDate(), 'dd-MM-yyyy')}">VALUE</h2>
 
-<div th:each="parcel : ${parcel.getPackageList()}">
+<div th:each="package : ${parcel.getPackageList()}">
 
     <hr/>
 
     <p>
         <b>Номер ТТН:</b>
-        <span th:text="${parcel.getParcelTrackingNumber() + '&nbsp; --- &nbsp;'}"></span>
+        <span th:text="${package.getParcelTrackingNumber() + '&nbsp; --- &nbsp;'}"></span>
         <b>Номер заявки:</b>
-        <span th:text="${parcel.getCardNumber() + '&nbsp; --- &nbsp;'}"></span>
+        <span th:text="${package.getCardNumber() + '&nbsp; --- &nbsp;'}"></span>
         <b>Замовник:</b>
-        <span th:text="${parcel.getClient() + '&nbsp; --- &nbsp;'}"></span>
+        <span th:text="${package.getClient() + '&nbsp; --- &nbsp;'}"></span>
         <b>Опис:</b>
-        <span th:text="${parcel.getDescriptions()}"></span>
+        <span th:text="${package.getDescriptions()}"></span>
+
     </p>
+
     <p>
     <b>Сумма:</b>
-    <span th:text="${parcel.getDeliveryPrice()} + 'грн' + ' ' +&#8372;"></span>
+    <span th:text="${package.getDeliveryPrice()} + 'грн' + ' ' +&#8372;"></span>
     </p>
+
+    <form th:method="GET" th:action="@{/parcel/{idLot}/{idPackage}/editPackage(idLot=${parcel.getId()}, idPackage=${package.getId()})}" style="display: inline-block; ">
+        <input type="submit" value="Редагувати" />
+    </form>
+
+    <form th:method="GET" th:action="@{/parcel/{id}/deletePackage(id=${package.getId()})}" style="display: inline-block; ">
+        <input type="submit" value="Видалити" />
+    </form>
+
+
 
 </div>
 <hr/>

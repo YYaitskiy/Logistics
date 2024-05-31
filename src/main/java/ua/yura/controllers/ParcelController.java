@@ -114,8 +114,6 @@ public class ParcelController {
         return "redirect:/parcel/receive";
     }
 
-
-
     @GetMapping("/{id}/deleteLot")
     public String getDelete(@PathVariable("id") UUID uuid, Model model){
         Lot lot = lotDAO.indexLot(uuid);
@@ -129,23 +127,17 @@ public class ParcelController {
         return "redirect:/parcel";
     }
 
-    @DeleteMapping("sent/{id}/deleteLot")
-    public String sentDelete(@PathVariable("id") UUID uuid){
-        lotDAO.delete(uuid);
-        return "redirect:/parcel/sent";
-    }
-
-    @DeleteMapping("receive/{id}/deleteLot")
-    public String receiveDelete(@PathVariable("id") UUID uuid){
-        lotDAO.delete(uuid);
-        return "redirect:/parcel/receive";
-    }
-
     @GetMapping("/sent/{id}/deleteLot")
     public String getSentDelete(@PathVariable("id") UUID uuid, Model model){
         Lot lot = lotDAO.indexLot(uuid);
         model.addAttribute("lot", lot);
         return "parcel/sentDeleteLot";
+    }
+
+    @DeleteMapping("sent/{id}/deleteLot")
+    public String sentDelete(@PathVariable("id") UUID uuid){
+        lotDAO.delete(uuid);
+        return "redirect:/parcel/sent";
     }
 
     @GetMapping("/receive/{id}/deleteLot")
@@ -154,5 +146,27 @@ public class ParcelController {
         model.addAttribute("lot", lot);
         return "parcel/receiveDeleteLot";
     }
+
+    @DeleteMapping("receive/{id}/deleteLot")
+    public String receiveDelete(@PathVariable("id") UUID uuid){
+        lotDAO.delete(uuid);
+        return "redirect:/parcel/receive";
+    }
+
+    @GetMapping("/{idLot}/{idPackage}/editPackage")
+    public String editPackage (@PathVariable("idLot") UUID uuidLot, @PathVariable("idPackage") UUID uuidPackage, Model model){
+        Package p = lotDAO.indexPackage(uuidLot, uuidPackage);
+        model.addAttribute("package", p);
+        return "parcel/editPackage";
+    }
+//    @PatchMapping("/{idLot}/{idPackage}/editPackage")
+//    public String updatePackage(@ModelAttribute("package") Package p, @PathVariable("idLot") UUID uuidLot, @PathVariable("idPackage") UUID uuidPackage){
+//        lotDAO.updatePackage(p, uuidLot, uuidPackage);
+//
+//    }
+
+
+
+
 
 }
