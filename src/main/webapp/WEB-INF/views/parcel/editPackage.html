@@ -6,9 +6,7 @@
 </head>
 <body>
 
-Проверка Package edit
-
-<form th:method="PATCH" th:action="@{/parcel/{id}(id=${package.getId()})}" th:object="${package}">
+<form th:method="PATCH" th:action="@{/parcel/{idLot}/{id}/editPackage(idLot=${idLot}, id=${package.getId()})}" th:object="${package}">
 
     <p>
         <label for="parcelTrackingNumber" style="font-size: 20px">Введіть TTN:</label>
@@ -36,13 +34,10 @@
     </p>
 
     <p>
-        <input type="submit" value="Створити" style="font-size: 20px">
+        <input type="submit" value="Редагувати" style="font-size: 20px">
     </p>
 
 </form>
-
-Проверка Package edit, после form
-
 
 </body>
 </html>

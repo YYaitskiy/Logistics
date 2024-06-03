@@ -119,18 +119,21 @@ public class LotDAO {
 
     }
 
-//    public void updatePackage(Package p, UUID idLot, UUID idPackage) {
-//
-//        for (Lot lot : lotList) {
-//            if (lot.getId().equals(idLot)) {
-//                for (Package p1 : lot.getPackageList()) {
-//                    if (p1.getId().equals(idPackage)) {
-//
-//                        break;
-//                    }
-//                }
-//                break;
-//            }
-//        }
-//    }
+    public void updatePackage(Package p, UUID idLot, UUID idPackage) {
+        int i = 0;
+        int i2 =0;
+        for (Lot lot : lotList) {
+            if (lot.getId().equals(idLot)) {
+                for (Package p1 : lot.getPackageList()) {
+                    if (p1.getId().equals(idPackage)) {
+                        lotList.get(i).getPackageList().set(i2, p);
+                        break;
+                    }
+                    i2++;
+                }
+                break;
+            }
+            i++;
+        }
+    }
 }

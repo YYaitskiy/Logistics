@@ -157,13 +157,23 @@ public class ParcelController {
     public String editPackage (@PathVariable("idLot") UUID uuidLot, @PathVariable("idPackage") UUID uuidPackage, Model model){
         Package p = lotDAO.indexPackage(uuidLot, uuidPackage);
         model.addAttribute("package", p);
+        model.addAttribute("idLot", uuidLot);
         return "parcel/editPackage";
     }
-//    @PatchMapping("/{idLot}/{idPackage}/editPackage")
-//    public String updatePackage(@ModelAttribute("package") Package p, @PathVariable("idLot") UUID uuidLot, @PathVariable("idPackage") UUID uuidPackage){
-//        lotDAO.updatePackage(p, uuidLot, uuidPackage);
-//
-//    }
+    @PatchMapping("/{idLot}/{idPackage}/editPackage")
+    public String updatePackage(@ModelAttribute("package") Package p, @PathVariable("idLot") UUID uuidLot, @PathVariable("idPackage") UUID uuidPackage){
+        p.setId(uuidPackage);
+        lotDAO.updatePackage(p, uuidLot, uuidPackage);
+        return "redirect:/parcel/" + uuidLot;
+    }
+    @GetMapping("/{idLot}/{idPackage}/deletePackage")
+    public String getDeletePackage(@PathVariable("idLot") UUID uuidLot, @PathVariable("idPackage") UUID uuidPackage, Model model){
+        Package p = lotDAO.indexPackage(uuidLot, uuidPackage);
+        model.addAttribute("package", p);
+        model.addAttribute("idLot", uuidLot);
+        return "parcel/deletePackage";
+
+    }
 
 
 
