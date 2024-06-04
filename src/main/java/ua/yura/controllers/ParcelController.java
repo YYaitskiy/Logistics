@@ -172,7 +172,11 @@ public class ParcelController {
         model.addAttribute("package", p);
         model.addAttribute("idLot", uuidLot);
         return "parcel/deletePackage";
-
+    }
+    @DeleteMapping("/{idLot}/{idPackage}/deletePackage")
+    public String deletePackage(@PathVariable("idLot") UUID uuidLot, @PathVariable("idPackage") UUID uuidPackage){
+       lotDAO.deletePackage(uuidLot, uuidPackage);
+        return "redirect:/parcel/" + uuidLot;
     }
 
 

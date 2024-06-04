@@ -136,4 +136,25 @@ public class LotDAO {
             i++;
         }
     }
+
+    public void deletePackage(UUID idLot, UUID idPackage) {
+        int i = 0;
+        int i2 =0;
+        for (Lot lot : lotList) {
+            if (lot.getId().equals(idLot)) {
+                for (Package p1 : lot.getPackageList()) {
+                    if (p1.getId().equals(idPackage)) {
+//                        lotList.get(i).getPackageList().set(i2, p);
+                        lotList.get(i).getPackageList().remove(i2);
+
+                        break;
+                    }
+                    i2++;
+                }
+                break;
+            }
+            i++;
+        }
+    }
+
 }
