@@ -3,6 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Show</title>
+
+    <style>
+        hr.light-gray {
+            border: none;
+            height: 1px;
+            background-color: #d3d3d3; /* Светло-серый цвет */
+            margin: 20px 0;
+        }
+    </style>
 </head>
 <body>
 
@@ -12,19 +21,19 @@
 
 
 <div th:each="parcel : ${parcel}">
-    <hr />
+    <hr class="light-gray"/>
 
    <div style="margin-bottom: 15px; margin-top: 10px;">
         <a th:href="@{/parcel/{id}(id=${parcel.getId()})}" th:text="${parcel.getStatus() } + ' ' +  ${#temporals.format(parcel.getShippingDate(), 'dd-MM-yyyy')}" style="font-size: 18px;">user</a>
 
 
 
-        <form th:method="GET" th:action="@{/parcel/{id}/editLot(id=${parcel.getId()})}" style="display: inline-block; position: absolute; left: 250px;">
-            <input type="submit" value="Редагувати" style="font-size: 17px"/>
+        <form th:method="GET" th:action="@{/parcel/{id}/editLot(id=${parcel.getId()})}" style="display: inline-block; position: absolute; left: 250px; ">
+            <input type="submit" value="Редагувати" style="font-size: 17px;"/>
         </form>
 
         <form th:method="GET" th:action="@{/parcel/{id}/deleteLot(id=${parcel.getId()})}" style="display: inline-block; position: absolute; left: 90vw; ">
-            <input type="submit" value="Видалити" style="font-size: 17px"/>
+            <input type="submit" value="Видалити" style="font-size: 17px; "/>
         </form>
     </div>
 
@@ -33,6 +42,6 @@
 
 
 
-<hr/>
+<hr class="light-gray"/>
 </body>
 </html>
