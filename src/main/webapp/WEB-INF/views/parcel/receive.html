@@ -3,12 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>Отримані</title>
+
+    <style>
+        hr.light-gray {
+            border: none;
+            height: 1px;
+            background-color: #d3d3d3; /* Светло-серый цвет */
+        }
+    </style>
 </head>
 <body>
-<h3><a href="/parcel"><span style="font-size: 30px">&larr;</span> Повернутись на головну</a> <a  href="/parcel/sent" style="margin-left: 25px">Відправлені &#11014;</a> </h3>
+<h3><a href="/parcel"><span style="font-size: 30px">&larr;</span> Повернутись на головну</a> <a  href="/parcel/sent" style="margin-left: 25px">Відправлені &#11014;</a> <a href="/parcel/newLot" style="margin-left: 25px">Створити &#10010;</a></h3> </h3>
 <h2>Отримані:</h2>
 <div th:each="parcel : ${parcel}">
-    <hr/>
+    <hr class="light-gray"/>
     <div style="margin-bottom: 15px; margin-top: 10px;">
         <a th:href="@{/parcel/{id}(id=${parcel.getId()})}" th:text="${parcel.getStatus()} + ' ' +  ${#temporals.format(parcel.getShippingDate(), 'dd-MM-yyyy')}" style="font-size: 18px;">user</a>
 
@@ -22,6 +30,6 @@
 
     </div>
 </div>
-<hr/>
+<hr class="light-gray"/>
 </body>
 </html>

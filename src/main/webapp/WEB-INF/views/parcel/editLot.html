@@ -8,8 +8,12 @@
 
 <h3><a th:href="@{/parcel}"><span style="font-size: 30px">&larr;</span> Повернутись на головну</a></h3>
 
+<h2>Обновити:</h2><h2 th:text="${lot.getStatus()} + ' ' + ${#temporals.format(lot.getShippingDate(), 'dd-MM-yyyy')}">VALUE</h2>
+
+
+
 <form th:method="PATCH" th:action="@{/parcel/{id}/update(id=${lot.getId()})}" th:object="${lot}">
-    <h2>Обновити:</h2>
+
 
     <br/>
 
@@ -23,7 +27,7 @@
     <input type="date"  th:field="*{shippingDate}" id="shippingDate" style="font-size: 20px; margin-right: 10px"/>
 
 
-    <input type="submit" value="Обновити" style="font-size: 20px">
+    <input type="submit" value="Редагувати" style="font-size: 20px">
 </form>
 
 </body>

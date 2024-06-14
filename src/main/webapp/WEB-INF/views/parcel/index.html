@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Index</title>
+    <title>Посилки</title>
 
     <style>
         hr.light-gray {
@@ -32,7 +32,7 @@
     </style>
 </head>
 <body>
-<h3><a th:href="@{/parcel}"><span style="font-size: 30px">&larr;</span> Повернутись на головну</a></h3> <h2 th:text="${parcel.getStatus()} + ' ' + ${#temporals.format(parcel.getShippingDate(), 'dd-MM-yyyy')}">VALUE</h2>
+<h3><a th:href="@{/parcel}"><span style="font-size: 30px">&larr;</span> Повернутись на головну</a><a  href="/parcel/sent" style="margin-left: 25px">Відправлені &#11014;</a> <a href="/parcel/receive" style="margin-left: 25px">Отримані &#11015;</a></h3> <h2 th:text="${parcel.getStatus()} + ' ' + ${#temporals.format(parcel.getShippingDate(), 'dd-MM-yyyy')}">VALUE</h2>
 
 <div th:each="package : ${parcel.getPackageList()}">
 

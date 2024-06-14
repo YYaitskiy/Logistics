@@ -6,6 +6,11 @@
 </head>
 <body>
 
+<h3><a th:href="@{/parcel/{idLot}(idLot=${idLot})}" ><span style="font-size: 30px">&larr;</span> Повернутись</a><a th:href="@{/parcel}" style="margin-left: 25px"><span style="font-size: 30px">&larr;</span> Повернутись на головну</a></h3>
+
+
+<h2>Обновити:</h2>
+
 <form th:method="PATCH" th:action="@{/parcel/{idLot}/{id}/editPackage(idLot=${idLot}, id=${package.getId()})}" th:object="${package}">
 
     <p>

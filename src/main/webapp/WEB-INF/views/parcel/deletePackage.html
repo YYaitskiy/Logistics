@@ -2,13 +2,13 @@
 <html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Видалити посилку</title>
 </head>
 <body>
 <h2 style="color: red; text-align: center;">Ви впевнені що хочете видалити посилку: </h2>
 
 <p style="text-align: center; font-size: 21px"  >
-<b>Номер заявки:</b>
+<b>№ Заявки:</b>
 <span th:text="${package.getCardNumber() + '&nbsp; --- &nbsp;'}"></span>
 <b>Замовник:</b>
 <span th:text="${package.getClient() + '&nbsp; --- &nbsp;'}"></span>
