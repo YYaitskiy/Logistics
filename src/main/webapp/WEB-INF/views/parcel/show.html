@@ -10,6 +10,41 @@
             height: 1px;
             background-color: #d3d3d3; /* Светло-серый цвет */
         }
+
+
+        .parcel-link, .button {
+            font-size: 17px;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .parcel-item:hover .parcel-link,
+        .parcel-item:hover .button {
+            background-color: #ddd; /* Светло-серый фон при наведении */
+            color: #333; /* Цвет текста при наведении */
+        }
+
+
+
+        .button:hover {
+            background-color: #ddd; /* Светло-серый фон при наведении */
+            color: #333; /* Цвет текста при наведении */
+        }
+
+
+        .button-container {
+            display: inline-block;
+        }
+
+        .edit-button {
+            position: absolute;
+            left: 250px;
+        }
+
+        .delete-button {
+            position: absolute;
+            left: 90vw;
+        }
     </style>
 </head>
 <body>
@@ -19,23 +54,23 @@
 
 
 
-<div th:each="parcel : ${parcel}">
-    <hr class="light-gray"/>
+<div th:each="parcel : ${parcel}" class="parcel-item">
+<hr class="light-gray"/>
+<div style="margin-bottom: 15px; margin-top: 10px;">
+    <a th:href="@{/parcel/{id}(id=${parcel.getId()})}" th:text="${parcel.getStatus()} + ' ' + ${#temporals.format(parcel.getShippingDate(), 'dd-MM-yyyy')}" class="parcel-link"; style="font-size: 18px"></a>
 
-   <div style="margin-bottom: 15px; margin-top: 10px;">
-        <a th:href="@{/parcel/{id}(id=${parcel.getId()})}" th:text="${parcel.getStatus() } + ' ' +  ${#temporals.format(parcel.getShippingDate(), 'dd-MM-yyyy')}" style="font-size: 18px;">user</a>
-
-
-
-        <form th:method="GET" th:action="@{/parcel/{id}/editLot(id=${parcel.getId()})}" style="display: inline-block; position: absolute; left: 250px; ">
-            <input type="submit" value="Редагувати" style="font-size: 17px;"/>
-        </form>
-
-        <form th:method="GET" th:action="@{/parcel/{id}/deleteLot(id=${parcel.getId()})}" style="display: inline-block; position: absolute; left: 90vw; ">
-            <input type="submit" value="Видалити" style="font-size: 17px; "/>
+    <div class="button-container edit-button">
+        <form th:method="GET" th:action="@{/parcel/{id}/editLot(id=${parcel.getId()})}" style="display: inline;">
+            <input type="submit" value="Редагувати" class="button"/>
         </form>
     </div>
 
+    <div class="button-container delete-button">
+        <form th:method="GET" th:action="@{/parcel/{id}/deleteLot(id=${parcel.getId()})}" style="display: inline;">
+            <input type="submit" value="Видалити" class="button"/>
+        </form>
+    </div>
+</div>
 </div>
 
 
