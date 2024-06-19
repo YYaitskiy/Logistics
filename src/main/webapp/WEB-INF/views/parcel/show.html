@@ -16,19 +16,33 @@
             font-size: 17px;
             text-decoration: none;
             color: inherit;
+
+        }
+
+        .button {
+            border: 1px solid #9F9F9F; /* Базовая рамка для всех кнопок */
+            margin-right: 10px;
+            cursor: pointer;
+            padding-bottom: 2px;
+            padding-top: 2px;
+            padding-left: 7px;
+            padding-right: 7px;
+            border-radius: 10px;
         }
 
         .parcel-item:hover .parcel-link,
         .parcel-item:hover .button {
             background-color: #ddd; /* Светло-серый фон при наведении */
-            color: #333; /* Цвет текста при наведении */
+            /*color: #333; !* Цвет текста при наведении *!*/
+
         }
-
-
-
-        .button:hover {
+        /* Добавляем рамку при наведении */
+        .button:hover, .button:focus {
+            outline: none;
             background-color: #ddd; /* Светло-серый фон при наведении */
             color: #333; /* Цвет текста при наведении */
+            border: 2px solid #333; /* Рамка при наведении */
+            font-weight: bold;
         }
 
 
@@ -44,6 +58,12 @@
         .delete-button {
             position: absolute;
             left: 90vw;
+        }
+
+        .parcel-link:hover {
+            font-weight: bold; /* Жирный текст при наведении на ссылку */
+            /*font-size: 30px;*/
+            color: #333;
         }
     </style>
 </head>
