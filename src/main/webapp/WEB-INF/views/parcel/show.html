@@ -12,14 +12,19 @@
         }
 
 
-        .parcel-link, .button {
-            font-size: 17px;
+        .parcel-link {
+            font-size: 18px;
             text-decoration: none;
             color: inherit;
+        }
 
+        .parcel-link:hover {
+            font-weight: bold; /* Жирный текст при наведении на ссылку */
+            color: #333;
         }
 
         .button {
+            font-size: 17px;
             border: 1px solid #9F9F9F; /* Базовая рамка для всех кнопок */
             margin-right: 10px;
             cursor: pointer;
@@ -30,20 +35,20 @@
             border-radius: 10px;
         }
 
-        .parcel-item:hover .parcel-link,
-        .parcel-item:hover .button {
-            background-color: #ddd; /* Светло-серый фон при наведении */
-            /*color: #333; !* Цвет текста при наведении *!*/
-
-        }
         /* Добавляем рамку при наведении */
-        .button:hover, .button:focus {
+        .button:hover {
             outline: none;
-            background-color: #ddd; /* Светло-серый фон при наведении */
             color: #333; /* Цвет текста при наведении */
             border: 2px solid #333; /* Рамка при наведении */
             font-weight: bold;
         }
+
+        .parcel-item:hover .parcel-link,
+        .parcel-item:hover .button {
+            background-color: #ddd; /* Светло-серый фон при наведении */
+        }
+
+
 
 
         .button-container {
@@ -60,11 +65,8 @@
             left: 90vw;
         }
 
-        .parcel-link:hover {
-            font-weight: bold; /* Жирный текст при наведении на ссылку */
-            /*font-size: 30px;*/
-            color: #333;
-        }
+
+
     </style>
 </head>
 <body>
@@ -77,16 +79,16 @@
 <div th:each="parcel : ${parcel}" class="parcel-item">
 <hr class="light-gray"/>
 <div style="margin-bottom: 15px; margin-top: 10px;">
-    <a th:href="@{/parcel/{id}(id=${parcel.getId()})}" th:text="${parcel.getStatus()} + ' ' + ${#temporals.format(parcel.getShippingDate(), 'dd-MM-yyyy')}" class="parcel-link"; style="font-size: 18px"></a>
+    <a th:href="@{/parcel/{id}(id=${parcel.getId()})}" th:text="${parcel.getStatus()} + ' ' + ${#temporals.format(parcel.getShippingDate(), 'dd-MM-yyyy')}" class="parcel-link"; ></a>
 
     <div class="button-container edit-button">
-        <form th:method="GET" th:action="@{/parcel/{id}/editLot(id=${parcel.getId()})}" style="display: inline;">
+        <form th:method="GET" th:action="@{/parcel/{id}/editLot(id=${parcel.getId()})}" >
             <input type="submit" value="Редагувати" class="button"/>
         </form>
     </div>
 
     <div class="button-container delete-button">
-        <form th:method="GET" th:action="@{/parcel/{id}/deleteLot(id=${parcel.getId()})}" style="display: inline;">
+        <form th:method="GET" th:action="@{/parcel/{id}/deleteLot(id=${parcel.getId()})}" >
             <input type="submit" value="Видалити" class="button"/>
         </form>
     </div>
