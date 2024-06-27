@@ -5,20 +5,22 @@
     <title>Всі посилки</title>
 
     <style>
-        hr.light-gray {
+        .light-line {
             border: none;
             height: 1px;
             background-color: #d3d3d3; /* Светло-серый цвет */
         }
 
 
-        .parcel-link-menu {
+        .link-menu {
             text-decoration: none;
-            color: #333;
+            color: #696969;
+
         }
 
-        .parcel-link-menu:hover {
+        .link-menu:hover {
             text-decoration: underline;
+            color: #333;
         }
 
         .parcel-link {
@@ -32,9 +34,21 @@
             color: #333;
         }
 
-        .button {
+        .button-edit {
             font-size: 17px;
-            border: 1px solid #9F9F9F; /* Базовая рамка для всех кнопок */
+            border: 1px solid #9F9F9F; /* Базовая рамка для кнопки редактировать */
+            margin-right: 10px;
+            cursor: pointer;
+            padding-bottom: 2px;
+            padding-top: 2px;
+            padding-left: 7px;
+            padding-right: 7px;
+            border-radius: 10px;
+        }
+
+        .button-delete {
+            font-size: 17px;
+            border: 1px solid #9F9F9F; /* Базовая рамка для кнопки удалить */
             margin-right: 10px;
             cursor: pointer;
             padding-bottom: 2px;
@@ -45,7 +59,16 @@
         }
 
         /* Добавляем рамку при наведении */
-        .button:hover {
+        .button-edit:hover {
+            outline: none;
+            color: #333; /* Цвет текста при наведении */
+            border: 2px solid #333; /* Рамка при наведении */
+            font-weight: bold;
+        }
+
+
+        /* Добавляем рамку при наведении */
+        .button-delete:hover {
             outline: none;
             color: #333; /* Цвет текста при наведении */
             border: 2px solid #333; /* Рамка при наведении */
@@ -53,10 +76,11 @@
         }
 
         .parcel-item:hover .parcel-link,
-        .parcel-item:hover .button {
+        .parcel-item:hover .button-edit,
+        .parcel-item:hover .button-delete{
             background-color: #ddd; /* Светло-серый фон при наведении */
-        }
 
+        }
 
 
 
@@ -80,25 +104,25 @@
 </head>
 <body>
 
-<h3 ><a  href="/parcel/sent" class="parcel-link-menu">Відправлені &#11014;</a> <a href="/parcel/receive" style="margin-left: 25px" class="parcel-link-menu">Отримані &#11015;</a> <a href="/parcel/newLot" style="margin-left: 25px" class="parcel-link-menu">Створити &#10010;</a></h3>
+<h3 ><a  href="/parcel/sent" class="link-menu">Відправлені &#11014;</a> <a href="/parcel/receive" style="margin-left: 25px" class="link-menu">Отримані &#11015;</a> <a href="/parcel/newLot" style="margin-left: 25px" class="link-menu">Створити &#10010;</a></h3>
 <h2>Всі посилки:</h2>
 
 
 
 <div th:each="parcel : ${parcel}" class="parcel-item">
-<hr class="light-gray"/>
+<hr class="light-line"/>
 <div style="margin-bottom: 15px; margin-top: 10px;">
     <a th:href="@{/parcel/{id}(id=${parcel.getId()})}" th:text="${parcel.getStatus()} + ' ' + ${#temporals.format(parcel.getShippingDate(), 'dd-MM-yyyy')}" class="parcel-link"; ></a>
 
     <div class="button-container edit-button">
         <form th:method="GET" th:action="@{/parcel/{id}/editLot(id=${parcel.getId()})}" >
-            <input type="submit" value="Редагувати" class="button"/>
+            <input type="submit" value="Редагувати" class="button-edit"/>
         </form>
     </div>
 
     <div class="button-container delete-button">
         <form th:method="GET" th:action="@{/parcel/{id}/deleteLot(id=${parcel.getId()})}" >
-            <input type="submit" value="Видалити" class="button"/>
+            <input type="submit" value="Видалити" class="button-delete"/>
         </form>
     </div>
 </div>
@@ -107,6 +131,6 @@
 
 
 
-<hr class="light-gray"/>
+<hr class="light-line"/>
 </body>
 </html>
