@@ -5,31 +5,93 @@
     <title>Отримані</title>
 
     <style>
-        hr.light-gray {
+        .light-line {
             border: none;
             height: 1px;
             background-color: #d3d3d3; /* Светло-серый цвет */
         }
+
+        .link-menu {
+            text-decoration: none;
+            color: #696969;
+        }
+
+        .link-menu:hover {
+            text-decoration: underline;
+            color: #333;
+        }
+
+        .parcel-link {
+            font-size: 18px;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .parcel-link:hover {
+            font-weight: bold; /* Жирный текст при наведении на ссылку */
+            color: #333;
+        }
+
+        .button-edit, .button-delete {
+            font-size: 17px;
+            border: 1px solid #9F9F9F; /* Базовая рамка для кнопок */
+            margin-right: 10px;
+            cursor: pointer;
+            padding: 2px 7px;
+            border-radius: 10px;
+        }
+
+        .button-edit:hover, .button-delete:hover {
+            outline: none;
+            color: #333; /* Цвет текста при наведении */
+            border: 2px solid #333; /* Рамка при наведении */
+            font-weight: bold;
+        }
+
+        /* Селекторы для изменения состояния ссылки при наведении на кнопки */
+        .parcel-item:hover .parcel-link {
+            font-weight: bold; /* Делает текст ссылки жирным */
+            text-decoration: underline;
+            color: #333;
+        }
+
+        .button-container {
+            display: inline-block;
+        }
+
+        .edit-button {
+            position: absolute;
+            left: 250px;
+        }
+
+        .delete-button {
+            position: absolute;
+            left: 90vw;
+        }
     </style>
 </head>
 <body>
-<h3><a href="/parcel"><span style="font-size: 30px">&larr;</span> Повернутись на головну</a> <a  href="/parcel/sent" style="margin-left: 25px">Відправлені &#11014;</a> <a href="/parcel/newLot" style="margin-left: 25px">Створити &#10010;</a></h3> </h3>
+<h3><a href="/parcel" class="link-menu"><span style="font-size: 30px">&larr;</span> Повернутись на головну</a> <a  href="/parcel/sent" style="margin-left: 25px" class="link-menu">Відправлені &#11014;</a> <a href="/parcel/newLot" style="margin-left: 25px" class="link-menu">Створити &#10010;</a></h3> </h3>
 <h2>Отримані:</h2>
-<div th:each="parcel : ${parcel}">
-    <hr class="light-gray"/>
+<div th:each="parcel : ${parcel}" class="parcel-item">
+    <hr class="light-line"/>
     <div style="margin-bottom: 15px; margin-top: 10px;">
-        <a th:href="@{/parcel/{id}(id=${parcel.getId()})}" th:text="${parcel.getStatus()} + ' ' +  ${#temporals.format(parcel.getShippingDate(), 'dd-MM-yyyy')}" style="font-size: 18px;">user</a>
+        <a th:href="@{/parcel/{id}(id=${parcel.getId()})}" th:text="${parcel.getStatus()} + ' ' +  ${#temporals.format(parcel.getShippingDate(), 'dd-MM-yyyy')}" class="parcel-link">user</a>
 
-        <form th:method="GET" th:action="@{/parcel/receive/{id}/editLot(id=${parcel.getId()})}" style="display: inline-block; position: absolute; left: 250px;">
-            <input type="submit" value="Редагувати" style="font-size: 17px"/>
+        <div class="button-container edit-button">
+        <form th:method="GET" th:action="@{/parcel/receive/{id}/editLot(id=${parcel.getId()})}">
+            <input type="submit" value="Редагувати" class="button-edit"/>
         </form>
+        </div>
 
-        <form th:method="GET" th:action="@{/parcel/receive/{id}/deleteLot(id=${parcel.getId()})}" style="display: inline-block; position: absolute; left: 90vw; ">
-            <input type="submit" value="Видалити" style="font-size: 17px"/>
+        <div class="button-container delete-button">
+        <form th:method="GET" th:action="@{/parcel/receive/{id}/deleteLot(id=${parcel.getId()})}">
+            <input type="submit" value="Видалити" class="button-delete"/>
         </form>
+        </div>
 
     </div>
 </div>
-<hr class="light-gray"/>
+<hr class="light-line"/>
 </body>
 </html>

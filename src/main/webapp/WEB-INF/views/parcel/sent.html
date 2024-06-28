@@ -69,13 +69,12 @@
             left: 90vw;
         }
 
-
-
     </style>
 </head>
 <body>
 <h3 ><a href="/parcel" class="link-menu"><span style="font-size: 30px">&larr;</span> Повернутись на головну</a> <a href="/parcel/receive" style="margin-left: 25px" class="link-menu">Отримані &#11015;</a> <a href="/parcel/newLot" style="margin-left: 25px" class="link-menu">Створити &#10010;</a></h3>
 <h2>Відправлені:</h2>
+
 <div th:each="parcel : ${parcel}" class="parcel-item">
 
     <hr class="light-line"/>

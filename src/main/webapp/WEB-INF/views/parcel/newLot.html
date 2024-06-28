@@ -5,10 +5,38 @@
 <head>
     <meta charset="UTF-8">
     <title>Створити відправленя</title>
+
+    <style>
+        .link-menu {
+            text-decoration: none;
+            color: #696969;
+        }
+
+        .link-menu:hover {
+            text-decoration: underline;
+            color: #333;
+        }
+
+        .button-to-create{
+            font-size: 20px;
+            border: 1px solid #9F9F9F; /* Базовая рамка для кнопок */
+            margin-right: 10px;
+            cursor: pointer;
+            padding: 2px 7px;
+            border-radius: 10px;
+        }
+
+        .button-to-create:hover {
+            outline: none;
+            color: #333; /* Цвет текста при наведении */
+            border: 2px solid #333; /* Рамка при наведении */
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
 
-<h3><a th:href="@{/parcel}"><span style="font-size: 30px">&larr;</span> Повернутись на головну</a></h3>
+<h3><a th:href="@{/parcel}" class="link-menu"><span style="font-size: 30px">&larr;</span> Повернутись на головну</a></h3>
 
 
 
@@ -26,7 +54,7 @@
     <input type="date"  th:field="*{shippingDate}" id="shippingDate" style="font-size: 20px; margin-right: 10px"/>
 
 
-    <input type="submit" value="Створити" style="font-size: 20px">
+    <input type="submit" value="Створити" class="button-to-create">
 </form>
 
 </body>

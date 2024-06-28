@@ -5,11 +5,37 @@
     <title>Посилки</title>
 
     <style>
-        hr.light-gray {
+        .light-line {
             border: none;
             height: 1px;
             background-color: #d3d3d3; /* Светло-серый цвет */
-            margin: 20px 0;
+        }
+
+        .link-menu {
+            text-decoration: none;
+            color: #696969;
+        }
+
+        .link-menu:hover {
+            text-decoration: underline;
+            color: #333;
+        }
+
+        .button {
+            font-size: 17px;
+            border: 1px solid #9F9F9F; /* Базовая рамка для кнопок */
+            margin-right: 10px;
+            cursor: pointer;
+            padding: 2px 7px;
+            border-radius: 10px;
+
+        }
+
+        .button:hover {
+            outline: none;
+            color: #333; /* Цвет текста при наведении */
+            border: 2px solid #333; /* Рамка при наведении */
+            font-weight: bold;
         }
     </style>
 
@@ -19,25 +45,18 @@
             display: flex;
             align-items: center; /* Выравнивание элементов по вертикали */
         }
-        .button-container form {
-            margin: 0; /* Убираем стандартные отступы у форм */
-        }
-        .button-container input[type="submit"] {
-            font-size: 17px;
-            display: inline-block;
-        }
-        .button-container input[type="submit"].delete {
-            margin-left: 250px; /* Специфический отступ для кнопки удаления */
-        }
+
+
+
     </style>
 </head>
 <body>
-<h3><a th:href="@{/parcel}"><span style="font-size: 30px">&larr;</span> Повернутись на головну</a><a  href="/parcel/sent" style="margin-left: 25px">Відправлені &#11014;</a> <a href="/parcel/receive" style="margin-left: 25px">Отримані &#11015;</a></h3> <h2 th:text="${parcel.getStatus()} + ' ' + ${#temporals.format(parcel.getShippingDate(), 'dd-MM-yyyy')}">VALUE</h2>
+<h3><a th:href="@{/parcel}" class="link-menu"><span style="font-size: 30px">&larr;</span> Повернутись на головну</a><a  href="/parcel/sent" style="margin-left: 25px" class="link-menu">Відправлені &#11014;</a> <a href="/parcel/receive" style="margin-left: 25px" class="link-menu">Отримані &#11015;</a></h3> <h2 th:text="${parcel.getStatus()} + ' ' + ${#temporals.format(parcel.getShippingDate(), 'dd-MM-yyyy')}">VALUE</h2>
 
 <div th:each="package : ${parcel.getPackageList()}">
 
-    <hr class="light-gray"/>
-
+    <hr class="light-line"/>
+<div style="margin-bottom: 15px; margin-top: 10px;">
     <b>№TTN:</b>
     <span th:text="${package.getParcelTrackingNumber()}" style="font-size: 18px; "></span>
 
@@ -49,10 +68,6 @@
         <span th:text="${package.getClient() + '&nbsp; --- &nbsp;'}" ></span>
         <b>Опис:</b>
         <span th:text="${package.getDescriptions()}" ></span>
-
-
-
-
     </p>
 
 <div style="font-size: 18px">
@@ -63,22 +78,17 @@
 
     <div class="button-container">
     <form th:method="GET" th:action="@{/parcel/{idLot}/{idPackage}/editPackage(idLot=${parcel.getId()}, idPackage=${package.getId()})}" >
-        <input type="submit" value="Редагувати" style="font-size: 17px; margin-top: 10px; display: inline-block;"/>
+        <input type="submit" value="Редагувати" style=" margin-top: 10px; display: inline-block;" class="button"/>
     </form>
 
     <form th:method="GET" th:action="@{/parcel/{idLot}/{idPackage}/deletePackage(idLot=${parcel.getId()}, idPackage=${package.getId()})}" >
-        <input type="submit" value="Видалити" style="font-size: 17px; margin-left: 50px; margin-top: 10px; display: inline-block;"/>
+        <input type="submit" value="Видалити" style=" margin-left: 50px; margin-top: 10px; display: inline-block;" class="button"/>
     </form>
     </div>
-
-
-
-
-
-
 </div>
-<hr class="light-gray"/>
-<h3><a th:href="@{/parcel/{id}/new(id=${parcel.getId()})}">Додати посилку &#10010;</a></h3>
+</div>
+<hr class="light-line"/>
+<h3><a th:href="@{/parcel/{id}/new(id=${parcel.getId()})}" class="link-menu">Додати посилку &#10010;</a></h3>
 
 
 
