@@ -11,11 +11,9 @@
             background-color: #d3d3d3; /* Светло-серый цвет */
         }
 
-
         .link-menu {
             text-decoration: none;
             color: #696969;
-
         }
 
         .link-menu:hover {
@@ -34,55 +32,28 @@
             color: #333;
         }
 
-        .button-edit {
+        .button-edit, .button-delete {
             font-size: 17px;
-            border: 1px solid #9F9F9F; /* Базовая рамка для кнопки редактировать */
+            border: 1px solid #9F9F9F; /* Базовая рамка для кнопок */
             margin-right: 10px;
             cursor: pointer;
-            padding-bottom: 2px;
-            padding-top: 2px;
-            padding-left: 7px;
-            padding-right: 7px;
+            padding: 2px 7px;
             border-radius: 10px;
         }
 
-        .button-delete {
-            font-size: 17px;
-            border: 1px solid #9F9F9F; /* Базовая рамка для кнопки удалить */
-            margin-right: 10px;
-            cursor: pointer;
-            padding-bottom: 2px;
-            padding-top: 2px;
-            padding-left: 7px;
-            padding-right: 7px;
-            border-radius: 10px;
-        }
-
-        /* Добавляем рамку при наведении */
-        .button-edit:hover {
+        .button-edit:hover, .button-delete:hover {
             outline: none;
             color: #333; /* Цвет текста при наведении */
             border: 2px solid #333; /* Рамка при наведении */
             font-weight: bold;
         }
 
-
-        /* Добавляем рамку при наведении */
-        .button-delete:hover {
-            outline: none;
-            color: #333; /* Цвет текста при наведении */
-            border: 2px solid #333; /* Рамка при наведении */
-            font-weight: bold;
+        /* Селекторы для изменения состояния ссылки при наведении на кнопки */
+        .parcel-item:hover .parcel-link {
+            font-weight: bold; /* Делает текст ссылки жирным */
+            text-decoration: underline;
+            color: #333;
         }
-
-        .parcel-item:hover .parcel-link,
-        .parcel-item:hover .button-edit,
-        .parcel-item:hover .button-delete{
-            background-color: #ddd; /* Светло-серый фон при наведении */
-
-        }
-
-
 
         .button-container {
             display: inline-block;
