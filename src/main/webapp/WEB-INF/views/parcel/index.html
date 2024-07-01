@@ -28,6 +28,7 @@
             cursor: pointer;
             padding: 2px 7px;
             border-radius: 10px;
+            box-sizing: border-box; /* Включение границ и padding в общую ширину */
 
         }
 
@@ -37,18 +38,30 @@
             border: 2px solid #333; /* Рамка при наведении */
             font-weight: bold;
         }
-    </style>
 
-    <style>
-        /* Контейнер с использованием Flexbox для выравнивания элементов по вертикали */
+
+
         .button-container {
-            display: flex;
-            align-items: center; /* Выравнивание элементов по вертикали */
+            position: relative; /* Для относительного позиционирования кнопок */
+            margin-top: 10px;
+            height: 40px; /* Достаточная высота для размещения кнопок */
         }
 
+        .edit-button {
+            position: absolute;
 
+            top: 10px; /* Чтобы кнопки не заходили за нижнюю границу контейнера */
+        }
 
+        .delete-button {
+            position: absolute;
+            left: 150px;
+            top: 10px; /* Чтобы кнопки не заходили за нижнюю границу контейнера */
+        }
     </style>
+
+
+
 </head>
 <body>
 <h3><a th:href="@{/parcel}" class="link-menu"><span style="font-size: 30px">&larr;</span> Повернутись на головну</a><a  href="/parcel/sent" style="margin-left: 25px" class="link-menu">Відправлені &#11014;</a> <a href="/parcel/receive" style="margin-left: 25px" class="link-menu">Отримані &#11015;</a></h3> <h2 th:text="${parcel.getStatus()} + ' ' + ${#temporals.format(parcel.getShippingDate(), 'dd-MM-yyyy')}">VALUE</h2>
@@ -77,13 +90,19 @@
 </div>
 
     <div class="button-container">
+        <div class="edit-button">
     <form th:method="GET" th:action="@{/parcel/{idLot}/{idPackage}/editPackage(idLot=${parcel.getId()}, idPackage=${package.getId()})}" >
-        <input type="submit" value="Редагувати" style=" margin-top: 10px; display: inline-block;" class="button"/>
+        <input type="submit" value="Редагувати"  class="button"/>
     </form>
+        </div>
 
-    <form th:method="GET" th:action="@{/parcel/{idLot}/{idPackage}/deletePackage(idLot=${parcel.getId()}, idPackage=${package.getId()})}" >
-        <input type="submit" value="Видалити" style=" margin-left: 50px; margin-top: 10px; display: inline-block;" class="button"/>
+
+        <div class="delete-button">
+        <form th:method="GET" th:action="@{/parcel/{idLot}/{idPackage}/deletePackage(idLot=${parcel.getId()}, idPackage=${package.getId()})}" >
+        <input type="submit" value="Видалити"  class="button"/>
     </form>
+        </div>
+
     </div>
 </div>
 </div>
