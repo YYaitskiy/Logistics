@@ -3,11 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <title>Обновити</title>
+
+    <style>
+        .link-menu {
+            text-decoration: none;
+            color: #696969;
+        }
+
+        .link-menu:hover {
+            text-decoration: underline;
+            color: #333;
+        }
+
+        .button-to-create{
+            font-size: 20px;
+            border: 1px solid #9F9F9F; /* Базовая рамка для кнопок */
+            margin-right: 10px;
+            cursor: pointer;
+            padding: 2px 7px;
+            border-radius: 10px;
+        }
+
+        .button-to-create:hover{
+            outline: none;
+            color: #333; /* Цвет текста при наведении */
+            border: 2px solid #333; /* Рамка при наведении */
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
 
-<h3><a th:href="@{/parcel/receive}" ><span style="font-size: 30px">&larr;</span> Повернутись</a>
-    <a th:href="@{/parcel}" style="margin-left: 25px"><span style="font-size: 30px">&larr;</span> Повернутись на головну</a></h3>
+<h3><a th:href="@{/parcel/receive}" class="link-menu"><span style="font-size: 30px">&larr;</span> Повернутись</a>
+    <a th:href="@{/parcel}" style="margin-left: 25px" class="link-menu"><span style="font-size: 30px">&larr;</span> Повернутись на головну</a></h3>
 
 <form th:method="PATCH" th:action="@{/parcel/receive/{id}/update(id=${lot.getId()})}" th:object="${lot}">
     <h2>Обновити:</h2>
@@ -24,7 +52,7 @@
     <input type="date"  th:field="*{shippingDate}" id="shippingDate" style="font-size: 20px; margin-right: 10px"/>
 
 
-    <input type="submit" value="Обновити" style="font-size: 20px">
+    <input type="submit" value="Обновити" class="button-to-create">
 </form>
 
 </body>
