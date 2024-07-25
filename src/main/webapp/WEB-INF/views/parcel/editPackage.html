@@ -30,6 +30,40 @@
             border: 2px solid #333; /* Рамка при наведении */
             font-weight: bold;
         }
+
+        .button-do-not-delete{
+            font-size: 17px;
+            border: 1px solid #9F9F9F; /* Базовая рамка для кнопок */
+            margin-right: 10px;
+            cursor: pointer;
+            padding: 2px 7px;
+            border-radius: 10px;
+            position: absolute
+        }
+
+        .button-do-not-delete:hover{
+            outline: none;
+            color: #333; /* Цвет текста при наведении */
+            border: 2px solid #333; /* Рамка при наведении */
+            font-weight: bold;
+        }
+
+        .button-yes-delete{
+            border: 1px solid #9F9F9F; /* Базовая рамка для кнопок */
+            margin-right: 10px;
+            cursor: pointer;
+            padding: 2px 7px;
+            border-radius: 10px;
+            position: absolute
+
+        }
+
+        .button-yes-delete:hover{
+            outline: none;
+            color: #333; /* Цвет текста при наведении */
+            border: 2px solid #333; /* Рамка при наведении */
+            font-weight: bold;
+        }
     </style>
 
 </head>
@@ -68,9 +102,20 @@
     </p>
 
     <p>
-        <input type="submit" value="Редагувати" class="button-to-create">
+        <input type="submit" value="Редагувати" class="button-do-not-delete" style="margin-top: 25px; font-size: 20px"/>
     </p>
 
+</form>
+
+
+
+
+<!--<form th:method="GET" th:action="@{/parcel/{idLot}/{idPackage}/deletePackage(idLot=${parcel.getId()}, idPackage=${package.getId()})}" >-->
+<!--    <input type="submit" value="Видалити" class="button"/>-->
+<!--</form>-->
+
+<form th:method="get" th:action="@{/parcel/{idLot}/{idPackage}/deletePackage(idLot=${idLot}, idPackage=${package.getId()})}">
+    <input type="submit" value="Видалити" class="button-yes-delete" style="margin-left: 200px; margin-top: 25px; font-size: 20px"/>
 </form>
 
 </body>

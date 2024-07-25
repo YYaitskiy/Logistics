@@ -2,14 +2,25 @@
 <html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Посилки</title>
-
+    <title>Parcel Information</title>
     <style>
         .light-line {
             border: none;
             height: 1px;
             background-color: #d3d3d3; /* Светло-серый цвет */
         }
+
+        .link-card-number {
+            font-weight: bold;
+            text-decoration: none;
+            color: #696969
+        }
+
+        .link-card-number:hover{
+            text-decoration: underline;
+            color: #333;
+        }
+
 
         .link-menu {
             text-decoration: none;
@@ -21,95 +32,71 @@
             color: #333;
         }
 
-        .button {
-            font-size: 17px;
-            border: 1px solid #9F9F9F; /* Базовая рамка для кнопок */
-            margin-right: 10px;
-            cursor: pointer;
-            padding: 2px 7px;
-            border-radius: 10px;
-            box-sizing: border-box; /* Включение границ и padding в общую ширину */
 
+        .parcel-link {
+            font-size: 20px;
+            text-decoration: none;
+            color: inherit;
         }
 
-        .button:hover {
-            outline: none;
-            color: #333; /* Цвет текста при наведении */
-            border: 2px solid #333; /* Рамка при наведении */
-            font-weight: bold;
-        }
-
-
-
-        .button-container {
-            position: relative; /* Для относительного позиционирования кнопок */
-            margin-top: 10px;
-            height: 40px; /* Достаточная высота для размещения кнопок */
-        }
-
-        .edit-button {
-            position: absolute;
-
-            top: 10px; /* Чтобы кнопки не заходили за нижнюю границу контейнера */
-        }
-
-        .delete-button {
-            position: absolute;
-            left: 150px;
-            top: 10px; /* Чтобы кнопки не заходили за нижнюю границу контейнера */
+        .parcel-link:hover {
+            text-decoration: underline;
+            font-weight: bold; /* Жирный текст при наведении на ссылку */
+            color: #333;
         }
     </style>
-
-
-
 </head>
 <body>
-<h3><a th:href="@{/parcel}" class="link-menu"><span style="font-size: 30px">&larr;</span> Повернутись на головну</a><a  href="/parcel/sent" style="margin-left: 25px" class="link-menu">Відправлені &#11014;</a> <a href="/parcel/receive" style="margin-left: 25px" class="link-menu">Отримані &#11015;</a></h3> <h2 th:text="${parcel.getStatus()} + ' ' + ${#temporals.format(parcel.getShippingDate(), 'dd-MM-yyyy')}">VALUE</h2>
+<h3>
+    <a th:href="@{/parcel}" class="link-menu"><span style="font-size: 30px">&larr;</span> Повернутись на головну</a>
+    <a href="/parcel/sent" style="margin-left: 25px" class="link-menu">Відправлені &#11014;</a>
+    <a href="/parcel/receive" style="margin-left: 25px" class="link-menu">Отримані &#11015;</a>
+</h3>
+<h2 th:text="${parcel.getStatus()} + ' ' + ${#temporals.format(parcel.getShippingDate(), 'dd-MM-yyyy')}">VALUE</h2>
 
-<div th:each="package : ${parcel.getPackageList()}">
-
-    <hr class="light-line"/>
-<div style="margin-bottom: 15px; margin-top: 10px;">
-    <b>№TTN:</b>
-    <span th:text="${package.getParcelTrackingNumber()}" style="font-size: 18px; "></span>
-
-
-    <p style="font-size: 18px;">
-        <b>№ Заявки:</b>
-        <span th:text="${package.getCardNumber() + '&nbsp; --- &nbsp;'}" ></span>
-        <b>Замовник:</b>
-        <span th:text="${package.getClient() + '&nbsp; --- &nbsp;'}" ></span>
-        <b>Опис:</b>
-        <span th:text="${package.getDescriptions()}" ></span>
-    </p>
-
-<div style="font-size: 18px">
-    <b>Ціна:</b>
-    <span th:text="${package.getDeliveryPrice()} + 'грн' + ' ' +&#8372;"></span>
-
-</div>
-
-    <div class="button-container">
-        <div class="edit-button">
-    <form th:method="GET" th:action="@{/parcel/{idLot}/{idPackage}/editPackage(idLot=${parcel.getId()}, idPackage=${package.getId()})}" >
-        <input type="submit" value="Редагувати"  class="button"/>
-    </form>
+<div th:with="parcelList=${parcel.getPackageList()}">
+    <div th:each="package, iterStat : ${parcelList}">
+        <!-- Выводим TTN только один раз для группы посылок -->
+        <div th:if="${iterStat.index == 0 or package.getParcelTrackingNumber() != parcelList[iterStat.index - 1].getParcelTrackingNumber()}">
+            <hr class="light-line" style=" margin-top: 15px"/>
+<!--            <div style="margin-bottom: 15px; margin-top: 10px;">-->
+<!--                <b>№TTN:</b>-->
+<!--                <span th:text="${package.getParcelTrackingNumber()}" style="font-size: 18px;"></span>-->
+<!--            </div>-->
         </div>
 
+        <!-- Пунктирная линия между заявками с одинаковым TTN -->
+        <div th:if="${iterStat.index > 0 and package.getParcelTrackingNumber() == parcelList[iterStat.index - 1].getParcelTrackingNumber()}">
 
-        <div class="delete-button">
-        <form th:method="GET" th:action="@{/parcel/{idLot}/{idPackage}/deletePackage(idLot=${parcel.getId()}, idPackage=${package.getId()})}" >
-        <input type="submit" value="Видалити"  class="button"/>
-    </form>
         </div>
 
+        <!-- Выводим информацию о заявке -->
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <p style="font-size: 20px; flex-grow: 1; margin: 0;">
+<!--                <b>№ Заявки:</b>-->
+<!--                <span th:text="${package.getCardNumber() + ' -&#45;&#45; '}"></span>-->
+                <a th:href="@{/parcel/{idLot}/{idPackage}/editPackage(idLot=${parcel.getId()}, idPackage=${package.getId()})}" th:text="${package.getCardNumber()}"  class="link-card-number"; ></a>  ---
+
+                <!--                <b>Замовник:</b>-->
+                <span th:text="${package.getClient() + ' --- '}"></span>
+<!--                <b>Опис:</b>-->
+                <span th:text="${package.getDescriptions()}"></span>
+            </p>
+
+
+        </div>
+
+        <!-- Выводим цену только для последней заявки в группе -->
+        <div th:if="${iterStat.index == parcelList.size() - 1 or package.getParcelTrackingNumber() != parcelList[iterStat.index + 1].getParcelTrackingNumber()}">
+            <div style="font-size: 20px; ">
+<!--                <b>Ціна:</b>-->
+                <span th:text="${package.getDeliveryPrice()} + 'грн ' + '&#8372;'"></span>
+            </div>
+        </div>
     </div>
+    <hr class="light-line"/>
 </div>
-</div>
-<hr class="light-line"/>
+
 <h3><a th:href="@{/parcel/{id}/new(id=${parcel.getId()})}" class="link-menu">Додати посилку &#10010;</a></h3>
-
-
-
 </body>
 </html>
