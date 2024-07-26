@@ -3,7 +3,6 @@ package ua.yura.models;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.UUID;
 
@@ -16,10 +15,6 @@ public class Lot {
 
 
     public Lot() {
-    }
-
-    public Lot(List<Package> packageList) {
-        this.packageList = packageList;
     }
 
     public Lot(UUID id, String status, LocalDate shippingDate, List<Package> packageList) {

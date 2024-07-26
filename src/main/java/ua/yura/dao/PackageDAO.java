@@ -14,12 +14,10 @@ public class PackageDAO {
     private List<Package> packageList;
     private List<Package> packageList2;
     private List<Package> packageList3;
-
     private List<Package> packageList4;
-
     private List<Package> packageList5;
 
-    private List<List<Package>> allPackageList;
+
 
     public PackageDAO(List<Package> packageList, List<Package> packageList2, List<Package> packageList3,
                       List<Package> packageList4, List<Package> packageList5) {

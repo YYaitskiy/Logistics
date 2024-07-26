@@ -38,13 +38,6 @@ public class LotDAO {
                 break;
             }
         }
-
-//        for (int i=0; i<lotId.getPackageList().size(); i++){
-//            Package p = lotId.getPackageList().get(i);
-//            for (int i2=0; i2<lotId.getPackageList().size(); i2++){
-//
-//            }
-//        }
         return lotId;
     }
 

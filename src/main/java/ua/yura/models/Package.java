@@ -10,6 +10,9 @@ public class Package {
     private String descriptions;
     private int deliveryPrice;
 
+    public Package() {
+    }
+
     public Package(UUID id) {
         this.id = id;
     }
@@ -23,10 +26,6 @@ public class Package {
         this.deliveryPrice = deliveryPrice;
     }
 
-
-
-    public Package() {
-    }
 
     public UUID getId() {
         return id;
