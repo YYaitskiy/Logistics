@@ -28,7 +28,6 @@ public class SubdivisionDAO {
         mcdList.add(new Subdivision(UUID.randomUUID(), "МакДональдз - Парк", 115, "+38(050) 347-12-15", "Хмельницький", "пр. Миру, 99/2А"));
         mcdList.add(new Subdivision(UUID.randomUUID(), "МакДональдз - Короленка", 72, "+38(050) 386-09-13", "Рівне", "вул. Борисенка, 1"));
         mcdList.add(new Subdivision(UUID.randomUUID(), "МакДональдз - Підстанція", 30, "+38(050) 463-91-14", "Дніпро", "пр. Науки, 128"));
-        mcdList.add(new Subdivision(UUID.randomUUID(), "МакДональдз - Глобал Житомир", 62, "+38(050) 386-71-51", "Житомир", "вул. Київська, 77"));
         mcdList.add(new Subdivision(UUID.randomUUID(), "МакДональдз - Мост сіті", 56, "+38(050) 482-98-40", "Дніпро", "вул. Королеви Єлизавети ІІ, 2"));
         mcdList.add(new Subdivision(UUID.randomUUID(), "МакДональдз - Вокзал Одеса", 19, "+38(050) 463-91-45", "Одеса", "вул.Пантелеймонівська, 17-Б"));
         mcdList.add(new Subdivision(UUID.randomUUID(), "МакДональдз - Глобал Київ", 63, "+38(050) 386-17-99", "Київ", "вул. Оноре де Бальзака, 2-А"));
