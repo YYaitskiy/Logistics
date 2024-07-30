@@ -144,9 +144,7 @@ public class LotDAO {
             if (lot.getId().equals(idLot)) {
                 for (Package p1 : lot.getPackageList()) {
                     if (p1.getId().equals(idPackage)) {
-//                        lotList.get(i).getPackageList().set(i2, p);
                         lotList.get(i).getPackageList().remove(i2);
-
                         break;
                     }
                     i2++;

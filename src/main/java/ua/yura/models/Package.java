@@ -5,7 +5,7 @@ import java.util.UUID;
 public class Package {
     private UUID id;
     private long parcelTrackingNumber;
-    private int cardNumber;
+    private String cardNumber;
     private String client;
     private String descriptions;
     private int deliveryPrice;
@@ -17,7 +17,7 @@ public class Package {
         this.id = id;
     }
 
-    public Package(UUID id, long parcelTrackingNumber, int cardNumber, String client, String descriptions, int deliveryPrice) {
+    public Package(UUID id, long parcelTrackingNumber, String cardNumber, String client, String descriptions, int deliveryPrice) {
         this.id = id;
         this.parcelTrackingNumber = parcelTrackingNumber;
         this.cardNumber = cardNumber;
@@ -43,11 +43,11 @@ public class Package {
         this.parcelTrackingNumber = parcelTrackingNumber;
     }
 
-    public int getCardNumber() {
+    public String getCardNumber() {
         return cardNumber;
     }
 
-    public void setCardNumber(int cardNumber) {
+    public void setCardNumber(String cardNumber) {
         this.cardNumber = cardNumber;
     }
 
