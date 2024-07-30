@@ -21,6 +21,16 @@
             color: #333;
         }
 
+        .link-client-name{
+            text-decoration: none;
+            color: black;
+        }
+
+        .link-client-name:hover{
+            text-decoration: underline;
+            color: #333;
+        }
+
 
         .link-menu {
             text-decoration: none;
@@ -78,7 +88,7 @@
                 <a th:href="@{/parcel/{idLot}/{idPackage}/editPackage(idLot=${parcel.getId()}, idPackage=${package.getId()})}" th:text="${package.getCardNumber()}"  class="link-card-number"; ></a>  ---
 
                 <!--                <b>Замовник:</b>-->
-                <span th:text="${package.getClient() + ' --- '}"></span>
+                <a th:href="@{/parcel/{idLot}/{idPackage}/editPackage(idLot=${parcel.getId()}, idPackage=${package.getId()})}"  th:text="${package.getClient().getName() }" class="link-client-name"></a>  ---
 <!--                <b>Опис:</b>-->
                 <span th:text="${package.getDescriptions()}"></span>
             </p>
