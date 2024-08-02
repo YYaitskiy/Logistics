@@ -51,10 +51,21 @@
     <input type="text" th:field="*{cardNumber}" id="cardNumber" style="font-size: 20px; display: inline-block; position: absolute; left: 135px;"/>
     </p>
 
-    <p>
-    <label for="client" style="font-size: 20px">Замовник:</label>
-    <input type="text" th:field="*{client}" id="client" style="font-size: 20px; display: inline-block; position: absolute; left: 135px;"/>
-    </p>
+<!--    <label for="companyList" style="font-size: 20px;">Компанія: </label>-->
+<!--    <select name="companyList" th:field="*{companyList}" id="companyList" style="font-size: 20px; display: inline-block; position: absolute; left: 135px;">-->
+<!--        <option value=""  ></option>-->
+<!--        <th:block th:each="company : ${companyDAO.companyList}" >-->
+<!--            <option th:value="${company.name}" th:text="${company.name}"></option>-->
+<!--        </th:block>-->
+<!--    </select>-->
+
+    <label for="client" style="font-size: 20px;">Замовник: </label>
+    <select name="client" th:field="*{client}" id="client" style="font-size: 20px; display: inline-block; position: absolute; left: 135px;">
+        <option value=""  ></option>
+        <th:block th:each="subdivision : ${subdivisionDAO.mcdList}" >
+            <option th:value="${subdivision.name}" th:text="${subdivision.numberSubdivision} + ' ' + ${subdivision.name}"></option>
+        </th:block>
+    </select>
 
     <p>
     <label for="descriptions" style="font-size: 20px">Опис:</label>

@@ -8,7 +8,7 @@ public class Package {
     private String cardNumber;
 //    private String client;
 
-    private Subdivision client;
+    private String client;
     private String descriptions;
     private int deliveryPrice;
 
@@ -19,7 +19,7 @@ public class Package {
         this.id = id;
     }
 
-    public Package(UUID id, long parcelTrackingNumber, String cardNumber, Subdivision client, String descriptions, int deliveryPrice) {
+    public Package(UUID id, long parcelTrackingNumber, String cardNumber, String client, String descriptions, int deliveryPrice) {
         this.id = id;
         this.parcelTrackingNumber = parcelTrackingNumber;
         this.cardNumber = cardNumber;
@@ -53,11 +53,11 @@ public class Package {
         this.cardNumber = cardNumber;
     }
 
-    public Subdivision getClient() {
+    public String getClient() {
         return client;
     }
 
-    public void setClient(Subdivision client) {
+    public void setClient(String client) {
         this.client = client;
     }
 

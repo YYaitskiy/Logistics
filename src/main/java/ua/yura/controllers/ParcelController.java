@@ -4,8 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import ua.yura.dao.CompanyDAO;
 import ua.yura.dao.LotDAO;
 import ua.yura.dao.PackageDAO;
+import ua.yura.dao.SubdivisionDAO;
 import ua.yura.models.Lot;
 import ua.yura.models.Package;
 
@@ -17,13 +19,17 @@ public class ParcelController {
 
     private LotDAO lotDAO;
     private PackageDAO packageDAO;
+    private CompanyDAO companyDAO;
+    private SubdivisionDAO subdivisionDAO;
 
 
 
     @Autowired
-    public ParcelController(LotDAO lotDAO, PackageDAO packageDAO) {
+    public ParcelController(LotDAO lotDAO, PackageDAO packageDAO, CompanyDAO companyDAO, SubdivisionDAO subdivisionDAO) {
         this.lotDAO = lotDAO;
         this.packageDAO = packageDAO;
+        this.companyDAO=companyDAO;
+        this.subdivisionDAO=subdivisionDAO;
     }
 
     @GetMapping()
@@ -66,6 +72,8 @@ public class ParcelController {
     @GetMapping("/{id}/new")
     public String newPackage (Model model, @PathVariable("id") UUID uuid){
         model.addAttribute("package", new Package(uuid));
+        model.addAttribute("subdivisionDAO", subdivisionDAO);
+        model.addAttribute("companyDAO", companyDAO);
         return "parcel/newPackage";
     }
 
