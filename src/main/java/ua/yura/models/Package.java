@@ -1,14 +1,15 @@
 package ua.yura.models;
 
+import java.util.List;
 import java.util.UUID;
 
 public class Package {
     private UUID id;
     private long parcelTrackingNumber;
     private String cardNumber;
-//    private String client;
-
     private String client;
+
+    private String companyName;
     private String descriptions;
     private int deliveryPrice;
 
@@ -19,15 +20,15 @@ public class Package {
         this.id = id;
     }
 
-    public Package(UUID id, long parcelTrackingNumber, String cardNumber, String client, String descriptions, int deliveryPrice) {
+    public Package(UUID id, long parcelTrackingNumber, String cardNumber, String client, String companyName, String descriptions, int deliveryPrice) {
         this.id = id;
         this.parcelTrackingNumber = parcelTrackingNumber;
         this.cardNumber = cardNumber;
         this.client = client;
+        this.companyName = companyName;
         this.descriptions = descriptions;
         this.deliveryPrice = deliveryPrice;
     }
-
 
     public UUID getId() {
         return id;
@@ -77,6 +78,12 @@ public class Package {
         this.deliveryPrice = deliveryPrice;
     }
 
+    public String getCompanyName() {
+        return companyName;
+    }
 
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
 }
 

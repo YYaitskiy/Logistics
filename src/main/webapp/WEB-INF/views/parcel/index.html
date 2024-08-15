@@ -85,7 +85,7 @@
             <p style="font-size: 20px; flex-grow: 1; margin: 0;">
 <!--                <b>№ Заявки:</b>-->
 <!--                <span th:text="${package.getCardNumber() + ' -&#45;&#45; '}"></span>-->
-                <a th:href="@{/parcel/{idLot}/{idPackage}/editPackage(idLot=${parcel.getId()}, idPackage=${package.getId()})}" th:text="${package.getCardNumber()}"  class="link-card-number"; ></a>  ---
+                <a th:href="@{/parcel/{idLot}/{idPackage}/{name}/editPackage(idLot=${parcel.getId()}, idPackage=${package.getId()}, name=${package.getCompanyName()})}" th:text="${package.getCardNumber()}"  class="link-card-number" ></a>  ---
 
                 <!--                <b>Замовник:</b>-->
                 <a th:href="@{/parcel/{idLot}/{idPackage}/editPackage(idLot=${parcel.getId()}, idPackage=${package.getId()})}"  th:text="${package.getClient() }" class="link-client-name"></a>  ---
@@ -107,6 +107,9 @@
     <hr class="light-line"/>
 </div>
 
-<h3><a th:href="@{/parcel/{id}/new(id=${parcel.getId()})}" class="link-menu">Додати посилку &#10010;</a></h3>
+
+<h3><a th:href="@{/parcel/{id}/newMCD(id=${parcel.getId()})}" class="link-menu">Додати посилку MCD &#10010;</a></h3>
+<h3><a th:href="@{/parcel/{id}/newPuma(id=${parcel.getId()})}" class="link-menu">Додати посилку Puma &#10010;</a></h3>
+<h3><a th:href="@{/parcel/{id}/newUCL(id=${parcel.getId()})}" class="link-menu">Додати посилку UCL &#10010;</a></h3>
 </body>
 </html>

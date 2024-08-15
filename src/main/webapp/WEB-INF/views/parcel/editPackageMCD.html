@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Обновити</title>
+
+    <style>
+        .link-menu {
+            text-decoration: none;
+            color: #696969;
+        }
+
+        .link-menu:hover {
+            text-decoration: underline;
+            color: #333;
+        }
+
+        .button-to-create{
+            font-size: 20px;
+            border: 1px solid #9F9F9F; /* Базовая рамка для кнопок */
+            margin-right: 10px;
+            cursor: pointer;
+            padding: 2px 7px;
+            border-radius: 10px;
+        }
+
+        .button-to-create:hover{
+            outline: none;
+            color: #333; /* Цвет текста при наведении */
+            border: 2px solid #333; /* Рамка при наведении */
+            font-weight: bold;
+        }
+
+        .button-do-not-delete{
+            font-size: 17px;
+            border: 1px solid #9F9F9F; /* Базовая рамка для кнопок */
+            margin-right: 10px;
+            cursor: pointer;
+            padding: 2px 7px;
+            border-radius: 10px;
+            position: absolute
+        }
+
+        .button-do-not-delete:hover{
+            outline: none;
+            color: #333; /* Цвет текста при наведении */
+            border: 2px solid #333; /* Рамка при наведении */
+            font-weight: bold;
+        }
+
+        .button-yes-delete{
+            border: 1px solid #9F9F9F; /* Базовая рамка для кнопок */
+            margin-right: 10px;
+            cursor: pointer;
+            padding: 2px 7px;
+            border-radius: 10px;
+            position: absolute
+
+        }
+
+        .button-yes-delete:hover{
+            outline: none;
+            color: #333; /* Цвет текста при наведении */
+            border: 2px solid #333; /* Рамка при наведении */
+            font-weight: bold;
+        }
+    </style>
+
+</head>
+<body>
+
+<h3><a th:href="@{/parcel/{idLot}(idLot=${idLot})}" class="link-menu"><span style="font-size: 30px">&larr;</span> Повернутись</a><a th:href="@{/parcel}" style="margin-left: 25px" class="link-menu"><span style="font-size: 30px">&larr;</span> Повернутись на головну</a></h3>
+
+
+<h2>Обновити:</h2>
+
+<form th:method="PATCH" th:action="@{/parcel/{idLot}/{id}/editPackage(idLot=${idLot}, id=${package.getId()})}" th:object="${package}">
+
+    <p>
+        <label for="parcelTrackingNumber" style="font-size: 20px">Введіть TTN:</label>
+        <input type="number" th:field="*{parcelTrackingNumber}" id="parcelTrackingNumber" style="font-size: 20px; display: inline-block; position: absolute; left: 135px;" />
+    </p>
+
+    <p>
+        <label for="cardNumber" style="font-size: 20px">Номер заявки:</label>
+        <input type="text" th:field="*{cardNumber}" id="cardNumber" style="font-size: 20px; display: inline-block; position: absolute; left: 135px;"/>
+    </p>
+
+    <p>
+        <label for="client" style="font-size: 20px;">Замовник: </label>
+        <select name="client" th:field="*{client}" id="client" style="font-size: 20px; display: inline-block; position: absolute; left: 135px;">
+            <option value=""  ></option>
+            <th:block th:each="subdivision : ${subdivisionDAO.mcdList}" >
+                <option th:value="${subdivision.name}" th:text="${subdivision.numberSubdivision} + ' ' + ${subdivision.name}"></option>
+            </th:block>
+        </select>
+    </p>
+
+    <p>
+        <label for="descriptions" style="font-size: 20px">Опис:</label>
+        <input type="text" th:field="*{descriptions}" id="descriptions" style="font-size: 20px; display: inline-block; position: absolute; left: 135px;"/>
+    </p>
+
+    <p>
+        <label for="deliveryPrice" style="font-size: 20px">Ціна:</label>
+        <input type="number" th:field="*{deliveryPrice}" id="deliveryPrice" style="font-size: 20px; display: inline-block; position: absolute; left: 135px;"/>
+    </p>
+
+    <p>
+        <input type="submit" value="Редагувати" class="button-do-not-delete" style="margin-top: 25px; font-size: 20px"/>
+    </p>
+
+</form>
+
+
+
+
+<!--<form th:method="GET" th:action="@{/parcel/{idLot}/{idPackage}/deletePackage(idLot=${parcel.getId()}, idPackage=${package.getId()})}" >-->
+<!--    <input type="submit" value="Видалити" class="button"/>-->
+<!--</form>-->
+
+<form th:method="get" th:action="@{/parcel/{idLot}/{idPackage}/deletePackage(idLot=${idLot}, idPackage=${package.getId()})}">
+    <input type="submit" value="Видалити" class="button-yes-delete" style="margin-left: 200px; margin-top: 25px; font-size: 20px"/>
+</form>
+
+</body>
+</html>

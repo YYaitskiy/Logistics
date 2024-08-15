@@ -3,6 +3,8 @@ package ua.yura.dao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ua.yura.models.Company;
+import ua.yura.models.Package;
+import ua.yura.models.Subdivision;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,4 +26,26 @@ public class CompanyDAO {
         companyList.add(new Company(UUID.randomUUID(), "Puma", 33741984, subdivisionDAO.getPumaList()));
         companyList.add(new Company(UUID.randomUUID(), "UCL", 11111111,subdivisionDAO.getUclList()));
     }
+
+    public SubdivisionDAO getSubdivisionDAO() {
+        return subdivisionDAO;
+    }
+
+    public void setSubdivisionDAO(SubdivisionDAO subdivisionDAO) {
+        this.subdivisionDAO = subdivisionDAO;
+    }
+
+    public List<Company> getCompanyList() {
+        return companyList;
+    }
+
+    public void setCompanyList(List<Company> companyList) {
+        this.companyList = companyList;
+    }
+
+    //    public CompanyDAO companySearch(Package p){
+//
+//    }
+
+
 }
