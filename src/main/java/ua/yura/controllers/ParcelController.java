@@ -71,21 +71,21 @@ public class ParcelController {
 
     @GetMapping("/{id}/newMCD")
     public String newPackageMCD (Model model, @PathVariable("id") UUID uuid){
-        model.addAttribute("package", new Package(uuid));
+        model.addAttribute("package", new Package(uuid, companyDAO.getCompanyList().get(0).getName()));
         model.addAttribute("subdivisionDAO", subdivisionDAO);
         return "parcel/newPackageMcd";
     }
 
     @GetMapping("/{id}/newPuma")
     public String newPackagePuma (Model model, @PathVariable("id") UUID uuid){
-        model.addAttribute("package", new Package(uuid));
+        model.addAttribute("package", new Package(uuid, companyDAO.getCompanyList().get(1).getName()));
         model.addAttribute("subdivisionDAO", subdivisionDAO);
         return "parcel/newPackagePuma";
     }
 
     @GetMapping("/{id}/newUCL")
     public String newPackageUCL (Model model, @PathVariable("id") UUID uuid){
-        model.addAttribute("package", new Package(uuid));
+        model.addAttribute("package", new Package(uuid, companyDAO.getCompanyList().get(2).getName()));
         model.addAttribute("subdivisionDAO", subdivisionDAO);
         return "parcel/newPackageUCL";
     }

@@ -51,6 +51,8 @@
         <input type="text" th:field="*{cardNumber}" id="cardNumber" style="font-size: 20px; display: inline-block; position: absolute; left: 135px;"/>
     </p>
 
+    <input type="hidden" th:field="*{companyName}" />
+
     <label for="client" style="font-size: 20px;">Замовник: </label>
     <select name="client" th:field="*{client}" id="client" style="font-size: 20px; display: inline-block; position: absolute; left: 135px;">
         <option value=""  ></option>

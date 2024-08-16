@@ -30,6 +30,11 @@ public class Package {
         this.deliveryPrice = deliveryPrice;
     }
 
+    public Package(UUID id, String companyName) {
+        this.id = id;
+        this.companyName = companyName;
+    }
+
     public UUID getId() {
         return id;
     }
