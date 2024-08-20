@@ -43,9 +43,17 @@ public class CompanyDAO {
         this.companyList = companyList;
     }
 
-    //    public CompanyDAO companySearch(Package p){
-//
-//    }
+    public Company searchCompany(String companyName){
+        Company foundCompany = new Company();
+        for (Company company:companyList) {
+            if (company.getName().equals(companyName)){
+                foundCompany=company;
+            }
+        }
+        return foundCompany;
+    }
+
+
 
 
 }

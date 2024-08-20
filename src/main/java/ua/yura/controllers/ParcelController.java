@@ -41,6 +41,7 @@ public class ParcelController {
     @GetMapping("/{id}")
     public String id(@PathVariable("id") UUID uuid, Model model){
         model.addAttribute("parcel", lotDAO.indexLot(uuid));
+
         return "parcel/index";
     }
 
@@ -218,6 +219,13 @@ public class ParcelController {
     public String deletePackage(@PathVariable("idLot") UUID uuidLot, @PathVariable("idPackage") UUID uuidPackage){
        lotDAO.deletePackage(uuidLot, uuidPackage);
         return "redirect:/parcel/" + uuidLot;
+    }
+
+    @GetMapping("/{companyName}/{idLot}/{idPackage}/company")
+    public String companyInfo(@PathVariable("companyName") String companyName,@PathVariable("idLot") UUID idLot, @PathVariable("idPackage") UUID idPackage, Model model){
+        model.addAttribute("company", companyDAO.searchCompany(companyName));
+        model.addAttribute("subdivision", lotDAO.indexPackage(idLot, idPackage));
+        return "parcel/companyShow";
     }
 
 

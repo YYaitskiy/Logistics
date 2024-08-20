@@ -88,7 +88,7 @@
                 <a th:href="@{/parcel/{idLot}/{idPackage}/{name}/editPackage(idLot=${parcel.getId()}, idPackage=${package.getId()}, name=${package.getCompanyName()})}" th:text="${package.getCardNumber()}"  class="link-card-number" ></a>  ---
 
                 <!--                <b>Замовник:</b>-->
-                <a th:href="@{/parcel/{idLot}/{idPackage}/editPackage(idLot=${parcel.getId()}, idPackage=${package.getId()})}"  th:text="${package.getClient() }" class="link-client-name"></a>  ---
+                <a th:href="@{/parcel/{companyName}/{idLot}/{idPackage}/company(idPackage=${package.getId()}, companyName=${package.getCompanyName()}, idLot=${parcel.getId()})}"  th:text="${package.getClient() }" class="link-client-name"></a>  ---
 <!--                <b>Опис:</b>-->
                 <span th:text="${package.getDescriptions()}"></span>
             </p>
