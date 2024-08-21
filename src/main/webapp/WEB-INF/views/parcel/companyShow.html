@@ -17,8 +17,9 @@
 </head>
 <body>
 <h3><a th:href="@{/parcel/{idLot}(idLot=${idLot})}" class="link-menu"><span style="font-size: 30px">&larr;</span> Повернутись</a><a th:href="@{/parcel}" style="margin-left: 25px" class="link-menu"><span style="font-size: 30px">&larr;</span> Повернутись на головну</a></h3>
-<h2 th:text="${company.getName()} +' '+ ${company.getEDRPOUCode()}"></h2>
-<h2 th:text="${subdivision.getName() +' '+ ${subdivision.getNumberSubdivision} +' '+ ${subdivision.getTelephone}"></h2>
+<p style="display: inline">Компанія:</p> <h2 th:text="${company.getName()}" style="display: inline"></h2><p STYLE="display: inline; margin-left: 100px">Код ЕГРПОУ</p> <h2 th:text="${company.getEDRPOUCode()}" style="display: inline; "></h2>
+<h3 th:text="${subdivision.getName()} +' '+ ${subdivision.getNumberSubdivision()} +' '+ ${subdivision.getTelephone()}"></h3>
+<h3 th:text="${subdivision.getRegion()} +' '+ ${subdivision.getCity()} +' '+ ${subdivision.getAddress()}" ></h3>
 
 </body>
 </html>

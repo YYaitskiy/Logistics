@@ -53,6 +53,18 @@ public class CompanyDAO {
         return foundCompany;
     }
 
+    public Subdivision searchSubdivision(String companyName, String client){
+        Subdivision foundSubdivision = new Subdivision();
+        Company company = searchCompany(companyName);
+        for (Subdivision subdivision:company.getSubdivisionList()) {
+            if (subdivision.getName().equals(client)){
+                foundSubdivision=subdivision;
+            }
+
+        }
+        return foundSubdivision;
+    }
+
 
 
 

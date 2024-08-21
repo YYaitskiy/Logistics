@@ -10,6 +10,7 @@ import ua.yura.dao.PackageDAO;
 import ua.yura.dao.SubdivisionDAO;
 import ua.yura.models.Lot;
 import ua.yura.models.Package;
+import ua.yura.models.Subdivision;
 
 import java.util.UUID;
 
@@ -224,7 +225,8 @@ public class ParcelController {
     @GetMapping("/{companyName}/{idLot}/{idPackage}/company")
     public String companyInfo(@PathVariable("companyName") String companyName,@PathVariable("idLot") UUID idLot, @PathVariable("idPackage") UUID idPackage, Model model){
         model.addAttribute("company", companyDAO.searchCompany(companyName));
-        model.addAttribute("subdivision", lotDAO.indexPackage(idLot, idPackage));
+        Package p = lotDAO.indexPackage(idLot, idPackage);
+        model.addAttribute("subdivision", companyDAO.searchSubdivision(p.getCompanyName(), p.getClient()));
         return "parcel/companyShow";
     }
 

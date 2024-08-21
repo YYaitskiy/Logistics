@@ -7,18 +7,19 @@ public class Subdivision {
     private String name;
     private int numberSubdivision;
     private String telephone;
-    private String locality;
+    private String region;
+    private String city;
     private String address;
-
     public Subdivision() {
     }
 
-    public Subdivision(UUID id, String name, int numberSubdivision, String telephone, String locality, String address) {
+    public Subdivision(UUID id, String name, int numberSubdivision, String telephone, String region, String city, String address) {
         this.id = id;
         this.name = name;
         this.numberSubdivision = numberSubdivision;
         this.telephone = telephone;
-        this.locality = locality;
+        this.region = region;
+        this.city = city;
         this.address = address;
     }
 
@@ -54,12 +55,12 @@ public class Subdivision {
         this.telephone = telephone;
     }
 
-    public String getLocality() {
-        return locality;
+    public String getRegion() {
+        return region;
     }
 
-    public void setLocality(String locality) {
-        this.locality = locality;
+    public void setRegion(String locality) {
+        this.region = locality;
     }
 
     public String getAddress() {
@@ -68,5 +69,13 @@ public class Subdivision {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 }
