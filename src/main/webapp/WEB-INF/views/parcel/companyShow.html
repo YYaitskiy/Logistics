@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://thymeleaf.org">
+<html lang="en" xmlns:th="http://thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>Компанія всі посилки </title>
@@ -13,13 +13,99 @@
             text-decoration: underline;
             color: #333;
         }
+
+        .link-card-number {
+            font-weight: bold;
+            text-decoration: none;
+            color: #696969
+        }
+
+        .link-card-number:hover{
+            text-decoration: underline;
+            color: #333;
+        }
+
+        .client-name{
+            text-decoration: none;
+            color: black;
+        }
+
+
+        .light-line {
+            border: none;
+            height: 1px;
+            background-color: #d3d3d3; /* Светло-серый цвет */
+        }
     </style>
 </head>
 <body>
 <h3><a th:href="@{/parcel/{idLot}(idLot=${idLot})}" class="link-menu"><span style="font-size: 30px">&larr;</span> Повернутись</a><a th:href="@{/parcel}" style="margin-left: 25px" class="link-menu"><span style="font-size: 30px">&larr;</span> Повернутись на головну</a></h3>
-<p style="display: inline">Компанія:</p> <h2 th:text="${company.getName()}" style="display: inline"></h2><p STYLE="display: inline; margin-left: 100px">Код ЕГРПОУ</p> <h2 th:text="${company.getEDRPOUCode()}" style="display: inline; "></h2>
-<h3 th:text="${subdivision.getName()} +' '+ ${subdivision.getNumberSubdivision()} +' '+ ${subdivision.getTelephone()}"></h3>
-<h3 th:text="${subdivision.getRegion()} +' '+ ${subdivision.getCity()} +' '+ ${subdivision.getAddress()}" ></h3>
+<div>
+    <span style="font-size: 25px;">Компанія: <b th:text="${company.getName()}"></b></span>
+    <span style="font-size: 25px; position: absolute; left:350px;">Замовник: <b th:text="${subdivision.getName()}"></b></span>
 
+</div>
+
+<div style="margin-top: 20px">
+    <span style="font-size: 20px;">Код ЕГРПОУ: <b th:text="${company.getEDRPOUCode()}"></b></span>
+    <span style="font-size: 20px; position: absolute; left:350px;">Номер закладу: <b th:text="${subdivision.getNumberSubdivision()}"></b></span>
+    <span style="font-size: 20px; position: absolute; left:700px;">Телефон замовника: <b th:text="${subdivision.getTelephone()}"></b></span>
+</div>
+
+<div style="margin-top: 10px">
+    <span style="font-size: 20px;">Регіон: <b th:text="${subdivision.getRegion()}"></b></span>
+    <span style="font-size: 20px; position: absolute; left:350px;">Місто: <b th:text="${subdivision.getCity()}"></b></span>
+    <span style="font-size: 20px; position: absolute; left:700px;">Адреса замовника: <b th:text="${subdivision.getAddress()}"></b></span>
+</div>
+
+<!--<div th:each="parcel : ${listAllParcelsSubdivision}">-->
+<!--&lt;!&ndash;    <p th:text="${parcel.getCardNumber()}"></p>&ndash;&gt;-->
+<!--    <div style="font-size: 20px; flex-grow: 1; margin: 0;">-->
+<!--        <a th:text="${parcel.getCardNumber()}" class="link-card-number"></a>  -&#45;&#45;-->
+<!--        <a  th:text="${parcel.getClient() }" class="link-client-name"></a>  -&#45;&#45;-->
+<!--        <span th:text="${parcel.getDescriptions()}"></span>-->
+<!--    </div>-->
+
+<!--</div>-->
+
+
+<div th:with="parcelList=${listAllParcelsSubdivision}">
+    <div th:each="package, iterStat : ${parcelList}">
+        <!-- Выводим TTN только один раз для группы посылок -->
+        <div th:if="${iterStat.index == 0 or package.getParcelTrackingNumber() != parcelList[iterStat.index - 1].getParcelTrackingNumber()}">
+            <hr class="light-line" style=" margin-top: 15px"/>
+        </div>
+
+        <!-- Пунктирная линия между заявками с одинаковым TTN -->
+        <div th:if="${iterStat.index > 0 and package.getParcelTrackingNumber() == parcelList[iterStat.index - 1].getParcelTrackingNumber()}">
+
+        </div>
+
+        <!-- Выводим информацию о заявке -->
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <p style="font-size: 20px; flex-grow: 1; margin: 0;">
+                <!--                <b>№ Заявки:</b>-->
+
+                <a th:href="@{/parcel/{idLot}/{idPackage}/{name}/editPackage(idLot=${lot.getId()}, idPackage=${package.getId()}, name=${package.getCompanyName()})}"  th:text="${package.getCardNumber()}"  class="link-card-number" ></a>  ---
+
+                <!--<b>Замовник:</b>-->
+                <span th:text="${package.getClient() }" class="client-name"></span>  ---
+                <!--                <b>Опис:</b>-->
+                <span th:text="${package.getDescriptions()}"></span>
+            </p>
+
+
+        </div>
+
+        <!-- Выводим цену только для последней заявки в группе -->
+        <div th:if="${iterStat.index == parcelList.size() - 1 or package.getParcelTrackingNumber() != parcelList[iterStat.index + 1].getParcelTrackingNumber()}">
+            <div style="font-size: 20px; ">
+                <!--                <b>Ціна:</b>-->
+                <span th:text="${package.getDeliveryPrice()} + 'грн ' + '&#8372;'"></span>
+            </div>
+        </div>
+    </div>
+    <hr class="light-line"/>
+</div>
 </body>
 </html>

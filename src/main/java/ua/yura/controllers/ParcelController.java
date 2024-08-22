@@ -227,6 +227,8 @@ public class ParcelController {
         model.addAttribute("company", companyDAO.searchCompany(companyName));
         Package p = lotDAO.indexPackage(idLot, idPackage);
         model.addAttribute("subdivision", companyDAO.searchSubdivision(p.getCompanyName(), p.getClient()));
+        model.addAttribute("listAllParcelsSubdivision", lotDAO.findAllParcelsSubdivision(p.getClient()));
+        model.addAttribute("lot", lotDAO.indexLot(idLot));
         return "parcel/companyShow";
     }
 

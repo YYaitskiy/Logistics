@@ -69,10 +69,6 @@
         <!-- Выводим TTN только один раз для группы посылок -->
         <div th:if="${iterStat.index == 0 or package.getParcelTrackingNumber() != parcelList[iterStat.index - 1].getParcelTrackingNumber()}">
             <hr class="light-line" style=" margin-top: 15px"/>
-<!--            <div style="margin-bottom: 15px; margin-top: 10px;">-->
-<!--                <b>№TTN:</b>-->
-<!--                <span th:text="${package.getParcelTrackingNumber()}" style="font-size: 18px;"></span>-->
-<!--            </div>-->
         </div>
 
         <!-- Пунктирная линия между заявками с одинаковым TTN -->
@@ -84,10 +80,10 @@
         <div style="display: flex; justify-content: space-between; align-items: center;">
             <p style="font-size: 20px; flex-grow: 1; margin: 0;">
 <!--                <b>№ Заявки:</b>-->
-<!--                <span th:text="${package.getCardNumber() + ' -&#45;&#45; '}"></span>-->
+
                 <a th:href="@{/parcel/{idLot}/{idPackage}/{name}/editPackage(idLot=${parcel.getId()}, idPackage=${package.getId()}, name=${package.getCompanyName()})}" th:text="${package.getCardNumber()}"  class="link-card-number" ></a>  ---
 
-                <!--                <b>Замовник:</b>-->
+                <!--<b>Замовник:</b>-->
                 <a th:href="@{/parcel/{companyName}/{idLot}/{idPackage}/company(idPackage=${package.getId()}, companyName=${package.getCompanyName()}, idLot=${parcel.getId()})}"  th:text="${package.getClient() }" class="link-client-name"></a>  ---
 <!--                <b>Опис:</b>-->
                 <span th:text="${package.getDescriptions()}"></span>

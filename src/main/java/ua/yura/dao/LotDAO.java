@@ -3,6 +3,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ua.yura.models.Lot;
 import ua.yura.models.Package;
+import ua.yura.models.Subdivision;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -153,6 +155,18 @@ public class LotDAO {
             }
             i++;
         }
+    }
+
+    public List<Package> findAllParcelsSubdivision(String client){
+        List<Package> allParcelsSubdivision = new ArrayList<>();
+        for (Lot lot : lotList) {
+            for (Package p : lot.getPackageList()) {
+                    if (p.getClient().equals(client)) {
+                        allParcelsSubdivision.add(p);
+                    }
+                }
+        }
+        return allParcelsSubdivision;
     }
 
 }

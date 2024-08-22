@@ -31,7 +31,7 @@ public class PackageDAO {
         this.packageList5 = packageList5;
 
 
-        packageList.add(new Package(UUID.randomUUID(),20450883238699L, "MD24-106391", subdivisionDAO.getMcdList().get(12).getName(), companyDAO.getCompanyList().get(0).getName(),  "Панч", 80));
+        packageList.add(new Package(UUID.randomUUID(),20450883238699L, "MD24-106391", subdivisionDAO.getMcdList().get(12).getName(),companyDAO.getCompanyList().get(0).getName(),  "Панч", 80));
         packageList.add(new Package(UUID.randomUUID(),20450883238698L, "MD24-106385", subdivisionDAO.getMcdList().get(13).getName(),companyDAO.getCompanyList().get(0).getName(), "пейджеры-5шт", 130));
         packageList.add(new Package(UUID.randomUUID(),20450979966353L, "PM24-134586", subdivisionDAO.getPumaList().get(1).getName(),companyDAO.getCompanyList().get(1).getName(), "кнопки", 130));
 
