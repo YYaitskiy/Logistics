@@ -117,9 +117,7 @@
 
 
 
-<!--<form th:method="GET" th:action="@{/parcel/{idLot}/{idPackage}/deletePackage(idLot=${parcel.getId()}, idPackage=${package.getId()})}" >-->
-<!--    <input type="submit" value="Видалити" class="button"/>-->
-<!--</form>-->
+
 
 <form th:method="get" th:action="@{/parcel/{idLot}/{idPackage}/deletePackage(idLot=${idLot}, idPackage=${package.getId()})}">
     <input type="submit" value="Видалити" class="button-yes-delete" style="margin-left: 200px; margin-top: 25px; font-size: 20px"/>

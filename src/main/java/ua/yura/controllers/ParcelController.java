@@ -185,6 +185,15 @@ public class ParcelController {
         return "parcel/editPackageMCD";
     }
 
+    @GetMapping("/{idLot}/{idPackage}/McDonald's/infoPackage")
+    public String infoPackageMCD(@PathVariable("idLot") UUID uuidLot, @PathVariable("idPackage") UUID uuidPackage, Model model){
+        Package p = lotDAO.indexPackage(uuidLot, uuidPackage);
+        model.addAttribute("package", p);
+        model.addAttribute("idLot", uuidLot);
+        model.addAttribute("subdivisionDAO", subdivisionDAO);
+        return "parcel/infoPackageMCD";
+    }
+
     @GetMapping("/{idLot}/{idPackage}/Puma/editPackage")
     public String editPackagePuma (@PathVariable("idLot") UUID uuidLot, @PathVariable("idPackage") UUID uuidPackage, Model model){
         Package p = lotDAO.indexPackage(uuidLot, uuidPackage);
