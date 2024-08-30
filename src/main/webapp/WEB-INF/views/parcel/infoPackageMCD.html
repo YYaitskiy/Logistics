@@ -58,15 +58,13 @@
 </head>
 <body>
 <h3 ><a th:href="@{/parcel/{idLot}(idLot=${idLot})}" class="link-menu"><span style="font-size: 30px">&larr;</span> Повернутись</a><a th:href="@{/parcel}" style="margin-left: 25px" class="link-menu"><span style="font-size: 30px">&larr;</span> Повернутись на головну</a></h3>
-<img th:src="@{/images/6a8095ed1769608793071.png}" alt="logo">
 
-<!--<h2 style="display: inline">Інформація посилка: <span th:text="${package.getCompanyName()}" style="color: #FFC72C">Інформація посилка:</span></h2><img src='resources/static/images/m.png' alt="1">-->
-<!--<div style="display: inline-flex; align-items: center;">-->
-<!--    <h2 style="margin: 0;">-->
-<!--        Інформація посилка:-->
-<!--        <span th:text="${package.getCompanyName()}" style="color: #FFC72C;">Інформація посилка:</span>-->
-<!--    </h2>-->
-<!--    <img  src='/parcel/m.png' style="margin-left: 5px;">-->
+<div style="display: inline-flex; align-items: center;">
+    <h2 style="margin: 0;">
+        Інформація посилка:
+        <span th:text="${package.getCompanyName()}" style="color: #FFC72C;">Інформація посилка:</span>
+    </h2>
+    <img src="#" th:src="@{'/images/' + ${package.getCompanyName()} + '.png'}"   alt="logo McD" style="margin-left: 5px; width: auto; height: 50px;">
 </div>
 
 <hr class="light-line">
