@@ -22,9 +22,9 @@ public class CompanyDAO {
         this.subdivisionDAO = subdivisionDAO;
         this.companyList = companyList;
 
-        companyList.add(new Company(UUID.randomUUID(), "McDonald's", 23744453, subdivisionDAO.getMcdList()));
-        companyList.add(new Company(UUID.randomUUID(), "Puma", 33741984, subdivisionDAO.getPumaList()));
-        companyList.add(new Company(UUID.randomUUID(), "UCL", 11111111,subdivisionDAO.getUclList()));
+        companyList.add(new Company(UUID.randomUUID(), "McDonald's", 23744453, "#FFC72C", subdivisionDAO.getMcdList()));
+        companyList.add(new Company(UUID.randomUUID(), "Puma", 33741984,"black", subdivisionDAO.getPumaList()));
+        companyList.add(new Company(UUID.randomUUID(), "Ukrainian Computer Laboratory", 11111111, "red", subdivisionDAO.getUclList()));
     }
 
     public SubdivisionDAO getSubdivisionDAO() {

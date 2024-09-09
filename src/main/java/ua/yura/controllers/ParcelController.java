@@ -10,7 +10,6 @@ import ua.yura.dao.PackageDAO;
 import ua.yura.dao.SubdivisionDAO;
 import ua.yura.models.Lot;
 import ua.yura.models.Package;
-import ua.yura.models.Subdivision;
 
 import java.util.UUID;
 
@@ -181,35 +180,27 @@ public class ParcelController {
         Package p = lotDAO.indexPackage(uuidLot, uuidPackage);
         model.addAttribute("package", p);
         model.addAttribute("idLot", uuidLot);
-        model.addAttribute("subdivisionDAO", subdivisionDAO);
+        switch (p.getCompanyName()) {
+            case "McDonald's":
+                model.addAttribute("subdivisionDAO", subdivisionDAO.getMcdList());
+                break;
+            case "Puma":
+                model.addAttribute("subdivisionDAO", subdivisionDAO.getPumaList());
+                break;
+            case "Ukrainian Computer Laboratory":
+                model.addAttribute("subdivisionDAO", subdivisionDAO.getUclList());
+                break;
+        }
         return "parcel/editPackageMCD";
     }
 
-    @GetMapping("/{idLot}/{idPackage}/McDonald's/infoPackage")
+    @GetMapping("/{idLot}/{idPackage}/infoPackage")
     public String infoPackageMCD(@PathVariable("idLot") UUID uuidLot, @PathVariable("idPackage") UUID uuidPackage, Model model){
         Package p = lotDAO.indexPackage(uuidLot, uuidPackage);
         model.addAttribute("package", p);
         model.addAttribute("idLot", uuidLot);
         model.addAttribute("subdivisionDAO", subdivisionDAO);
-        return "parcel/infoPackageMCD";
-    }
-
-    @GetMapping("/{idLot}/{idPackage}/Puma/editPackage")
-    public String editPackagePuma (@PathVariable("idLot") UUID uuidLot, @PathVariable("idPackage") UUID uuidPackage, Model model){
-        Package p = lotDAO.indexPackage(uuidLot, uuidPackage);
-        model.addAttribute("package", p);
-        model.addAttribute("idLot", uuidLot);
-        model.addAttribute("subdivisionDAO", subdivisionDAO);
-        return "parcel/editPackagePuma";
-    }
-
-    @GetMapping("/{idLot}/{idPackage}/UCL/editPackage")
-    public String editPackageUCL (@PathVariable("idLot") UUID uuidLot, @PathVariable("idPackage") UUID uuidPackage, Model model){
-        Package p = lotDAO.indexPackage(uuidLot, uuidPackage);
-        model.addAttribute("package", p);
-        model.addAttribute("idLot", uuidLot);
-        model.addAttribute("subdivisionDAO", subdivisionDAO);
-        return "parcel/editPackageUCL";
+        return "parcel/infoPackage";
     }
 
     @PatchMapping("/{idLot}/{idPackage}/editPackage")

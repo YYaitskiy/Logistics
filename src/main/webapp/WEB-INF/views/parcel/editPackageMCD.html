@@ -92,7 +92,7 @@
         <label for="client" style="font-size: 20px;">Замовник: </label>
         <select name="client" th:field="*{client}" id="client" style="font-size: 20px; display: inline-block; position: absolute; left: 135px;">
             <option value=""  ></option>
-            <th:block th:each="subdivision : ${subdivisionDAO.mcdList}" >
+            <th:block th:each="subdivision : ${subdivisionDAO}" >
                 <option th:value="${subdivision.name}" th:text="${subdivision.numberSubdivision} + ' ' + ${subdivision.name}"></option>
             </th:block>
         </select>
