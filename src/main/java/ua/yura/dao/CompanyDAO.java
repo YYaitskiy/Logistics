@@ -64,6 +64,10 @@ public class CompanyDAO {
         }
         return foundSubdivision;
     }
+    public List<Subdivision> searchListSubdivision(String companyName){
+        Company company = searchCompany(companyName);
+        return company.getSubdivisionList();
+    }
 
 
 

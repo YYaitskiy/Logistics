@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Інформація про посилку</title>
+  <style>
+    .link-menu {
+      text-decoration: none;
+      color: #696969;
+    }
+
+    .link-menu:hover {
+      text-decoration: underline;
+      color: #333;
+    }
+
+    .light-line {
+      border: none;
+      height: 1px;
+      background-color: #d3d3d3; /* Светло-серый цвет */
+    }
+
+    .button-do-not-delete{
+      font-size: 17px;
+      border: 1px solid #9F9F9F; /* Базовая рамка для кнопок */
+      margin-right: 10px;
+      cursor: pointer;
+      padding: 2px 7px;
+      border-radius: 10px;
+      position: absolute
+    }
+
+    .button-do-not-delete:hover{
+      outline: none;
+      color: #333; /* Цвет текста при наведении */
+      border: 2px solid #333; /* Рамка при наведении */
+      font-weight: bold;
+    }
+
+    .button-yes-delete{
+      border: 1px solid #9F9F9F; /* Базовая рамка для кнопок */
+      margin-right: 10px;
+      cursor: pointer;
+      padding: 2px 7px;
+      border-radius: 10px;
+      position: absolute
+
+    }
+
+    .button-yes-delete:hover{
+      outline: none;
+      color: #333; /* Цвет текста при наведении */
+      border: 2px solid #333; /* Рамка при наведении */
+      font-weight: bold;
+    }
+  </style>
+  </style>
+</head>
+<body>
+<h3 ><a th:href="@{/parcel/{idLot}/{idPackage}/{companyName}/company(idLot=${idLot}, idPackage=${package.getId()}, companyName=${company.getName()} )}" class="link-menu"><span style="font-size: 30px">&larr;</span> Повернутись</a><a th:href="@{/parcel}" style="margin-left: 25px" class="link-menu"><span style="font-size: 30px">&larr;</span> Повернутись на головну</a></h3>
+
+<div style="display: inline-flex; align-items: center;">
+  <h2 style="margin: 0;">
+    Інформація посилка:
+    <span th:text="${company.getName()}" th:style="'color: ' + ${company.getColor()} + ';'"></span>
+  </h2>
+  <img src="#" th:src="@{'/images/' + ${package.getCompanyName()} + '.png'}"   alt="logo McD" style="margin-left: 5px; width: auto; height: 25px;">
+</div>
+
+<hr class="light-line">
+<div>
+  <span style="font-size: 22px">№ TTN:</span>
+  <SPAN th:text="${package.getParcelTrackingNumber()}" style="font-size: 22px;  position: absolute; left: 140px; font-weight: bold"></SPAN>
+</div>
+
+<div style="margin-top: 10px">
+  <span style="font-size: 20px">Номер заявки:</span>
+  <span th:text="${package.getCardNumber()}" style="font-size: 20px;  position: absolute; left: 140px; font-weight: bold"></span>
+</div >
+
+<div style="margin-top: 10px">
+  <span style="font-size: 20px">Замовник:</span>
+  <span th:text="${package.getClient()}" style="font-size: 20px;  position: absolute; left: 140px; font-weight: bold"></span>
+</div>
+
+<div style="margin-top: 10px">
+  <span style="font-size: 20px">Опис:</span>
+  <span th:text="${package.getDescriptions()}" style="font-size: 20px;  position: absolute; left: 140px; font-weight: bold"></span>
+</div>
+
+<div style="margin-top: 10px">
+  <span style="font-size: 20px">Ціна:</span>
+  <span th:text="${package.getDeliveryPrice()} + 'грн ' + '&#8372;'" style="font-size: 20px;  position: absolute; left: 140px; font-weight: bold"></span>
+</div>
+
+<form th:method="get" th:action="@{/parcel/{idLot}/{idPackage}/{company}/editPackage(company=${company.getName()},  idLot=${idLot}, idPackage=${package.getId()})}">
+  <input type="submit" value="Редагувати" class="button-do-not-delete" style="margin-top: 25px; font-size: 20px"/>
+</form>
+
+<form th:method="get" th:action="@{/parcel/{idLot}/{idPackage}/deletePackage(idLot=${idLot}, idPackage=${package.getId()})}">
+  <input type="submit" value="Видалити" class="button-yes-delete" style="margin-left: 200px; margin-top: 25px; font-size: 20px"/>
+</form>
+
+<hr class="light-line">
+
+
+</body>
+</html>

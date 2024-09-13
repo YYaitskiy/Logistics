@@ -95,6 +95,7 @@ public class ParcelController {
     public String createPackage(@ModelAttribute("package")  Package p, @PathVariable("id") UUID uuid){
         lotDAO.savePackage(p);
         return "redirect:/parcel/" + uuid;
+
     }
 
     @GetMapping("/{id}/editLot")
@@ -175,32 +176,33 @@ public class ParcelController {
         return "redirect:/parcel/receive";
     }
 
-    @GetMapping("/{idLot}/{idPackage}/McDonald's/editPackage")
+    @GetMapping("/{idLot}/{idPackage}/{company}/editPackage")
     public String editPackageMCD (@PathVariable("idLot") UUID uuidLot, @PathVariable("idPackage") UUID uuidPackage, Model model){
         Package p = lotDAO.indexPackage(uuidLot, uuidPackage);
         model.addAttribute("package", p);
         model.addAttribute("idLot", uuidLot);
-        switch (p.getCompanyName()) {
-            case "McDonald's":
-                model.addAttribute("subdivisionDAO", subdivisionDAO.getMcdList());
-                break;
-            case "Puma":
-                model.addAttribute("subdivisionDAO", subdivisionDAO.getPumaList());
-                break;
-            case "Ukrainian Computer Laboratory":
-                model.addAttribute("subdivisionDAO", subdivisionDAO.getUclList());
-                break;
-        }
-        return "parcel/editPackageMCD";
+        model.addAttribute("subdivisionDAO", companyDAO.searchListSubdivision(p.getCompanyName()));
+        return "parcel/editPackage";
     }
 
-    @GetMapping("/{idLot}/{idPackage}/infoPackage")
-    public String infoPackageMCD(@PathVariable("idLot") UUID uuidLot, @PathVariable("idPackage") UUID uuidPackage, Model model){
+    @GetMapping("/{idLot}/{idPackage}/{companyName}/infoPackage")
+    public String infoPackageMCD(@PathVariable("companyName") String companyName, @PathVariable("idLot") UUID uuidLot, @PathVariable("idPackage") UUID uuidPackage, Model model){
         Package p = lotDAO.indexPackage(uuidLot, uuidPackage);
+        model.addAttribute("company", companyDAO.searchCompany(companyName));
         model.addAttribute("package", p);
         model.addAttribute("idLot", uuidLot);
-        model.addAttribute("subdivisionDAO", subdivisionDAO);
+        System.out.println("infoPackage " + p.getId());
         return "parcel/infoPackage";
+    }
+
+    @GetMapping("/{idPackage}/{companyName}/infoPackageCompany")
+    public String infoPackageCompany(@PathVariable("companyName") String companyName, @PathVariable("idPackage") UUID uuidPackage, Model model){
+        Package p = lotDAO.indexPackageCompany(uuidPackage);
+        model.addAttribute("company", companyDAO.searchCompany(companyName));
+        model.addAttribute("package", p);
+//        model.addAttribute("idLot", uuidLot);
+        System.out.println("infoPackage " + p.getId());
+        return "parcel/infoPackageCompany";
     }
 
     @PatchMapping("/{idLot}/{idPackage}/editPackage")
@@ -222,18 +224,17 @@ public class ParcelController {
         return "redirect:/parcel/" + uuidLot;
     }
 
-    @GetMapping("/{companyName}/{idLot}/{idPackage}/company")
+    @GetMapping("/{idLot}/{idPackage}/{companyName}/company")
     public String companyInfo(@PathVariable("companyName") String companyName,@PathVariable("idLot") UUID idLot, @PathVariable("idPackage") UUID idPackage, Model model){
         model.addAttribute("company", companyDAO.searchCompany(companyName));
         Package p = lotDAO.indexPackage(idLot, idPackage);
         model.addAttribute("subdivision", companyDAO.searchSubdivision(p.getCompanyName(), p.getClient()));
         model.addAttribute("listAllParcelsSubdivision", lotDAO.findAllParcelsSubdivision(p.getClient()));
         model.addAttribute("lot", lotDAO.indexLot(idLot));
+        System.out.println("companyShow " + p.getId());
+
+
         return "parcel/companyShow";
     }
-
-
-
-
 
 }

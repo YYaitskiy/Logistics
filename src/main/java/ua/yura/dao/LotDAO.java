@@ -27,6 +27,14 @@ public class LotDAO {
         lotList.add(new Lot(UUID.randomUUID(), "Отримані", LocalDate.of(2024, 4, 8), packageDAO.getPackageList5()));
     }
 
+    public List<Lot> getLotList() {
+        return lotList;
+    }
+
+    public void setLotList(List<Lot> lotList) {
+        this.lotList = lotList;
+    }
+
     public List<Lot> show() {
         return lotList;
     }
@@ -43,6 +51,23 @@ public class LotDAO {
         return lotId;
     }
 
+//    public Package indexPackage(UUID idLot, UUID idPackage) {
+//        Package packageId = new Package();
+//        for (Lot lot : lotList) {
+//            if (lot.getId().equals(idLot)) {
+//                for (Package p : lot.getPackageList()) {
+//                    if (p.getId().equals(idPackage)) {
+//                        packageId = p;
+//                        break;
+//                    }
+//                }
+//                break;
+//            }
+//        }
+//        System.out.println("LotDao indexPackage " + packageId.getId());
+//        return packageId;
+//    }
+
     public Package indexPackage(UUID idLot, UUID idPackage) {
         Package packageId = new Package();
         for (Lot lot : lotList) {
@@ -56,6 +81,23 @@ public class LotDAO {
                 break;
             }
         }
+        System.out.println("LotDao indexPackage " + packageId.getId());
+        return packageId;
+    }
+
+    public Package indexPackageCompany(UUID idPackage) {
+        Package packageId = new Package();
+        for (Lot lot : lotList) {
+                for (Package p : lot.getPackageList()) {
+                    if (p.getId().equals(idPackage)) {
+                        packageId = p;
+                        break;
+                    }
+                }
+
+
+        }
+        System.out.println("LotDao indexPackageCompany " + packageId.getId());
         return packageId;
     }
 
@@ -168,5 +210,7 @@ public class LotDAO {
         }
         return allParcelsSubdivision;
     }
+
+
 
 }

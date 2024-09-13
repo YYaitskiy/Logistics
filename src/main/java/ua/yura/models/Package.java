@@ -5,13 +5,15 @@ import java.util.UUID;
 
 public class Package {
     private UUID id;
+
+    private UUID idLot;
     private long parcelTrackingNumber;
     private String cardNumber;
     private String client;
-
     private String companyName;
     private String descriptions;
     private int deliveryPrice;
+
 
     public Package() {
     }
@@ -20,8 +22,9 @@ public class Package {
         this.id = id;
     }
 
-    public Package(UUID id, long parcelTrackingNumber, String cardNumber, String client, String companyName, String descriptions, int deliveryPrice) {
+    public Package(UUID id, UUID idLot, long parcelTrackingNumber, String cardNumber, String client, String companyName, String descriptions, int deliveryPrice) {
         this.id = id;
+        this.idLot = idLot;
         this.parcelTrackingNumber = parcelTrackingNumber;
         this.cardNumber = cardNumber;
         this.client = client;
@@ -89,6 +92,14 @@ public class Package {
 
     public void setCompanyName(String companyName) {
         this.companyName = companyName;
+    }
+
+    public UUID getIdLot() {
+        return idLot;
+    }
+
+    public void setIdLot(UUID idLot) {
+        this.idLot = idLot;
     }
 }
 

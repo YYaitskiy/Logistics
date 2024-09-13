@@ -69,7 +69,8 @@
 </head>
 <body>
 
-<h3><a th:href="@{/parcel/{idLot}(idLot=${idLot})}" class="link-menu"><span style="font-size: 30px">&larr;</span> Повернутись</a><a th:href="@{/parcel}" style="margin-left: 25px" class="link-menu"><span style="font-size: 30px">&larr;</span> Повернутись на головну</a></h3>
+
+<h3><a th:href="@{/parcel/{idLot}/{idPackage}/{company}/infoPackage(company=${package.getCompanyName()},  idLot=${idLot}, idPackage=${package.getId()})}" class="link-menu"><span style="font-size: 30px">&larr;</span> Повернутись</a><a th:href="@{/parcel}" style="margin-left: 25px" class="link-menu"><span style="font-size: 30px">&larr;</span> Повернутись на головну</a></h3>
 
 
 <h2>Обновити:</h2>
@@ -115,13 +116,9 @@
 </form>
 
 
-
-
-
-
-<form th:method="get" th:action="@{/parcel/{idLot}/{idPackage}/deletePackage(idLot=${idLot}, idPackage=${package.getId()})}">
-    <input type="submit" value="Видалити" class="button-yes-delete" style="margin-left: 200px; margin-top: 25px; font-size: 20px"/>
-</form>
+<!--<form th:method="get" th:action="@{/parcel/{idLot}/{idPackage}/deletePackage(idLot=${idLot}, idPackage=${package.getId()})}">-->
+<!--    <input type="submit" value="Видалити" class="button-yes-delete" style="margin-left: 200px; margin-top: 25px; font-size: 20px"/>-->
+<!--</form>-->
 
 </body>
 </html>

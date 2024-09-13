@@ -62,7 +62,7 @@
 <div style="display: inline-flex; align-items: center;">
     <h2 style="margin: 0;">
         Інформація посилка:
-        <span th:text="${package.getCompanyName()}" style="color: #FFC72C;">Інформація посилка:</span>
+        <span th:text="${company.getName()}" th:style="'color: ' + ${company.getColor()} + ';'"></span>
     </h2>
     <img src="#" th:src="@{'/images/' + ${package.getCompanyName()} + '.png'}"   alt="logo McD" style="margin-left: 5px; width: auto; height: 25px;">
 </div>
@@ -93,7 +93,7 @@
     <span th:text="${package.getDeliveryPrice()} + 'грн ' + '&#8372;'" style="font-size: 20px;  position: absolute; left: 140px; font-weight: bold"></span>
 </div>
 
-<form th:method="get" th:action="@{/parcel/{idLot}/{id}/McDonald's/editPackage(idLot=${idLot}, id=${package.getId()})}">
+<form th:method="get" th:action="@{/parcel/{idLot}/{idPackage}/{company}/editPackage(company=${company.getName()},  idLot=${idLot}, idPackage=${package.getId()})}">
     <input type="submit" value="Редагувати" class="button-do-not-delete" style="margin-top: 25px; font-size: 20px"/>
 </form>
 
