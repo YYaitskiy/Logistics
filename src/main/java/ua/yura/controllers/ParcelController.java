@@ -93,7 +93,9 @@ public class ParcelController {
 
     @PostMapping("/{id}")
     public String createPackage(@ModelAttribute("package")  Package p, @PathVariable("id") UUID uuid){
-        lotDAO.savePackage(p);
+        lotDAO.savePackage(p, uuid);
+        System.out.println("createPackage idLot " + uuid);
+        System.out.println("createPackage idPackage " + p.getId());
         return "redirect:/parcel/" + uuid;
 
     }
@@ -177,7 +179,7 @@ public class ParcelController {
     }
 
     @GetMapping("/{idLot}/{idPackage}/{company}/editPackage")
-    public String editPackageMCD (@PathVariable("idLot") UUID uuidLot, @PathVariable("idPackage") UUID uuidPackage, Model model){
+    public String editPackageMCD (@PathVariable("idLot") UUID uuidLot, @PathVariable("idPackage") UUID uuidPackage, Model model, @PathVariable String company){
         Package p = lotDAO.indexPackage(uuidLot, uuidPackage);
         model.addAttribute("package", p);
         model.addAttribute("idLot", uuidLot);
@@ -192,6 +194,7 @@ public class ParcelController {
         model.addAttribute("package", p);
         model.addAttribute("idLot", uuidLot);
         System.out.println("infoPackage " + p.getId());
+        System.out.println("infoPackage idLot " + p.getIdLot());
         return "parcel/infoPackage";
     }
 

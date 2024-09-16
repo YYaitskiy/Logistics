@@ -22,6 +22,11 @@ public class Lot {
         this.status = status;
         this.shippingDate = shippingDate;
         this.packageList = packageList;
+
+        for (Package pkg : packageList) {
+            pkg.setIdLot(this.id);
+        }
+
     }
 
     public UUID getId() {

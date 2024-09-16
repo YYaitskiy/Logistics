@@ -22,9 +22,8 @@ public class Package {
         this.id = id;
     }
 
-    public Package(UUID id, UUID idLot, long parcelTrackingNumber, String cardNumber, String client, String companyName, String descriptions, int deliveryPrice) {
+    public Package(UUID id, long parcelTrackingNumber, String cardNumber, String client, String companyName, String descriptions, int deliveryPrice) {
         this.id = id;
-        this.idLot = idLot;
         this.parcelTrackingNumber = parcelTrackingNumber;
         this.cardNumber = cardNumber;
         this.client = client;

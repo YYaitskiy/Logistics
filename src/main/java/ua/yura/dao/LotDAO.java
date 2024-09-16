@@ -126,7 +126,7 @@ public class LotDAO {
         lotList.add(0, lot);
     }
 
-    public void savePackage(Package p) {
+    public void savePackage(Package p, UUID uuid) {
         for (int i = 0; i < lotList.size(); i++) {
             if (lotList.get(i).getId().equals(p.getId())) {
                 if (lotList.get(i).getPackageList() == null) {
