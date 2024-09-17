@@ -104,8 +104,8 @@
 </div>
 
 
-<h3><a th:href="@{/parcel/{id}/newMCD(id=${parcel.getId()})}" class="link-menu">Додати посилку MCD &#10010;</a></h3>
-<h3><a th:href="@{/parcel/{id}/newPuma(id=${parcel.getId()})}" class="link-menu">Додати посилку Puma &#10010;</a></h3>
-<h3><a th:href="@{/parcel/{id}/newUCL(id=${parcel.getId()})}" class="link-menu">Додати посилку UCL &#10010;</a></h3>
+<h3><a th:href="@{/parcel/{id}/newPackage(id=${parcel.getId()}, company=${companyNameMCD})}" class="link-menu">Додати посилку MCD &#10010;</a></h3>
+<h3><a th:href="@{/parcel/{id}/newPackage(id=${parcel.getId()}, company=${companyNamePuma})}" class="link-menu">Додати посилку Puma &#10010;</a></h3>
+<h3><a th:href="@{/parcel/{id}/newPackage(id=${parcel.getId()}, company=${companyNameUCL})}" class="link-menu">Додати посилку UCL &#10010;</a></h3>
 </body>
 </html>

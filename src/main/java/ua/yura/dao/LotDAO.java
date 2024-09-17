@@ -133,6 +133,7 @@ public class LotDAO {
                     lotList.get(i).setPackageList(new ArrayList<>());
                 }
                 p.setId(UUID.randomUUID());
+                p.setIdLot(uuid);
                 lotList.get(i).getPackageList().add(p);
             }
         }

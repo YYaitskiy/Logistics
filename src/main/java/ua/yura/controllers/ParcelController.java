@@ -41,7 +41,9 @@ public class ParcelController {
     @GetMapping("/{id}")
     public String id(@PathVariable("id") UUID uuid, Model model){
         model.addAttribute("parcel", lotDAO.indexLot(uuid));
-
+        model.addAttribute("companyNameMCD", companyDAO.getCompanyList().get(0).getName());
+        model.addAttribute("companyNamePuma", companyDAO.getCompanyList().get(1).getName());
+        model.addAttribute("companyNameUCL", companyDAO.getCompanyList().get(2).getName());
         return "parcel/index";
     }
 
@@ -70,32 +72,19 @@ public class ParcelController {
         return "redirect:/parcel/" + lot.getId();
     }
 
-    @GetMapping("/{id}/newMCD")
-    public String newPackageMCD (Model model, @PathVariable("id") UUID uuid){
-        model.addAttribute("package", new Package(uuid, companyDAO.getCompanyList().get(0).getName()));
-        model.addAttribute("subdivisionDAO", subdivisionDAO);
-        return "parcel/newPackageMcd";
-    }
-
-    @GetMapping("/{id}/newPuma")
-    public String newPackagePuma (Model model, @PathVariable("id") UUID uuid){
-        model.addAttribute("package", new Package(uuid, companyDAO.getCompanyList().get(1).getName()));
-        model.addAttribute("subdivisionDAO", subdivisionDAO);
-        return "parcel/newPackagePuma";
-    }
-
-    @GetMapping("/{id}/newUCL")
-    public String newPackageUCL (Model model, @PathVariable("id") UUID uuid){
-        model.addAttribute("package", new Package(uuid, companyDAO.getCompanyList().get(2).getName()));
-        model.addAttribute("subdivisionDAO", subdivisionDAO);
-        return "parcel/newPackageUCL";
+    @GetMapping("/{id}/newPackage")
+    public String newPackage (Model model, @PathVariable("id") UUID uuid, @RequestParam("company") String companyName){
+        model.addAttribute("package", new Package(uuid, companyDAO.searchCompany(companyName).getName()));
+        model.addAttribute("subdivisionDAO", companyDAO.searchCompany(companyName).getSubdivisionList());
+        return "parcel/newPackage";
     }
 
     @PostMapping("/{id}")
     public String createPackage(@ModelAttribute("package")  Package p, @PathVariable("id") UUID uuid){
+        System.out.println("createPackage id before method savePackage" + p.getId());
         lotDAO.savePackage(p, uuid);
-        System.out.println("createPackage idLot " + uuid);
-        System.out.println("createPackage idPackage " + p.getId());
+        System.out.println("createPackage id " + p.getId());
+        System.out.println("createPackage idLot " + p.getIdLot());
         return "redirect:/parcel/" + uuid;
 
     }
@@ -193,8 +182,6 @@ public class ParcelController {
         model.addAttribute("company", companyDAO.searchCompany(companyName));
         model.addAttribute("package", p);
         model.addAttribute("idLot", uuidLot);
-        System.out.println("infoPackage " + p.getId());
-        System.out.println("infoPackage idLot " + p.getIdLot());
         return "parcel/infoPackage";
     }
 
@@ -204,7 +191,6 @@ public class ParcelController {
         model.addAttribute("company", companyDAO.searchCompany(companyName));
         model.addAttribute("package", p);
 //        model.addAttribute("idLot", uuidLot);
-        System.out.println("infoPackage " + p.getId());
         return "parcel/infoPackageCompany";
     }
 
@@ -234,9 +220,6 @@ public class ParcelController {
         model.addAttribute("subdivision", companyDAO.searchSubdivision(p.getCompanyName(), p.getClient()));
         model.addAttribute("listAllParcelsSubdivision", lotDAO.findAllParcelsSubdivision(p.getClient()));
         model.addAttribute("lot", lotDAO.indexLot(idLot));
-        System.out.println("companyShow " + p.getId());
-
-
         return "parcel/companyShow";
     }
 
