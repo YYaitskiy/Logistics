@@ -36,7 +36,13 @@
 <h3><a th:href="@{/parcel/{id}(id=${package.getId()})}" class="link-menu"><span style="font-size: 30px">&larr;</span> Повернутись</a>
 <a th:href="@{/parcel}" style="margin-left: 25px" class="link-menu"><span style="font-size: 30px">&larr;</span> Повернутись на головну</a></h3>
 
-<h2>Додати посилку McD:</h2>
+<div style="display: inline-flex; align-items: center;">
+    <h2 style="margin: 0;">
+        Додати посилку:
+        <span th:text="${company.getName()}" th:style="'color: ' + ${company.getColor()} + ';'"></span>
+    </h2>
+    <img src="#" th:src="@{'/images/' + ${package.getCompanyName()} + '.png'}"   alt="logo McD" style="margin-left: 5px; width: auto; height: 25px;">
+</div>
 
 
 <form th:method="POST" th:action="@{/parcel/{id}(id=${package.getId()})}" th:object="${package}">

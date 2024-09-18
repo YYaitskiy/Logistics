@@ -76,6 +76,7 @@ public class ParcelController {
     public String newPackage (Model model, @PathVariable("id") UUID uuid, @RequestParam("company") String companyName){
         model.addAttribute("package", new Package(uuid, companyDAO.searchCompany(companyName).getName()));
         model.addAttribute("subdivisionDAO", companyDAO.searchCompany(companyName).getSubdivisionList());
+        model.addAttribute("company", companyDAO.searchCompany(companyName));
         return "parcel/newPackage";
     }
 
@@ -183,15 +184,6 @@ public class ParcelController {
         model.addAttribute("package", p);
         model.addAttribute("idLot", uuidLot);
         return "parcel/infoPackage";
-    }
-
-    @GetMapping("/{idPackage}/{companyName}/infoPackageCompany")
-    public String infoPackageCompany(@PathVariable("companyName") String companyName, @PathVariable("idPackage") UUID uuidPackage, Model model){
-        Package p = lotDAO.indexPackageCompany(uuidPackage);
-        model.addAttribute("company", companyDAO.searchCompany(companyName));
-        model.addAttribute("package", p);
-//        model.addAttribute("idLot", uuidLot);
-        return "parcel/infoPackageCompany";
     }
 
     @PatchMapping("/{idLot}/{idPackage}/editPackage")
