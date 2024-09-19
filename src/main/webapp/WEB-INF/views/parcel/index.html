@@ -81,7 +81,7 @@
             <p style="font-size: 20px; flex-grow: 1; margin: 0;">
 <!--                <b>№ Заявки:</b>-->
 
-                <a th:href="@{/parcel/{idLot}/{idPackage}/{companyName}/infoPackage(idLot=${parcel.getId()}, companyName=${package.getCompanyName()}, idPackage=${package.getId()})}" th:text="${package.getCardNumber()}"  class="link-card-number" ></a>  ---
+                <a th:href="@{/parcel/{idLot}/{idPackage}/{companyName}/infoPackage(idPackage=${package.getId()}, companyName=${package.getCompanyName()}, idLot=${parcel.getId()})}" th:text="${package.getCardNumber()}"  class="link-card-number" ></a>  ---
 
                 <!--<b>Замовник:</b>-->
                 <a th:href="@{/parcel/{idLot}/{idPackage}/{companyName}/company(idPackage=${package.getId()}, companyName=${package.getCompanyName()}, idLot=${parcel.getId()})}"  th:text="${package.getClient() }" class="link-client-name"></a>  ---

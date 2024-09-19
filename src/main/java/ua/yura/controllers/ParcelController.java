@@ -190,8 +190,9 @@ public class ParcelController {
     public String updatePackage(@ModelAttribute("package") Package p, @PathVariable("idLot") UUID uuidLot, @PathVariable("idPackage") UUID uuidPackage){
         p.setId(uuidPackage);
         lotDAO.updatePackage(p, uuidLot, uuidPackage);
-        return "redirect:/parcel/" + uuidLot;
+        return "redirect:/parcel/" + uuidLot + '/' + uuidPackage + '/' + p.getCompanyName() + "/infoPackage";
     }
+
     @GetMapping("/{idLot}/{idPackage}/deletePackage")
     public String getDeletePackage(@PathVariable("idLot") UUID uuidLot, @PathVariable("idPackage") UUID uuidPackage, Model model){
         Package p = lotDAO.indexPackage(uuidLot, uuidPackage);
