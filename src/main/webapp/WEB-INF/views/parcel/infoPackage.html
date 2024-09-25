@@ -93,11 +93,17 @@
     <span th:text="${package.getDeliveryPrice()} + 'грн ' + '&#8372;'" style="font-size: 20px;  position: absolute; left: 140px; font-weight: bold"></span>
 </div>
 
+<div style="margin-top: 10px">
+    <span style="font-size: 20px">Ціна:</span>
+    <span th:text="${from}" style="font-size: 20px;  position: absolute; left: 140px; font-weight: bold"></span>
+</div>
+
 <form th:method="get" th:action="@{/parcel/{idLot}/{idPackage}/{company}/editPackage(company=${company.getName()},  idLot=${idLot}, idPackage=${package.getId()})}">
     <input type="submit" value="Редагувати" class="button-do-not-delete" style="margin-top: 25px; font-size: 20px"/>
 </form>
 
 <form th:method="get" th:action="@{/parcel/{idLot}/{idPackage}/deletePackage(idLot=${idLot}, idPackage=${package.getId()})}">
+    <input type="hidden" th:name="from" th:value="${from}" />
     <input type="submit" value="Видалити" class="button-yes-delete" style="margin-left: 200px; margin-top: 25px; font-size: 20px"/>
 </form>
 

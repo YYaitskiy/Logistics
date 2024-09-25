@@ -51,23 +51,6 @@ public class LotDAO {
         return lotId;
     }
 
-//    public Package indexPackage(UUID idLot, UUID idPackage) {
-//        Package packageId = new Package();
-//        for (Lot lot : lotList) {
-//            if (lot.getId().equals(idLot)) {
-//                for (Package p : lot.getPackageList()) {
-//                    if (p.getId().equals(idPackage)) {
-//                        packageId = p;
-//                        break;
-//                    }
-//                }
-//                break;
-//            }
-//        }
-//        System.out.println("LotDao indexPackage " + packageId.getId());
-//        return packageId;
-//    }
-
     public Package indexPackage(UUID idLot, UUID idPackage) {
         Package packageId = new Package();
         for (Lot lot : lotList) {
@@ -85,11 +68,11 @@ public class LotDAO {
         return packageId;
     }
 
-    public Package indexPackageCompany(UUID idPackage) {
+    public Package indexPackageCompany(UUID idPackageLot) {
         Package packageId = new Package();
         for (Lot lot : lotList) {
                 for (Package p : lot.getPackageList()) {
-                    if (p.getId().equals(idPackage)) {
+                    if (p.getIdLot().equals(idPackageLot)) {
                         packageId = p;
                         break;
                     }

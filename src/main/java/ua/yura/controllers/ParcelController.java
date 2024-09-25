@@ -11,6 +11,10 @@ import ua.yura.dao.SubdivisionDAO;
 import ua.yura.models.Lot;
 import ua.yura.models.Package;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.UUID;
 
 @Controller
@@ -84,10 +88,7 @@ public class ParcelController {
     public String createPackage(@ModelAttribute("package")  Package p, @PathVariable("id") UUID uuid){
         System.out.println("createPackage id before method savePackage" + p.getId());
         lotDAO.savePackage(p, uuid);
-        System.out.println("createPackage id " + p.getId());
-        System.out.println("createPackage idLot " + p.getIdLot());
         return "redirect:/parcel/" + uuid;
-
     }
 
     @GetMapping("/{id}/editLot")
@@ -178,11 +179,13 @@ public class ParcelController {
     }
 
     @GetMapping("/{idLot}/{idPackage}/{companyName}/infoPackage")
-    public String infoPackageMCD(@PathVariable("companyName") String companyName, @PathVariable("idLot") UUID uuidLot, @PathVariable("idPackage") UUID uuidPackage, Model model){
+    public String infoPackageMCD(@PathVariable("companyName") String companyName, @PathVariable("idLot") UUID uuidLot, @PathVariable("idPackage") UUID uuidPackage, Model model, @RequestParam(value = "from", required = false) String from){
         Package p = lotDAO.indexPackage(uuidLot, uuidPackage);
         model.addAttribute("company", companyDAO.searchCompany(companyName));
         model.addAttribute("package", p);
         model.addAttribute("idLot", uuidLot);
+        model.addAttribute("from", from);
+        System.out.println("infoPackageMCD from= " + from);
         return "parcel/infoPackage";
     }
 
@@ -194,25 +197,45 @@ public class ParcelController {
     }
 
     @GetMapping("/{idLot}/{idPackage}/deletePackage")
-    public String getDeletePackage(@PathVariable("idLot") UUID uuidLot, @PathVariable("idPackage") UUID uuidPackage, Model model){
+    public String getDeletePackage(@PathVariable("idLot") UUID uuidLot, @PathVariable("idPackage") UUID uuidPackage, @RequestParam(value = "from", required = false) String from, Model model){
+        System.out.println("first getDeletePackage from= " + from);
         Package p = lotDAO.indexPackage(uuidLot, uuidPackage);
         model.addAttribute("package", p);
         model.addAttribute("idLot", uuidLot);
+        model.addAttribute("from", from);
+        System.out.println("last getDeletePackage from= " + from);
         return "parcel/deletePackage";
     }
     @DeleteMapping("/{idLot}/{idPackage}/deletePackage")
-    public String deletePackage(@PathVariable("idLot") UUID uuidLot, @PathVariable("idPackage") UUID uuidPackage){
-       lotDAO.deletePackage(uuidLot, uuidPackage);
+    public String deletePackage(@PathVariable("idLot") UUID uuidLot, @PathVariable("idPackage") UUID uuidPackage, @RequestParam(value = "from", required = false) String from) throws UnsupportedEncodingException {
+       Package p = lotDAO.indexPackage(uuidLot, uuidPackage);
+
+        // Сохраняем имя компании и клиента перед удалением
+        String companyName = p.getCompanyName();
+        String client = p.getClient();
+
+        // Кодируем параметры companyName и client в URL
+        String encodedCompanyName = URLEncoder.encode(companyName, StandardCharsets.UTF_8.toString());
+        String encodedClient = URLEncoder.encode(client, StandardCharsets.UTF_8.toString());
+
+        lotDAO.deletePackage(uuidLot, uuidPackage);
+        System.out.println("from= " + from);
+        // Если параметр "from" равен "companyInfo", перенаправляем обратно на страницу companyInfo
+        if ("companyInfo".equals(from)) {
+            return "redirect:/parcel/" + encodedCompanyName + '/' + encodedClient + "/company";
+        }
+
+        // Если параметр "from" не передан, перенаправляем на страницу "id"
         return "redirect:/parcel/" + uuidLot;
     }
 
-    @GetMapping("/{idLot}/{idPackage}/{companyName}/company")
-    public String companyInfo(@PathVariable("companyName") String companyName,@PathVariable("idLot") UUID idLot, @PathVariable("idPackage") UUID idPackage, Model model){
-        model.addAttribute("company", companyDAO.searchCompany(companyName));
-        Package p = lotDAO.indexPackage(idLot, idPackage);
-        model.addAttribute("subdivision", companyDAO.searchSubdivision(p.getCompanyName(), p.getClient()));
-        model.addAttribute("listAllParcelsSubdivision", lotDAO.findAllParcelsSubdivision(p.getClient()));
-        model.addAttribute("lot", lotDAO.indexLot(idLot));
+    @GetMapping("/{companyName}/{subdivisionName}/company")
+    public String companyInfo(@PathVariable("companyName") String companyName,@PathVariable("subdivisionName") String subdivisionName, Model model) throws UnsupportedEncodingException {
+        String decodedCompanyName = URLDecoder.decode(companyName, StandardCharsets.UTF_8.toString());
+        String decodedSubdivisionName = URLDecoder.decode(subdivisionName, StandardCharsets.UTF_8.toString());
+        model.addAttribute("company", companyDAO.searchCompany(decodedCompanyName));
+        model.addAttribute("subdivision", companyDAO.searchSubdivision(decodedCompanyName, decodedSubdivisionName));
+        model.addAttribute("listAllParcelsSubdivision", lotDAO.findAllParcelsSubdivision(decodedSubdivisionName));
         return "parcel/companyShow";
     }
 
