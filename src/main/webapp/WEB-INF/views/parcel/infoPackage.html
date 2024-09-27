@@ -57,7 +57,24 @@
     </style>
 </head>
 <body>
-<h3 ><a th:href="@{/parcel/{idLot}(idLot=${idLot})}" class="link-menu"><span style="font-size: 30px">&larr;</span> Повернутись</a><a th:href="@{/parcel}" style="margin-left: 25px" class="link-menu"><span style="font-size: 30px">&larr;</span> Повернутись на головну</a></h3>
+<h3>
+    <a th:if="${from == 'companyInfo'}"
+       th:href="@{/parcel/{companyName}/{subdivisionName}/company(companyName=${company.name}, subdivisionName=${package.getClient()}, idLot=${idLot})}"
+       class="link-menu">
+        <span style="font-size: 30px">&larr;</span> Повернутись до Company Info
+    </a>
+
+    <a th:unless="${from == 'companyInfo'}"
+       th:href="@{/parcel/{idLot}(idLot=${idLot})}"
+       class="link-menu">
+        <span style="font-size: 30px">&larr;</span> Повернутись
+    </a>
+
+    <a th:href="@{/parcel}" style="margin-left: 25px" class="link-menu">
+        <span style="font-size: 30px">&larr;</span> Повернутись на головну
+    </a>
+</h3>
+<!--<h3 ><a th:href="@{/parcel/{idLot}(idLot=${idLot})}" class="link-menu"><span style="font-size: 30px">&larr;</span> Повернутись</a><a th:href="@{/parcel}" style="margin-left: 25px" class="link-menu"><span style="font-size: 30px">&larr;</span> Повернутись на головну</a></h3>-->
 
 <div style="display: inline-flex; align-items: center;">
     <h2 style="margin: 0;">
@@ -98,7 +115,8 @@
     <span th:text="${from}" style="font-size: 20px;  position: absolute; left: 140px; font-weight: bold"></span>
 </div>
 
-<form th:method="get" th:action="@{/parcel/{idLot}/{idPackage}/{company}/editPackage(company=${company.getName()},  idLot=${idLot}, idPackage=${package.getId()})}">
+<form th:method="get" th:action="@{/parcel/{idLot}/{idPackage}/{company}/editPackage(company=${company.getName()},  idLot=${idLot}, idPackage=${package.getId()} )}">
+    <input type="hidden" th:name="from" th:value="${from}" />
     <input type="submit" value="Редагувати" class="button-do-not-delete" style="margin-top: 25px; font-size: 20px"/>
 </form>
 

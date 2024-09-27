@@ -170,11 +170,13 @@ public class ParcelController {
     }
 
     @GetMapping("/{idLot}/{idPackage}/{company}/editPackage")
-    public String editPackageMCD (@PathVariable("idLot") UUID uuidLot, @PathVariable("idPackage") UUID uuidPackage, Model model, @PathVariable String company){
+    public String editPackageMCD (@PathVariable("idLot") UUID uuidLot, @PathVariable("idPackage") UUID uuidPackage, Model model, @PathVariable String company, @RequestParam(value = "from", required = false) String from){
         Package p = lotDAO.indexPackage(uuidLot, uuidPackage);
         model.addAttribute("package", p);
         model.addAttribute("idLot", uuidLot);
         model.addAttribute("subdivisionDAO", companyDAO.searchListSubdivision(p.getCompanyName()));
+        model.addAttribute("from", from);
+        System.out.println("editPackageMCD from= " + from);
         return "parcel/editPackage";
     }
 
@@ -190,14 +192,13 @@ public class ParcelController {
     }
 
     @PatchMapping("/{idLot}/{idPackage}/editPackage")
-    public String updatePackage(@ModelAttribute("package") Package p, @PathVariable("idLot") UUID uuidLot, @PathVariable("idPackage") UUID uuidPackage){
+    public String updatePackage(@ModelAttribute("package") Package p, @PathVariable("idLot") UUID uuidLot, @PathVariable("idPackage") UUID uuidPackage, @RequestParam(value = "from", required = false) String from){
         p.setId(uuidPackage);
         lotDAO.updatePackage(p, uuidLot, uuidPackage);
-        return "redirect:/parcel/" + uuidLot + '/' + uuidPackage + '/' + p.getCompanyName() + "/infoPackage";
+        return "redirect:/parcel/" + uuidLot + '/' + uuidPackage + '/' + p.getCompanyName() + "/infoPackage?from=" + from;
     }
 
-    @GetMapping("/{idLot}/{idPackage}/deletePackage")
-    public String getDeletePackage(@PathVariable("idLot") UUID uuidLot, @PathVariable("idPackage") UUID uuidPackage, @RequestParam(value = "from", required = false) String from, Model model){
+    @GetMapping("/{idLot}/{idPackage}/deletePackage")    public String getDeletePackage(@PathVariable("idLot") UUID uuidLot, @PathVariable("idPackage") UUID uuidPackage, @RequestParam(value = "from", required = false) String from, Model model){
         System.out.println("first getDeletePackage from= " + from);
         Package p = lotDAO.indexPackage(uuidLot, uuidPackage);
         model.addAttribute("package", p);
@@ -222,7 +223,7 @@ public class ParcelController {
         System.out.println("from= " + from);
         // Если параметр "from" равен "companyInfo", перенаправляем обратно на страницу companyInfo
         if ("companyInfo".equals(from)) {
-            return "redirect:/parcel/" + encodedCompanyName + '/' + encodedClient + "/company";
+            return "redirect:/parcel/" + encodedCompanyName + '/' + encodedClient + "/company?idLot=" + uuidLot;
         }
 
         // Если параметр "from" не передан, перенаправляем на страницу "id"
@@ -230,12 +231,14 @@ public class ParcelController {
     }
 
     @GetMapping("/{companyName}/{subdivisionName}/company")
-    public String companyInfo(@PathVariable("companyName") String companyName,@PathVariable("subdivisionName") String subdivisionName, Model model) throws UnsupportedEncodingException {
+    public String companyInfo(@PathVariable("companyName") String companyName,@PathVariable("subdivisionName") String subdivisionName, @RequestParam("idLot") UUID uuidLot, Model model) throws UnsupportedEncodingException {
         String decodedCompanyName = URLDecoder.decode(companyName, StandardCharsets.UTF_8.toString());
         String decodedSubdivisionName = URLDecoder.decode(subdivisionName, StandardCharsets.UTF_8.toString());
         model.addAttribute("company", companyDAO.searchCompany(decodedCompanyName));
         model.addAttribute("subdivision", companyDAO.searchSubdivision(decodedCompanyName, decodedSubdivisionName));
         model.addAttribute("listAllParcelsSubdivision", lotDAO.findAllParcelsSubdivision(decodedSubdivisionName));
+        model.addAttribute("idLot", uuidLot);
+        System.out.println("companyInfo uuidLot " + uuidLot);
         return "parcel/companyShow";
     }
 
