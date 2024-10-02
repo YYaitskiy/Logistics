@@ -15,6 +15,12 @@
             color: #333;
         }
 
+        .light-line {
+            border: none;
+            height: 1px;
+            background-color: #d3d3d3; /* Светло-серый цвет */
+        }
+
         .button-to-create{
             font-size: 20px;
             border: 1px solid #9F9F9F; /* Базовая рамка для кнопок */
@@ -72,8 +78,15 @@
 
 <h3><a th:href="@{/parcel/{idLot}/{idPackage}/{company}/infoPackage(company=${package.getCompanyName()},  idLot=${idLot}, idPackage=${package.getId()})}" class="link-menu"><span style="font-size: 30px">&larr;</span> Повернутись</a><a th:href="@{/parcel}" style="margin-left: 25px" class="link-menu"><span style="font-size: 30px">&larr;</span> Повернутись на головну</a></h3>
 
+<div style="display: inline-flex; align-items: center;">
+<h2 style="margin: 0;">
+    Обновити посилку:
+    <span th:text="${company.getName()}" th:style="'color: ' + ${company.getColor()} + ';'"></span>
+</h2>
+    <img src="#" th:src="@{'/images/' + ${package.getCompanyName()} + '.png'}"   alt="logo McD" style="margin-left: 5px; width: auto; height: 25px;">
+</div>
 
-<h2>Обновити:</h2>
+<hr class="light-line">
 
 <form th:method="PATCH" th:action="@{/parcel/{idLot}/{id}/editPackage(idLot=${idLot}, id=${package.getId()}, from=${from})}" th:object="${package}">
 
@@ -114,6 +127,9 @@
     </p>
 
 </form>
+
+<hr class="light-line">
+
 
 
 <!--<form th:method="get" th:action="@{/parcel/{idLot}/{idPackage}/deletePackage(idLot=${idLot}, idPackage=${package.getId()})}">-->

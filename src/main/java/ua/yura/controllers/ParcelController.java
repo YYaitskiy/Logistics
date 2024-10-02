@@ -170,8 +170,9 @@ public class ParcelController {
     }
 
     @GetMapping("/{idLot}/{idPackage}/{company}/editPackage")
-    public String editPackageMCD (@PathVariable("idLot") UUID uuidLot, @PathVariable("idPackage") UUID uuidPackage, Model model, @PathVariable String company, @RequestParam(value = "from", required = false) String from){
+    public String editPackageMCD (@PathVariable("idLot") UUID uuidLot, @PathVariable("idPackage") UUID uuidPackage, Model model, @PathVariable("company") String company, @RequestParam(value = "from", required = false) String from){
         Package p = lotDAO.indexPackage(uuidLot, uuidPackage);
+        model.addAttribute("company", companyDAO.searchCompany(company));
         model.addAttribute("package", p);
         model.addAttribute("idLot", uuidLot);
         model.addAttribute("subdivisionDAO", companyDAO.searchListSubdivision(p.getCompanyName()));
@@ -198,9 +199,11 @@ public class ParcelController {
         return "redirect:/parcel/" + uuidLot + '/' + uuidPackage + '/' + p.getCompanyName() + "/infoPackage?from=" + from;
     }
 
-    @GetMapping("/{idLot}/{idPackage}/deletePackage")    public String getDeletePackage(@PathVariable("idLot") UUID uuidLot, @PathVariable("idPackage") UUID uuidPackage, @RequestParam(value = "from", required = false) String from, Model model){
+    @GetMapping("/{idLot}/{idPackage}/deletePackage")
+    public String getDeletePackage(@PathVariable("idLot") UUID uuidLot, @PathVariable("idPackage") UUID uuidPackage, @RequestParam(value = "from", required = false) String from, Model model){
         System.out.println("first getDeletePackage from= " + from);
         Package p = lotDAO.indexPackage(uuidLot, uuidPackage);
+        model.addAttribute("company", companyDAO.searchCompany(p.getCompanyName()));
         model.addAttribute("package", p);
         model.addAttribute("idLot", uuidLot);
         model.addAttribute("from", from);
