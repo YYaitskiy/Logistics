@@ -86,6 +86,8 @@
     <img src="#" th:src="@{'/images/' + ${package.getCompanyName()} + '.png'}"   alt="logo McD" style="margin-left: 5px; width: auto; height: 25px;">
 </div>
 
+<p th:text="${lot.getStatus()} + ' ' + ${#temporals.format(lot.getShippingDate(), 'dd-MM-yyyy')}" style="font-weight: bold; margin-bottom: 0;"></p>
+
 <hr class="light-line">
 
 <form th:method="PATCH" th:action="@{/parcel/{idLot}/{id}/editPackage(idLot=${idLot}, id=${package.getId()}, from=${from})}" th:object="${package}">

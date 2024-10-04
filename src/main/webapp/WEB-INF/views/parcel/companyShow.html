@@ -68,17 +68,6 @@
     <span style="font-size: 20px; position: absolute; left:700px;">Адреса замовника: <b th:text="${subdivision.getAddress()}"></b></span>
 </div>
 
-<!--<div th:each="parcel : ${listAllParcelsSubdivision}">-->
-<!--&lt;!&ndash;    <p th:text="${parcel.getCardNumber()}"></p>&ndash;&gt;-->
-<!--    <div style="font-size: 20px; flex-grow: 1; margin: 0;">-->
-<!--        <a th:text="${parcel.getCardNumber()}" class="link-card-number"></a>  -&#45;&#45;-->
-<!--        <a  th:text="${parcel.getClient() }" class="link-client-name"></a>  -&#45;&#45;-->
-<!--        <span th:text="${parcel.getDescriptions()}"></span>-->
-<!--    </div>-->
-
-<!--</div>-->
-
-
 <div th:with="parcelList=${listAllParcelsSubdivision}">
     <div th:each="package, iterStat : ${parcelList}">
         <!-- Выводим TTN только один раз для группы посылок -->
@@ -90,6 +79,7 @@
         <div th:if="${iterStat.index > 0 and package.getParcelTrackingNumber() == parcelList[iterStat.index - 1].getParcelTrackingNumber()}">
 
         </div>
+        <p th:text="${lot.getStatus()} + ' ' + ${#temporals.format(lot.getShippingDate(), 'dd-MM-yyyy')}" style="font-weight: bold; margin-top: 0;"></p>
 
         <!-- Выводим информацию о заявке -->
         <div style="display: flex; justify-content: space-between; align-items: center;">

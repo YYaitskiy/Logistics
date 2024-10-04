@@ -172,6 +172,8 @@ public class ParcelController {
     @GetMapping("/{idLot}/{idPackage}/{company}/editPackage")
     public String editPackageMCD (@PathVariable("idLot") UUID uuidLot, @PathVariable("idPackage") UUID uuidPackage, Model model, @PathVariable("company") String company, @RequestParam(value = "from", required = false) String from){
         Package p = lotDAO.indexPackage(uuidLot, uuidPackage);
+        Lot lot = lotDAO.indexLot(uuidLot);
+        model.addAttribute("lot", lot);
         model.addAttribute("company", companyDAO.searchCompany(company));
         model.addAttribute("package", p);
         model.addAttribute("idLot", uuidLot);
@@ -184,6 +186,8 @@ public class ParcelController {
     @GetMapping("/{idLot}/{idPackage}/{companyName}/infoPackage")
     public String infoPackageMCD(@PathVariable("companyName") String companyName, @PathVariable("idLot") UUID uuidLot, @PathVariable("idPackage") UUID uuidPackage, Model model, @RequestParam(value = "from", required = false) String from){
         Package p = lotDAO.indexPackage(uuidLot, uuidPackage);
+        Lot lot = lotDAO.indexLot(uuidLot);
+        model.addAttribute("lot", lot);
         model.addAttribute("company", companyDAO.searchCompany(companyName));
         model.addAttribute("package", p);
         model.addAttribute("idLot", uuidLot);
@@ -237,6 +241,8 @@ public class ParcelController {
     public String companyInfo(@PathVariable("companyName") String companyName,@PathVariable("subdivisionName") String subdivisionName, @RequestParam("idLot") UUID uuidLot, Model model) throws UnsupportedEncodingException {
         String decodedCompanyName = URLDecoder.decode(companyName, StandardCharsets.UTF_8.toString());
         String decodedSubdivisionName = URLDecoder.decode(subdivisionName, StandardCharsets.UTF_8.toString());
+        Lot lot = lotDAO.indexLot(uuidLot);
+        model.addAttribute("lot", lot);
         model.addAttribute("company", companyDAO.searchCompany(decodedCompanyName));
         model.addAttribute("subdivision", companyDAO.searchSubdivision(decodedCompanyName, decodedSubdivisionName));
         model.addAttribute("listAllParcelsSubdivision", lotDAO.findAllParcelsSubdivision(decodedSubdivisionName));

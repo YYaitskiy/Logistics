@@ -83,7 +83,10 @@
     <img src="#" th:src="@{'/images/' + ${package.getCompanyName()} + '.png'}"   alt="logo McD" style="margin-left: 5px; width: auto; height: 25px;">
 </div>
 
+<p th:text="${lot.getStatus()} + ' ' + ${#temporals.format(lot.getShippingDate(), 'dd-MM-yyyy')}" style="font-weight: bold; margin-bottom: 0;"></p>
+
 <hr class="light-line">
+
 <div>
     <span style="font-size: 22px">№ TTN:</span>
     <SPAN th:text="${package.getParcelTrackingNumber()}" style="font-size: 22px;  position: absolute; left: 140px; font-weight: bold"></SPAN>
@@ -109,10 +112,6 @@
     <span th:text="${package.getDeliveryPrice()} + 'грн ' + '&#8372;'" style="font-size: 20px;  position: absolute; left: 140px; font-weight: bold"></span>
 </div>
 
-<div style="margin-top: 10px">
-    <span style="font-size: 20px">Ціна:</span>
-    <span th:text="${from}" style="font-size: 20px;  position: absolute; left: 140px; font-weight: bold"></span>
-</div>
 
 <form th:method="get" th:action="@{/parcel/{idLot}/{idPackage}/{company}/editPackage(company=${company.getName()},  idLot=${idLot}, idPackage=${package.getId()} )}">
     <input type="hidden" th:name="from" th:value="${from}" />

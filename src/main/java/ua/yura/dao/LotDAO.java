@@ -186,7 +186,9 @@ public class LotDAO {
     public List<Package> findAllParcelsSubdivision(String client){
         List<Package> allParcelsSubdivision = new ArrayList<>();
         for (Lot lot : lotList) {
-
+            if (lot.getPackageList() == null || lot.getPackageList().isEmpty()) {
+                continue;
+            }
             for (Package p : lot.getPackageList()) {
                     if (p.getClient().equals(client)) {
                         allParcelsSubdivision.add(p);
