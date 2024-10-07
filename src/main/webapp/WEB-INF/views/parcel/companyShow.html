@@ -68,8 +68,9 @@
     <span style="font-size: 20px; position: absolute; left:700px;">Адреса замовника: <b th:text="${subdivision.getAddress()}"></b></span>
 </div>
 
-<div th:with="parcelList=${listAllParcelsSubdivision}">
-    <div th:each="package, iterStat : ${parcelList}">
+<div th:each="parcelLot : ${listAllParcelsSubdivision}">
+    <div th:with="parcelList=${parcelLot.packageList}">
+        <div th:each="package, iterStat : ${parcelList}">
         <!-- Выводим TTN только один раз для группы посылок -->
         <div th:if="${iterStat.index == 0 or package.getParcelTrackingNumber() != parcelList[iterStat.index - 1].getParcelTrackingNumber()}">
             <hr class="light-line" style=" margin-top: 15px"/>
@@ -79,7 +80,7 @@
         <div th:if="${iterStat.index > 0 and package.getParcelTrackingNumber() == parcelList[iterStat.index - 1].getParcelTrackingNumber()}">
 
         </div>
-        <p th:text="${lot.getStatus()} + ' ' + ${#temporals.format(lot.getShippingDate(), 'dd-MM-yyyy')}" style="font-weight: bold; margin-top: 0;"></p>
+        <p th:text="${parcelLot.getStatus()} + ' ' + ${#temporals.format(parcelLot.getShippingDate(), 'dd-MM-yyyy')}" style="font-weight: bold; margin-top: 0;"></p>
 
         <!-- Выводим информацию о заявке -->
         <div style="display: flex; justify-content: space-between; align-items: center;">
@@ -105,7 +106,10 @@
             </div>
         </div>
     </div>
-    <hr class="light-line"/>
+
+    </div>
 </div>
+<hr class="light-line"/>
+
 </body>
 </html>

@@ -183,19 +183,38 @@ public class LotDAO {
         }
     }
 
-    public List<Package> findAllParcelsSubdivision(String client){
-        List<Package> allParcelsSubdivision = new ArrayList<>();
+//    public List<Package> findAllParcelsSubdivision(String client){
+//        List<Package> allParcelsSubdivision = new ArrayList<>();
+//        for (Lot lot : lotList) {
+//            if (lot.getPackageList() == null || lot.getPackageList().isEmpty()) {
+//                continue;
+//            }
+//            for (Package p : lot.getPackageList()) {
+//                    if (p.getClient().equals(client)) {
+//                        allParcelsSubdivision.add(p);
+//                    }
+//                }
+//        }
+//        return allParcelsSubdivision;
+//    }
+
+    public List<Lot> findAllParcelsSubdivision(String client) {
+        List<Lot> findAllParcelsSubdivisionInLot = new ArrayList<>();
         for (Lot lot : lotList) {
-            if (lot.getPackageList() == null || lot.getPackageList().isEmpty()) {
-                continue;
-            }
-            for (Package p : lot.getPackageList()) {
+            List<Package> allParcelsSubdivision = new ArrayList<>();
+            if (lot.getPackageList() != null && !lot.getPackageList().isEmpty()) {
+                for (Package p : lot.getPackageList()) {
                     if (p.getClient().equals(client)) {
                         allParcelsSubdivision.add(p);
                     }
                 }
+                if (!allParcelsSubdivision.isEmpty()) {
+                    Lot lotWithFilteredPackages = new Lot(lot.getId(), lot.getStatus(), lot.getShippingDate(), allParcelsSubdivision);
+                    findAllParcelsSubdivisionInLot.add(lotWithFilteredPackages);
+                }
+            }
         }
-        return allParcelsSubdivision;
+        return findAllParcelsSubdivisionInLot;
     }
 
 
