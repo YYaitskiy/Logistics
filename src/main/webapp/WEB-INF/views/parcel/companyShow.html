@@ -36,6 +36,19 @@
             height: 1px;
             background-color: #d3d3d3; /* Светло-серый цвет */
         }
+
+        .link-index {
+            display: inline-block;;
+            text-decoration: none;
+            color: #696969;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .link-index:hover {
+            text-decoration: underline;
+            color: #333;
+        }
     </style>
 </head>
 <body>
@@ -80,7 +93,9 @@
         <div th:if="${iterStat.index > 0 and package.getParcelTrackingNumber() == parcelList[iterStat.index - 1].getParcelTrackingNumber()}">
 
         </div>
-        <p th:text="${parcelLot.getStatus()} + ' ' + ${#temporals.format(parcelLot.getShippingDate(), 'dd-MM-yyyy')}" style="font-weight: bold; margin-top: 0;"></p>
+        <a th:href="@{/parcel/{idLot}(idLot=${parcelLot.getId()})}" th:text="${parcelLot.getStatus()} + ' ' + ${#temporals.format(parcelLot.getShippingDate(), 'dd-MM-yyyy')}" class="link-index" ></a>
+
+<!--            th:href="@{/parcel/{idLot}(idLot=${idLot})}"-->
 
         <!-- Выводим информацию о заявке -->
         <div style="display: flex; justify-content: space-between; align-items: center;">

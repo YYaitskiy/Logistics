@@ -44,6 +44,7 @@ public class ParcelController {
 
     @GetMapping("/{id}")
     public String id(@PathVariable("id") UUID uuid, Model model){
+        System.out.println("id " + uuid);
         model.addAttribute("parcel", lotDAO.indexLot(uuid));
         model.addAttribute("companyNameMCD", companyDAO.getCompanyList().get(0).getName());
         model.addAttribute("companyNamePuma", companyDAO.getCompanyList().get(1).getName());
