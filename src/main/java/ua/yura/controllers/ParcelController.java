@@ -15,6 +15,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Controller
@@ -73,6 +74,11 @@ public class ParcelController {
     @PostMapping()
     public String createLot (@ModelAttribute("lot") Lot lot){
         lot.setId(UUID.randomUUID());
+
+        if (lot.getShippingDate() == null) {
+            lot.setShippingDate(LocalDate.now());
+        }
+
         lotDAO.save(lot);
         return "redirect:/parcel/" + lot.getId();
     }

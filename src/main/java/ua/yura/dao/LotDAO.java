@@ -7,8 +7,10 @@ import ua.yura.models.Subdivision;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Component
 public class LotDAO {
@@ -36,7 +38,9 @@ public class LotDAO {
     }
 
     public List<Lot> show() {
-        return lotList;
+        return lotList.stream()
+                .sorted(Comparator.comparing(Lot::getShippingDate).reversed())
+                .collect(Collectors.toList());
     }
 
     public Lot indexLot(UUID uuid) {
