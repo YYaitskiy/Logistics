@@ -54,21 +54,16 @@
             font-weight: bold;
         }
 
-        .button-yes-delete{
-            border: 1px solid #9F9F9F; /* Базовая рамка для кнопок */
-            margin-right: 10px;
-            cursor: pointer;
-            padding: 2px 7px;
-            border-radius: 10px;
-            position: absolute
-
+        .link-index {
+            display: inline-block;;
+            text-decoration: none;
+            color: #696969;
+            font-weight: bold;
         }
 
-        .button-yes-delete:hover{
-            outline: none;
-            color: #333; /* Цвет текста при наведении */
-            border: 2px solid #333; /* Рамка при наведении */
-            font-weight: bold;
+        .link-index:hover {
+            text-decoration: underline;
+            color: #333;
         }
     </style>
 
@@ -86,7 +81,7 @@
     <img src="#" th:src="@{'/images/' + ${package.getCompanyName()} + '.png'}"   alt="logo McD" style="margin-left: 5px; width: auto; height: 25px;">
 </div>
 
-<p th:text="${lot.getStatus()} + ' ' + ${#temporals.format(lot.getShippingDate(), 'dd-MM-yyyy')}" style="font-weight: bold; margin-bottom: 0;"></p>
+<p><a th:href="@{/parcel/{idLot}(idLot=${lot.getId()})}" th:text="${lot.getStatus()} + ' ' + ${#temporals.format(lot.getShippingDate(), 'dd-MM-yyyy')}"  class="link-index"></a></p>
 
 <hr class="light-line">
 

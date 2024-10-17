@@ -20,12 +20,12 @@
             color: #696969
         }
 
-        .link-card-number:hover{
+        .link-card-number:hover {
             text-decoration: underline;
             color: #333;
         }
 
-        .client-name{
+        .client-name {
             text-decoration: none;
             color: black;
         }
@@ -40,7 +40,7 @@
         .link-index {
             display: inline-block;;
             text-decoration: none;
-            color: #696969;
+            color: black;
             font-weight: bold;
             margin-bottom: 15px;
         }
@@ -52,76 +52,73 @@
     </style>
 </head>
 <body>
-<h3><a th:href="@{/parcel/{idLot}(idLot=${idLot})}" class="link-menu"><span style="font-size: 30px">&larr;</span> Повернутись</a><a th:href="@{/parcel}" style="margin-left: 25px" class="link-menu"><span style="font-size: 30px">&larr;</span> Повернутись на головну</a></h3>
+<h3><a th:href="@{/parcel/{idLot}(idLot=${idLot})}" class="link-menu"><span style="font-size: 30px">&larr;</span>
+    Повернутись</a><a th:href="@{/parcel}" style="margin-left: 25px" class="link-menu"><span style="font-size: 30px">&larr;</span>
+    Повернутись на головну</a></h3>
 
 <div style="display: flex; align-items: center;">
     <!-- Блок компании -->
     <span style="font-size: 25px; margin-right: 10px;">
         Компания: <b th:text="${company.getName()}" th:style="'color: ' + ${company.getColor()} + ';'"></b>
     </span>
-    <img th:src="@{'/images/' + ${company.getName()} + '.png'}" alt="Логотип компании" style="margin-right: 50px; width: auto; height: 25px;">
+    <img th:src="@{'/images/' + ${company.getName()} + '.png'}" alt="Логотип компании"
+         style="margin-right: 50px; width: auto; height: 25px;">
 
     <!-- Блок заказчика -->
     <span style="font-size: 25px; margin-right: 10px;">
         Заказчик: <b th:text="${subdivision.getName()}" th:style="'color: ' + ${company.getColor()} + ';'"></b>
     </span>
-    <img th:src="@{'/images/' + ${company.getName()} + '.png'}" alt="Логотип заказчика" style="width: auto; height: 25px;">
+    <img th:src="@{'/images/' + ${company.getName()} + '.png'}" alt="Логотип заказчика"
+         style="width: auto; height: 25px;">
 </div>
 
 
 <div style="margin-top: 20px">
     <span style="font-size: 20px;">Код ЕГРПОУ: <b th:text="${company.getEDRPOUCode()}"></b></span>
-    <span style="font-size: 20px; position: absolute; left:350px;">Номер закладу: <b th:text="${subdivision.getNumberSubdivision()}"></b></span>
-    <span style="font-size: 20px; position: absolute; left:700px;">Телефон замовника: <b th:text="${subdivision.getTelephone()}"></b></span>
+    <span style="font-size: 20px; position: absolute; left:350px;">Номер закладу: <b
+            th:text="${subdivision.getNumberSubdivision()}"></b></span>
+    <span style="font-size: 20px; position: absolute; left:700px;">Телефон замовника: <b
+            th:text="${subdivision.getTelephone()}"></b></span>
 </div>
 
 <div style="margin-top: 10px">
     <span style="font-size: 20px;">Регіон: <b th:text="${subdivision.getRegion()}"></b></span>
-    <span style="font-size: 20px; position: absolute; left:350px;">Місто: <b th:text="${subdivision.getCity()}"></b></span>
-    <span style="font-size: 20px; position: absolute; left:700px;">Адреса замовника: <b th:text="${subdivision.getAddress()}"></b></span>
+    <span style="font-size: 20px; position: absolute; left:350px;">Місто: <b
+            th:text="${subdivision.getCity()}"></b></span>
+    <span style="font-size: 20px; position: absolute; left:700px;">Адреса замовника: <b
+            th:text="${subdivision.getAddress()}"></b></span>
 </div>
 
 <div th:each="parcelLot : ${listAllParcelsSubdivision}">
     <div th:with="parcelList=${parcelLot.packageList}">
         <div th:each="package, iterStat : ${parcelList}">
-        <!-- Выводим TTN только один раз для группы посылок -->
-        <div th:if="${iterStat.index == 0 or package.getParcelTrackingNumber() != parcelList[iterStat.index - 1].getParcelTrackingNumber()}">
-            <hr class="light-line" style=" margin-top: 15px"/>
-        </div>
 
-        <!-- Пунктирная линия между заявками с одинаковым TTN -->
-        <div th:if="${iterStat.index > 0 and package.getParcelTrackingNumber() == parcelList[iterStat.index - 1].getParcelTrackingNumber()}">
+            <!-- Выводим TTN и ссылку только один раз для группы посылок -->
+            <div th:if="${iterStat.index == 0 or package.getParcelTrackingNumber() != parcelList[iterStat.index - 1].getParcelTrackingNumber()}">
+                <hr class="light-line" style=" margin-top: 15px"/>
 
-        </div>
-        <a th:href="@{/parcel/{idLot}(idLot=${parcelLot.getId()})}" th:text="${parcelLot.getStatus()} + ' ' + ${#temporals.format(parcelLot.getShippingDate(), 'dd-MM-yyyy')}" class="link-index" ></a>
+                <!-- Выводим ссылку на всю группу только один раз -->
+                <a th:href="@{/parcel/{idLot}(idLot=${parcelLot.getId()})}" th:text="${parcelLot.getStatus()} + ' ' + ${#temporals.format(parcelLot.getShippingDate(), 'dd-MM-yyyy')}" class="link-index" ></a>
+            </div>
 
-<!--            th:href="@{/parcel/{idLot}(idLot=${idLot})}"-->
+            <!-- Выводим информацию о заявке -->
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <p style="font-size: 20px; flex-grow: 1; margin: 0;">
+                    <a th:href="@{/parcel/{idLot}/{idPackage}/{companyName}/infoPackage(idLot=${package.getIdLot()}, idPackage=${package.getId()}, companyName=${package.getCompanyName()}, from='companyInfo')}"
+                       th:text="${package.getCardNumber()}"
+                       class="link-card-number" ></a>  ---
+                    <span th:text="${package.getClient()}" class="client-name"></span>  ---
+                    <span th:text="${package.getDescriptions()}"></span>
+                </p>
+            </div>
 
-        <!-- Выводим информацию о заявке -->
-        <div style="display: flex; justify-content: space-between; align-items: center;">
-            <p style="font-size: 20px; flex-grow: 1; margin: 0;">
-                <!--                <b>№ Заявки:</b>-->
-
-                <a th:href="@{/parcel/{idLot}/{idPackage}/{companyName}/infoPackage(idLot=${package.getIdLot()}, idPackage=${package.getId()}, companyName=${package.getCompanyName()}, from='companyInfo')}"  th:text="${package.getCardNumber()}"  class="link-card-number" ></a>  ---
-
-                <!--<b>Замовник:</b>-->
-                <span th:text="${package.getClient() }" class="client-name"></span>  ---
-                <!--                <b>Опис:</b>-->
-                <span th:text="${package.getDescriptions()}"></span>
-            </p>
-
-
-        </div>
-
-        <!-- Выводим цену только для последней заявки в группе -->
-        <div th:if="${iterStat.index == parcelList.size() - 1 or package.getParcelTrackingNumber() != parcelList[iterStat.index + 1].getParcelTrackingNumber()}">
-            <div style="font-size: 20px; ">
-                <!--                <b>Ціна:</b>-->
-                <span th:text="${package.getDeliveryPrice()} + 'грн ' + '&#8372;'"></span>
+            <!-- Выводим цену только для последней заявки в группе -->
+            <div th:if="${iterStat.index == parcelList.size() - 1 or package.getParcelTrackingNumber() != parcelList[iterStat.index + 1].getParcelTrackingNumber()}">
+                <div style="font-size: 20px;">
+                    <span th:text="${package.getDeliveryPrice()} + ' грн ' + '&#8372;'"></span>
+                </div>
             </div>
         </div>
-    </div>
-
     </div>
 </div>
 <hr class="light-line"/>

@@ -3,14 +3,17 @@ package ua.yura.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ua.yura.dao.CompanyDAO;
 import ua.yura.dao.LotDAO;
 import ua.yura.dao.PackageDAO;
 import ua.yura.dao.SubdivisionDAO;
+import ua.yura.models.Company;
 import ua.yura.models.Lot;
 import ua.yura.models.Package;
 
+import javax.validation.Valid;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
@@ -85,14 +88,21 @@ public class ParcelController {
 
     @GetMapping("/{id}/newPackage")
     public String newPackage (Model model, @PathVariable("id") UUID uuid, @RequestParam("company") String companyName){
-        model.addAttribute("package", new Package(uuid, companyDAO.searchCompany(companyName).getName()));
-        model.addAttribute("subdivisionDAO", companyDAO.searchCompany(companyName).getSubdivisionList());
-        model.addAttribute("company", companyDAO.searchCompany(companyName));
+        Company company = companyDAO.searchCompany(companyName); // Сохранение результата в переменную
+        model.addAttribute("package", new Package(uuid, company.getName()));
+        model.addAttribute("subdivisionDAO", company.getSubdivisionList());
+        model.addAttribute("company", company);
         return "parcel/newPackage";
     }
 
     @PostMapping("/{id}")
-    public String createPackage(@ModelAttribute("package")  Package p, @PathVariable("id") UUID uuid){
+    public String createPackage(@ModelAttribute("package") @Valid Package p, BindingResult bindingResult, @PathVariable("id") UUID uuid, Model model){
+        if (bindingResult.hasErrors()){
+            Company company = companyDAO.searchCompany(p.getCompanyName()); // Снова извлекаем данные
+            model.addAttribute("subdivisionDAO", company.getSubdivisionList());
+            model.addAttribute("company", company);
+            return "parcel/newPackage";
+        }
         System.out.println("createPackage id before method savePackage" + p.getId());
         lotDAO.savePackage(p, uuid);
         return "redirect:/parcel/" + uuid;
@@ -204,7 +214,10 @@ public class ParcelController {
     }
 
     @PatchMapping("/{idLot}/{idPackage}/editPackage")
-    public String updatePackage(@ModelAttribute("package") Package p, @PathVariable("idLot") UUID uuidLot, @PathVariable("idPackage") UUID uuidPackage, @RequestParam(value = "from", required = false) String from){
+    public String updatePackage(@ModelAttribute("package") @Valid Package p, BindingResult bindingResult, @PathVariable("idLot") UUID uuidLot, @PathVariable("idPackage") UUID uuidPackage, @RequestParam(value = "from", required = false) String from){
+        if (bindingResult.hasErrors()){
+            return "parcel/editPackage";
+        }
         p.setId(uuidPackage);
         lotDAO.updatePackage(p, uuidLot, uuidPackage);
         return "redirect:/parcel/" + uuidLot + '/' + uuidPackage + '/' + p.getCompanyName() + "/infoPackage?from=" + from;
@@ -213,11 +226,13 @@ public class ParcelController {
     @GetMapping("/{idLot}/{idPackage}/deletePackage")
     public String getDeletePackage(@PathVariable("idLot") UUID uuidLot, @PathVariable("idPackage") UUID uuidPackage, @RequestParam(value = "from", required = false) String from, Model model){
         System.out.println("first getDeletePackage from= " + from);
+        Lot lot = lotDAO.indexLot(uuidLot);
         Package p = lotDAO.indexPackage(uuidLot, uuidPackage);
         model.addAttribute("company", companyDAO.searchCompany(p.getCompanyName()));
         model.addAttribute("package", p);
         model.addAttribute("idLot", uuidLot);
         model.addAttribute("from", from);
+        model.addAttribute("lot", lot);
         System.out.println("last getDeletePackage from= " + from);
         return "parcel/deletePackage";
     }

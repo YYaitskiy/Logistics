@@ -1,17 +1,23 @@
 package ua.yura.models;
 
+import javax.validation.constraints.*;
 import java.util.List;
 import java.util.UUID;
 
 public class Package {
     private UUID id;
-
     private UUID idLot;
-    private long parcelTrackingNumber;
+
+    @Size(min = 3, max = 22, message = "TTH повинно бути не менше 3 символів і не більше 22 символів")
+    private String parcelTrackingNumber;
+    @Pattern(regexp = "^(MD|PM|UC)\\d{2}-\\d{1,10}$", message = "Номер повинен починатися з MD, PM або UC, за якими йдуть 2 цифри, тире та від 1 до 10 цифр")
     private String cardNumber;
     private String client;
     private String companyName;
+    @Size(min = 3, max = 255, message = "Опис повинен містити не менше 3 символів і не більше 255 символів")
     private String descriptions;
+    @Min(value = 0, message = "Ціна доставки не може бути негативною")
+    @Digits(integer = 6, fraction = 0, message = "Ціна доставки повинна містити не більше 6 цифр")
     private int deliveryPrice;
 
 
@@ -22,7 +28,7 @@ public class Package {
         this.id = id;
     }
 
-    public Package(UUID id, long parcelTrackingNumber, String cardNumber, String client, String companyName, String descriptions, int deliveryPrice) {
+    public Package(UUID id, String parcelTrackingNumber, String cardNumber, String client, String companyName, String descriptions, int deliveryPrice) {
         this.id = id;
         this.parcelTrackingNumber = parcelTrackingNumber;
         this.cardNumber = cardNumber;
@@ -45,11 +51,11 @@ public class Package {
         this.id = id;
     }
 
-    public long getParcelTrackingNumber() {
+    public String getParcelTrackingNumber() {
         return parcelTrackingNumber;
     }
 
-    public void setParcelTrackingNumber(long parcelTrackingNumber) {
+    public void setParcelTrackingNumber(String parcelTrackingNumber) {
         this.parcelTrackingNumber = parcelTrackingNumber;
     }
 
