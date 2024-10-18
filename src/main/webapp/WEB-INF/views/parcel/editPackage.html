@@ -85,11 +85,11 @@
 
 <hr class="light-line">
 
-<form th:method="PATCH" th:action="@{/parcel/{idLot}/{id}/editPackage(idLot=${idLot}, id=${package.getId()}, from=${from})}" th:object="${package}">
+<form th:method="PATCH" th:action="@{/parcel/{idLot}/{id}/{companyName}/editPackage(idLot=${idLot}, id=${package.getId()}, companyName=${company.getName()}, from=${from})}" th:object="${package}">
 
     <p>
         <label for="parcelTrackingNumber" style="font-size: 20px">Введіть TTN:</label>
-        <input type="number" th:field="*{parcelTrackingNumber}" id="parcelTrackingNumber" style="font-size: 20px; display: inline-block; position: absolute; left: 135px;" />
+        <input type="text" th:field="*{parcelTrackingNumber}" id="parcelTrackingNumber" style="font-size: 20px; display: inline-block; position: absolute; left: 135px;" />
     </p>
 
     <p>

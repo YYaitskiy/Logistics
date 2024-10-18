@@ -30,6 +30,25 @@
             border: 2px solid #333; /* Рамка при наведении */
             font-weight: bold;
         }
+
+        .link-index {
+            display: inline-block;;
+            text-decoration: none;
+            color: #696969;
+            font-weight: bold;
+        }
+
+        .link-index:hover {
+            text-decoration: underline;
+            color: #333;
+        }
+
+        .light-line {
+            border: none;
+            height: 1px;
+            background-color: #d3d3d3; /* Светло-серый цвет */
+        }
+
     </style>
 </head>
 <body>
@@ -44,12 +63,15 @@
     <img src="#" th:src="@{'/images/' + ${package.getCompanyName()} + '.png'}"   alt="logo McD" style="margin-left: 5px; width: auto; height: 25px;">
 </div>
 
+<p><a th:href="@{/parcel/{idLot}(idLot=${lot.getId()})}" th:text="${lot.getStatus()} + ' ' + ${#temporals.format(lot.getShippingDate(), 'dd-MM-yyyy')}"  class="link-index"></a></p>
+
+<hr class="light-line">
 
 <form th:method="POST" th:action="@{/parcel/{id}(id=${package.getId()})}" th:object="${package}">
 
     <p>
     <label for="parcelTrackingNumber" style="font-size: 20px">Введіть TTN:</label>
-    <input type="text" th:field="*{parcelTrackingNumber}" id="parcelTrackingNumber" style="font-size: 20px; display: inline-block; position: absolute; left: 135px;"  />
+    <input type="text" th:field="*{parcelTrackingNumber}" id="parcelTrackingNumber" style="font-size: 20px; display: inline-block; position: absolute; left: 135px;"  required/>
     <div STYLE="color: red" th:if="${#fields.hasErrors('parcelTrackingNumber')}" th:errors="*{parcelTrackingNumber}"></div>
     </p>
 
@@ -81,6 +103,8 @@
     <input type="number" th:field="*{deliveryPrice}" id="deliveryPrice" style="font-size: 20px; display: inline-block; position: absolute; left: 135px;"/>
     <div STYLE="color: red" th:if="${#fields.hasErrors('deliveryPrice')}" th:errors="*{deliveryPrice}"></div>
     </p>
+
+    <hr class="light-line">
 
     <p>
     <input type="submit" value="Створити" style="font-size: 20px" class="button-to-create">

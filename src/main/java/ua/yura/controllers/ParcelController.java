@@ -88,7 +88,8 @@ public class ParcelController {
 
     @GetMapping("/{id}/newPackage")
     public String newPackage (Model model, @PathVariable("id") UUID uuid, @RequestParam("company") String companyName){
-        Company company = companyDAO.searchCompany(companyName); // Сохранение результата в переменную
+        Company company = companyDAO.searchCompany(companyName);
+        model.addAttribute("lot", lotDAO.indexLot(uuid));
         model.addAttribute("package", new Package(uuid, company.getName()));
         model.addAttribute("subdivisionDAO", company.getSubdivisionList());
         model.addAttribute("company", company);
@@ -98,12 +99,12 @@ public class ParcelController {
     @PostMapping("/{id}")
     public String createPackage(@ModelAttribute("package") @Valid Package p, BindingResult bindingResult, @PathVariable("id") UUID uuid, Model model){
         if (bindingResult.hasErrors()){
-            Company company = companyDAO.searchCompany(p.getCompanyName()); // Снова извлекаем данные
+            Company company = companyDAO.searchCompany(p.getCompanyName());
+            model.addAttribute("lot", lotDAO.indexLot(uuid));
             model.addAttribute("subdivisionDAO", company.getSubdivisionList());
             model.addAttribute("company", company);
             return "parcel/newPackage";
         }
-        System.out.println("createPackage id before method savePackage" + p.getId());
         lotDAO.savePackage(p, uuid);
         return "redirect:/parcel/" + uuid;
     }
@@ -196,7 +197,6 @@ public class ParcelController {
         model.addAttribute("idLot", uuidLot);
         model.addAttribute("subdivisionDAO", companyDAO.searchListSubdivision(p.getCompanyName()));
         model.addAttribute("from", from);
-        System.out.println("editPackageMCD from= " + from);
         return "parcel/editPackage";
     }
 
@@ -209,13 +209,18 @@ public class ParcelController {
         model.addAttribute("package", p);
         model.addAttribute("idLot", uuidLot);
         model.addAttribute("from", from);
-        System.out.println("infoPackageMCD from= " + from);
         return "parcel/infoPackage";
     }
 
-    @PatchMapping("/{idLot}/{idPackage}/editPackage")
-    public String updatePackage(@ModelAttribute("package") @Valid Package p, BindingResult bindingResult, @PathVariable("idLot") UUID uuidLot, @PathVariable("idPackage") UUID uuidPackage, @RequestParam(value = "from", required = false) String from){
+    @PatchMapping("/{idLot}/{idPackage}/{companyName}/editPackage")
+    public String updatePackage(@ModelAttribute("package") @Valid Package p, BindingResult bindingResult, @PathVariable("idLot") UUID uuidLot, @PathVariable("idPackage") UUID uuidPackage, @RequestParam(value = "from", required = false) String from, Model model, @PathVariable("companyName") String companyName){
         if (bindingResult.hasErrors()){
+            Lot lot = lotDAO.indexLot(uuidLot);
+            model.addAttribute("lot", lot);
+            model.addAttribute("company", companyDAO.searchCompany(companyName));
+            model.addAttribute("package", p);
+            model.addAttribute("idLot", uuidLot);
+            model.addAttribute("from", from);
             return "parcel/editPackage";
         }
         p.setId(uuidPackage);
