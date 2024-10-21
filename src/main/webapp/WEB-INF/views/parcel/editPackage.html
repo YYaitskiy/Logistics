@@ -71,7 +71,7 @@
 <body>
 
 
-<h3><a th:href="@{/parcel/{idLot}/{idPackage}/{company}/infoPackage(company=${package.getCompanyName()},  idLot=${idLot}, idPackage=${package.getId()})}" class="link-menu"><span style="font-size: 30px">&larr;</span> Повернутись</a><a th:href="@{/parcel}" style="margin-left: 25px" class="link-menu"><span style="font-size: 30px">&larr;</span> Повернутись на головну</a></h3>
+<h3><a th:href="@{/parcel/{idLot}/{idPackage}/{company}/infoPackage(company=${package.getCompanyName()},  idLot=${idLot}, idPackage=${idPackage})}" class="link-menu"><span style="font-size: 30px">&larr;</span> Повернутись</a><a th:href="@{/parcel}" style="margin-left: 25px" class="link-menu"><span style="font-size: 30px">&larr;</span> Повернутись на головну</a></h3>
 
 <div style="display: inline-flex; align-items: center;">
 <h2 style="margin: 0;">
@@ -85,7 +85,7 @@
 
 <hr class="light-line">
 
-<form th:method="PATCH" th:action="@{/parcel/{idLot}/{id}/{companyName}/editPackage(idLot=${idLot}, id=${package.getId()}, companyName=${company.getName()}, from=${from})}" th:object="${package}">
+<form th:method="PATCH" th:action="@{/parcel/{idLot}/{id}/{companyName}/editPackage(idLot=${idLot}, id=${idPackage}, companyName=${company.getName()}, from=${from})}" th:object="${package}">
 
     <p>
         <label for="parcelTrackingNumber" style="font-size: 20px">Введіть TTN:</label>

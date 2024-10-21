@@ -200,6 +200,23 @@ public class ParcelController {
         return "parcel/editPackage";
     }
 
+    @PatchMapping("/{idLot}/{idPackage}/{companyName}/editPackage")
+    public String updatePackage(@ModelAttribute("package") @Valid Package p, BindingResult bindingResult, @PathVariable("idLot") UUID uuidLot, @PathVariable("idPackage") UUID uuidPackage, @RequestParam(value = "from", required = false) String from, Model model, @PathVariable("companyName") String companyName){
+        if (bindingResult.hasErrors()){
+            Lot lot = lotDAO.indexLot(uuidLot);
+            model.addAttribute("lot", lot);
+            model.addAttribute("company", companyDAO.searchCompany(companyName));
+            model.addAttribute("idPackage", uuidPackage);
+            model.addAttribute("idLot", uuidLot);
+            model.addAttribute("subdivisionDAO", companyDAO.searchListSubdivision(p.getCompanyName()));
+            model.addAttribute("from", from);
+            return "parcel/editPackage";
+        }
+        p.setId(uuidPackage);
+        lotDAO.updatePackage(p, uuidLot, uuidPackage);
+        return "redirect:/parcel/" + uuidLot + '/' + uuidPackage + '/' + p.getCompanyName() + "/infoPackage?from=" + from;
+    }
+
     @GetMapping("/{idLot}/{idPackage}/{companyName}/infoPackage")
     public String infoPackageMCD(@PathVariable("companyName") String companyName, @PathVariable("idLot") UUID uuidLot, @PathVariable("idPackage") UUID uuidPackage, Model model, @RequestParam(value = "from", required = false) String from){
         Package p = lotDAO.indexPackage(uuidLot, uuidPackage);
@@ -212,21 +229,7 @@ public class ParcelController {
         return "parcel/infoPackage";
     }
 
-    @PatchMapping("/{idLot}/{idPackage}/{companyName}/editPackage")
-    public String updatePackage(@ModelAttribute("package") @Valid Package p, BindingResult bindingResult, @PathVariable("idLot") UUID uuidLot, @PathVariable("idPackage") UUID uuidPackage, @RequestParam(value = "from", required = false) String from, Model model, @PathVariable("companyName") String companyName){
-        if (bindingResult.hasErrors()){
-            Lot lot = lotDAO.indexLot(uuidLot);
-            model.addAttribute("lot", lot);
-            model.addAttribute("company", companyDAO.searchCompany(companyName));
-            model.addAttribute("package", p);
-            model.addAttribute("idLot", uuidLot);
-            model.addAttribute("from", from);
-            return "parcel/editPackage";
-        }
-        p.setId(uuidPackage);
-        lotDAO.updatePackage(p, uuidLot, uuidPackage);
-        return "redirect:/parcel/" + uuidLot + '/' + uuidPackage + '/' + p.getCompanyName() + "/infoPackage?from=" + from;
-    }
+
 
     @GetMapping("/{idLot}/{idPackage}/deletePackage")
     public String getDeletePackage(@PathVariable("idLot") UUID uuidLot, @PathVariable("idPackage") UUID uuidPackage, @RequestParam(value = "from", required = false) String from, Model model){
@@ -268,8 +271,8 @@ public class ParcelController {
     public String companyInfo(@PathVariable("companyName") String companyName,@PathVariable("subdivisionName") String subdivisionName, @RequestParam("idLot") UUID uuidLot, Model model) throws UnsupportedEncodingException {
         String decodedCompanyName = URLDecoder.decode(companyName, StandardCharsets.UTF_8.toString());
         String decodedSubdivisionName = URLDecoder.decode(subdivisionName, StandardCharsets.UTF_8.toString());
-        Lot lot = lotDAO.indexLot(uuidLot);
-        model.addAttribute("lot", lot);
+//        Lot lot = lotDAO.indexLot(uuidLot);
+//        model.addAttribute("lot", lot);
         model.addAttribute("company", companyDAO.searchCompany(decodedCompanyName));
         model.addAttribute("subdivision", companyDAO.searchSubdivision(decodedCompanyName, decodedSubdivisionName));
         model.addAttribute("listAllParcelsSubdivision", lotDAO.findAllParcelsSubdivision(decodedSubdivisionName));

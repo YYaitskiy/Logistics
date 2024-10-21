@@ -218,7 +218,10 @@ public class LotDAO {
                 }
             }
         }
-        return findAllParcelsSubdivisionInLot;
+
+        return findAllParcelsSubdivisionInLot.stream()
+                .sorted(Comparator.comparing(Lot::getShippingDate).reversed())
+                .collect(Collectors.toList());
     }
 
 
