@@ -90,11 +90,13 @@
     <p>
         <label for="parcelTrackingNumber" style="font-size: 20px">Введіть TTN:</label>
         <input type="text" th:field="*{parcelTrackingNumber}" id="parcelTrackingNumber" style="font-size: 20px; display: inline-block; position: absolute; left: 135px;" />
+    <div STYLE="color: red" th:if="${#fields.hasErrors('parcelTrackingNumber')}" th:errors="*{parcelTrackingNumber}"></div>
     </p>
 
     <p>
         <label for="cardNumber" style="font-size: 20px">Номер заявки:</label>
         <input type="text" th:field="*{cardNumber}" id="cardNumber" style="font-size: 20px; display: inline-block; position: absolute; left: 135px;"/>
+    <div STYLE="color: red" th:if="${#fields.hasErrors('cardNumber')}" th:errors="*{cardNumber}"></div>
     </p>
 
     <input type="hidden" th:field="*{companyName}" />
@@ -112,11 +114,13 @@
     <p>
         <label for="descriptions" style="font-size: 20px">Опис:</label>
         <input type="text" th:field="*{descriptions}" id="descriptions" style="font-size: 20px; display: inline-block; position: absolute; left: 135px;"/>
+    <div STYLE="color: red" th:if="${#fields.hasErrors('descriptions')}" th:errors="*{descriptions}"></div>
     </p>
 
     <p>
         <label for="deliveryPrice" style="font-size: 20px">Ціна:</label>
         <input type="number" th:field="*{deliveryPrice}" id="deliveryPrice" style="font-size: 20px; display: inline-block; position: absolute; left: 135px;"/>
+    <div STYLE="color: red" th:if="${#fields.hasErrors('deliveryPrice')}" th:errors="*{deliveryPrice}"></div>
     </p>
 
     <p>
@@ -126,12 +130,6 @@
 </form>
 
 <hr class="light-line">
-
-
-
-<!--<form th:method="get" th:action="@{/parcel/{idLot}/{idPackage}/deletePackage(idLot=${idLot}, idPackage=${package.getId()})}">-->
-<!--    <input type="submit" value="Видалити" class="button-yes-delete" style="margin-left: 200px; margin-top: 25px; font-size: 20px"/>-->
-<!--</form>-->
 
 </body>
 </html>

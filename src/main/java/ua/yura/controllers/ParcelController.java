@@ -42,7 +42,8 @@ public class ParcelController {
 
     @GetMapping()
     public String show(Model model){
-        model.addAttribute("parcel", lotDAO.show());
+        model.addAttribute("parcels", lotDAO.show());
+
         return "parcel/show";
     }
 

@@ -27,6 +27,86 @@ public class LotDAO {
         lotList.add(new Lot(UUID.randomUUID(), "Відправлені", LocalDate.of(2024, 3, 7), packageDAO.getPackageList2()));
         lotList.add(new Lot(UUID.randomUUID(), "Відправлені", LocalDate.of(2024, 3, 5), packageDAO.getPackageList3()));
         lotList.add(new Lot(UUID.randomUUID(), "Отримані", LocalDate.of(2024, 4, 8), packageDAO.getPackageList5()));
+
+        lotList.add(new Lot(UUID.randomUUID(), "Відправлені", LocalDate.of(2024, 4, 6), packageDAO.getPackageList()));
+        lotList.add(new Lot(UUID.randomUUID(), "Отримані", LocalDate.of(2024, 4, 9), packageDAO.getPackageList4()));
+        lotList.add(new Lot(UUID.randomUUID(), "Відправлені", LocalDate.of(2024, 5, 7), packageDAO.getPackageList2()));
+        lotList.add(new Lot(UUID.randomUUID(), "Відправлені", LocalDate.of(2024, 5, 5), packageDAO.getPackageList3()));
+        lotList.add(new Lot(UUID.randomUUID(), "Отримані", LocalDate.of(2024, 5, 8), packageDAO.getPackageList5()));
+        lotList.add(new Lot(UUID.randomUUID(), "Відправлені", LocalDate.of(2024, 5, 6), packageDAO.getPackageList()));
+        lotList.add(new Lot(UUID.randomUUID(), "Отримані", LocalDate.of(2024, 5, 9), packageDAO.getPackageList4()));
+        lotList.add(new Lot(UUID.randomUUID(), "Відправлені", LocalDate.of(2024, 5, 7), packageDAO.getPackageList2()));
+        lotList.add(new Lot(UUID.randomUUID(), "Відправлені", LocalDate.of(2024, 5, 5), packageDAO.getPackageList3()));
+        lotList.add(new Lot(UUID.randomUUID(), "Отримані", LocalDate.of(2024, 5, 8), packageDAO.getPackageList5()));
+        lotList.add(new Lot(UUID.randomUUID(), "Відправлені", LocalDate.of(2024, 5, 6), packageDAO.getPackageList()));
+        lotList.add(new Lot(UUID.randomUUID(), "Отримані", LocalDate.of(2024, 5, 9), packageDAO.getPackageList4()));
+        lotList.add(new Lot(UUID.randomUUID(), "Відправлені", LocalDate.of(2024, 5, 7), packageDAO.getPackageList2()));
+        lotList.add(new Lot(UUID.randomUUID(), "Відправлені", LocalDate.of(2024, 6, 5), packageDAO.getPackageList3()));
+        lotList.add(new Lot(UUID.randomUUID(), "Отримані", LocalDate.of(2024, 6, 8), packageDAO.getPackageList5()));
+        lotList.add(new Lot(UUID.randomUUID(), "Відправлені", LocalDate.of(2024, 6, 6), packageDAO.getPackageList()));
+        lotList.add(new Lot(UUID.randomUUID(), "Отримані", LocalDate.of(2024, 6, 9), packageDAO.getPackageList4()));
+        lotList.add(new Lot(UUID.randomUUID(), "Відправлені", LocalDate.of(2024, 6, 7), packageDAO.getPackageList2()));
+        lotList.add(new Lot(UUID.randomUUID(), "Відправлені", LocalDate.of(2024, 6, 5), packageDAO.getPackageList3()));
+        lotList.add(new Lot(UUID.randomUUID(), "Отримані", LocalDate.of(2024, 6, 8), packageDAO.getPackageList5()));
+        lotList.add(new Lot(UUID.randomUUID(), "Відправлені", LocalDate.of(2024, 6, 6), packageDAO.getPackageList()));
+        lotList.add(new Lot(UUID.randomUUID(), "Отримані", LocalDate.of(2024, 7, 9), packageDAO.getPackageList4()));
+        lotList.add(new Lot(UUID.randomUUID(), "Відправлені", LocalDate.of(2024, 7, 7), packageDAO.getPackageList2()));
+        lotList.add(new Lot(UUID.randomUUID(), "Відправлені", LocalDate.of(2024, 7, 5), packageDAO.getPackageList3()));
+        lotList.add(new Lot(UUID.randomUUID(), "Отримані", LocalDate.of(2024, 7, 8), packageDAO.getPackageList5()));
+        lotList.add(new Lot(UUID.randomUUID(), "Відправлені", LocalDate.of(2024, 7, 6), packageDAO.getPackageList()));
+        lotList.add(new Lot(UUID.randomUUID(), "Отримані", LocalDate.of(2024, 7, 9), packageDAO.getPackageList4()));
+        lotList.add(new Lot(UUID.randomUUID(), "Відправлені", LocalDate.of(2024, 7, 7), packageDAO.getPackageList2()));
+        lotList.add(new Lot(UUID.randomUUID(), "Відправлені", LocalDate.of(2024, 7, 5), packageDAO.getPackageList3()));
+        lotList.add(new Lot(UUID.randomUUID(), "Отримані", LocalDate.of(2024, 7, 8), packageDAO.getPackageList5()));
+        lotList.add(new Lot(UUID.randomUUID(), "Відправлені", LocalDate.of(2024, 7, 6), packageDAO.getPackageList()));
+
+        lotList.add(new Lot(UUID.randomUUID(), "Відправлені", LocalDate.of(2024, 10, 1), packageDAO.getPackageList4()));
+        lotList.add(new Lot(UUID.randomUUID(), "Відправлені", LocalDate.of(2024, 10, 2), packageDAO.getPackageList2()));
+        lotList.add(new Lot(UUID.randomUUID(), "Відправлені", LocalDate.of(2024, 10, 3), packageDAO.getPackageList3()));
+        lotList.add(new Lot(UUID.randomUUID(), "Відправлені", LocalDate.of(2024, 10, 4), packageDAO.getPackageList5()));
+        lotList.add(new Lot(UUID.randomUUID(), "Відправлені", LocalDate.of(2024, 10, 7), packageDAO.getPackageList()));
+        lotList.add(new Lot(UUID.randomUUID(), "Відправлені", LocalDate.of(2024, 10, 8), packageDAO.getPackageList4()));
+        lotList.add(new Lot(UUID.randomUUID(), "Відправлені", LocalDate.of(2024, 10, 9), packageDAO.getPackageList2()));
+        lotList.add(new Lot(UUID.randomUUID(), "Відправлені", LocalDate.of(2024, 10, 10), packageDAO.getPackageList3()));
+        lotList.add(new Lot(UUID.randomUUID(), "Відправлені", LocalDate.of(2024, 10, 11), packageDAO.getPackageList5()));
+        lotList.add(new Lot(UUID.randomUUID(), "Відправлені", LocalDate.of(2024, 10, 14), packageDAO.getPackageList4()));
+        lotList.add(new Lot(UUID.randomUUID(), "Відправлені", LocalDate.of(2024, 10, 15), packageDAO.getPackageList2()));
+        lotList.add(new Lot(UUID.randomUUID(), "Відправлені", LocalDate.of(2024, 10, 16), packageDAO.getPackageList3()));
+        lotList.add(new Lot(UUID.randomUUID(), "Відправлені", LocalDate.of(2024, 10, 17), packageDAO.getPackageList5()));
+        lotList.add(new Lot(UUID.randomUUID(), "Відправлені", LocalDate.of(2024, 10, 18), packageDAO.getPackageList()));
+        lotList.add(new Lot(UUID.randomUUID(), "Відправлені", LocalDate.of(2024, 10, 21), packageDAO.getPackageList4()));
+        lotList.add(new Lot(UUID.randomUUID(), "Відправлені", LocalDate.of(2024, 10, 22), packageDAO.getPackageList2()));
+        lotList.add(new Lot(UUID.randomUUID(), "Відправлені", LocalDate.of(2024, 10, 23), packageDAO.getPackageList3()));
+        lotList.add(new Lot(UUID.randomUUID(), "Відправлені", LocalDate.of(2024, 10, 24), packageDAO.getPackageList5()));
+        lotList.add(new Lot(UUID.randomUUID(), "Відправлені", LocalDate.of(2024, 10, 28), packageDAO.getPackageList4()));
+        lotList.add(new Lot(UUID.randomUUID(), "Відправлені", LocalDate.of(2024, 10, 29), packageDAO.getPackageList2()));
+        lotList.add(new Lot(UUID.randomUUID(), "Відправлені", LocalDate.of(2024, 10, 30), packageDAO.getPackageList3()));
+
+        lotList.add(new Lot(UUID.randomUUID(), "Отримані", LocalDate.of(2024, 10, 1), packageDAO.getPackageList4()));
+        lotList.add(new Lot(UUID.randomUUID(), "Отримані", LocalDate.of(2024, 10, 2), packageDAO.getPackageList2()));
+        lotList.add(new Lot(UUID.randomUUID(), "Отримані", LocalDate.of(2024, 10, 3), packageDAO.getPackageList3()));
+        lotList.add(new Lot(UUID.randomUUID(), "Отримані", LocalDate.of(2024, 10, 4), packageDAO.getPackageList5()));
+        lotList.add(new Lot(UUID.randomUUID(), "Отримані", LocalDate.of(2024, 10, 7), packageDAO.getPackageList()));
+        lotList.add(new Lot(UUID.randomUUID(), "Отримані", LocalDate.of(2024, 10, 8), packageDAO.getPackageList4()));
+        lotList.add(new Lot(UUID.randomUUID(), "Отримані", LocalDate.of(2024, 10, 9), packageDAO.getPackageList2()));
+        lotList.add(new Lot(UUID.randomUUID(), "Отримані", LocalDate.of(2024, 10, 10), packageDAO.getPackageList3()));
+        lotList.add(new Lot(UUID.randomUUID(), "Отримані", LocalDate.of(2024, 10, 11), packageDAO.getPackageList5()));
+        lotList.add(new Lot(UUID.randomUUID(), "Отримані", LocalDate.of(2024, 10, 14), packageDAO.getPackageList4()));
+        lotList.add(new Lot(UUID.randomUUID(), "Отримані", LocalDate.of(2024, 10, 15), packageDAO.getPackageList2()));
+        lotList.add(new Lot(UUID.randomUUID(), "Отримані", LocalDate.of(2024, 10, 16), packageDAO.getPackageList3()));
+        lotList.add(new Lot(UUID.randomUUID(), "Отримані", LocalDate.of(2024, 10, 17), packageDAO.getPackageList5()));
+        lotList.add(new Lot(UUID.randomUUID(), "Отримані", LocalDate.of(2024, 10, 18), packageDAO.getPackageList()));
+        lotList.add(new Lot(UUID.randomUUID(), "Отримані", LocalDate.of(2024, 10, 21), packageDAO.getPackageList4()));
+        lotList.add(new Lot(UUID.randomUUID(), "Отримані", LocalDate.of(2024, 10, 22), packageDAO.getPackageList2()));
+        lotList.add(new Lot(UUID.randomUUID(), "Отримані", LocalDate.of(2024, 10, 23), packageDAO.getPackageList3()));
+        lotList.add(new Lot(UUID.randomUUID(), "Отримані", LocalDate.of(2024, 10, 24), packageDAO.getPackageList5()));
+        lotList.add(new Lot(UUID.randomUUID(), "Отримані", LocalDate.of(2024, 10, 28), packageDAO.getPackageList4()));
+        lotList.add(new Lot(UUID.randomUUID(), "Отримані", LocalDate.of(2024, 10, 29), packageDAO.getPackageList2()));
+        lotList.add(new Lot(UUID.randomUUID(), "Отримані", LocalDate.of(2024, 10, 30), packageDAO.getPackageList3()));
+
+
+
+
     }
 
     public List<Lot> getLotList() {
@@ -41,6 +121,7 @@ public class LotDAO {
         return lotList.stream()
                 .sorted(Comparator.comparing(Lot::getShippingDate).reversed())
                 .collect(Collectors.toList());
+
     }
 
     public Lot indexLot(UUID uuid) {
@@ -186,21 +267,6 @@ public class LotDAO {
             i++;
         }
     }
-
-//    public List<Package> findAllParcelsSubdivision(String client){
-//        List<Package> allParcelsSubdivision = new ArrayList<>();
-//        for (Lot lot : lotList) {
-//            if (lot.getPackageList() == null || lot.getPackageList().isEmpty()) {
-//                continue;
-//            }
-//            for (Package p : lot.getPackageList()) {
-//                    if (p.getClient().equals(client)) {
-//                        allParcelsSubdivision.add(p);
-//                    }
-//                }
-//        }
-//        return allParcelsSubdivision;
-//    }
 
     public List<Lot> findAllParcelsSubdivision(String client) {
         List<Lot> findAllParcelsSubdivisionInLot = new ArrayList<>();
