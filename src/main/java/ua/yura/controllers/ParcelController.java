@@ -19,7 +19,10 @@ import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
-import java.util.UUID;
+import java.time.temporal.WeekFields;
+import java.util.*;
+
+
 
 @Controller
 @RequestMapping("/parcel")
@@ -42,9 +45,20 @@ public class ParcelController {
 
     @GetMapping()
     public String show(Model model){
-        model.addAttribute("parcels", lotDAO.show());
+        List<Lot> lots = lotDAO.show();
+
+        Map<Integer, List<Lot>> lotsByWeek = new LinkedHashMap<>();
+        for (Lot lot : lots) {
+            int weekOfYear = lot.getShippingDate().get(WeekFields.ISO.weekOfYear());
+
+            lotsByWeek.computeIfAbsent(weekOfYear, k -> new ArrayList<>()).add(lot);
+        }
+
+        model.addAttribute("lotsByWeek", lotsByWeek);
+
 
         return "parcel/show";
+
     }
 
     @GetMapping("/{id}")
