@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <title>Всі посилки</title>
+
 
     <style>
         .light-line {
@@ -71,6 +73,12 @@
 
 
 
+        body {
+            font-family: 'Arial', sans-serif;
+        }
+
+
+
     </style>
 </head>
 
@@ -83,10 +91,24 @@
 <!-- Основной цикл для вывода посылок по неделям -->
 <div th:each="entry : ${lotsByWeek}">
     <!-- Вывод номера недели и месяца -->
+    <hr class="light-line"/>
     <p style="font-size: 20px; text-align: center">
-        <b>Тиждень: <span th:text="${entry.key} + ', ' "></span>
-        <span th:text="${#temporals.format(entry.value[0].getShippingDate(), 'MMMM yyyy')}" style="text-align: center" ></span></b>
+        Тиждень: <span th:text="${entry.key} + ', ' "></span>
+<!--        <span th:text="${#temporals.format(entry.value[0].getShippingDate(), 'MMMM yyyy')}" style="text-align: center" ></span>-->
+<!--        <span th:if="${#temporals.format(entry.value[0].getShippingDate(), 'MMMM yyyy') != #temporals.format(entry.value[0].getShippingDate(), 'MMMM yyyy')}" th:text="${' / ' + #temporals.format(entry.value[0].getShippingDate(), 'MMMM yyyy')}"></span>-->
+<!--    </p>-->
 
+    <!-- Получаем первую и последнюю даты недели -->
+    <span th:with="firstDate=${entry.value[0].getShippingDate()}, lastDate=${entry.value[entry.value.size() - 1].getShippingDate()}">
+            <!-- Выводим первый месяц -->
+            <span th:text="${#temporals.format(firstDate, 'MMMM yyyy')}"></span>
+
+        <!-- Если месяц первой и последней даты не совпадают, выводим последний месяц -->
+            <span th:if="${#temporals.format(firstDate, 'MMMM') != #temporals.format(lastDate, 'MMMM')}"
+                  th:text="${' / ' + #temporals.format(lastDate, 'MMMM yyyy')}"></span>
+    </span>
+
+    </p>
 
     <!-- Цикл для вывода посылок внутри недели -->
     <div th:each="parcel : ${entry.value}" class="parcel-item">
