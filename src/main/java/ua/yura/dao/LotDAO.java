@@ -177,7 +177,9 @@ public class LotDAO {
                 lotList1.add(lot);
             }
         }
-        return lotList1;
+        return lotList1.stream()
+                .sorted(Comparator.comparing(Lot::getShippingDate).reversed())
+                .collect(Collectors.toList());
     }
 
     public List<Lot> receiveStatus() {
@@ -187,7 +189,9 @@ public class LotDAO {
                 lotList1.add(lot);
             }
         }
-        return lotList1;
+        return lotList1.stream()
+                .sorted(Comparator.comparing(Lot::getShippingDate).reversed())
+                .collect(Collectors.toList());
     }
 
     public void save(Lot lot) {

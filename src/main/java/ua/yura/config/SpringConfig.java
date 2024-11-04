@@ -67,6 +67,8 @@ public class SpringConfig implements WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/images/**") // URL-путь для доступа к файлам
                 .addResourceLocations("/images/"); // Путь внутри webapp
+        registry.addResourceHandler("/static/**")
+                .addResourceLocations("/static/");
     }
 
     @Bean

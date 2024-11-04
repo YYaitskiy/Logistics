@@ -61,6 +61,40 @@ public class ParcelController {
 
     }
 
+    @GetMapping("/sent")
+    public String sent(Model model){
+        List<Lot> lots = lotDAO.sentStatus();
+
+        Map<Integer, List<Lot>> lotsByWeek = new LinkedHashMap<>();
+        for (Lot lot : lots) {
+            int weekOfYear = lot.getShippingDate().get(WeekFields.ISO.weekOfYear());
+
+            lotsByWeek.computeIfAbsent(weekOfYear, k -> new ArrayList<>()).add(lot);
+        }
+
+        model.addAttribute("lotsByWeek", lotsByWeek);
+
+
+        return "parcel/sent";
+    }
+
+    @GetMapping("/receive")
+    public String receive(Model model){
+        List<Lot> lots = lotDAO.receiveStatus();
+
+        Map<Integer, List<Lot>> lotsByWeek = new LinkedHashMap<>();
+        for (Lot lot : lots) {
+            int weekOfYear = lot.getShippingDate().get(WeekFields.ISO.weekOfYear());
+
+            lotsByWeek.computeIfAbsent(weekOfYear, k -> new ArrayList<>()).add(lot);
+        }
+
+        model.addAttribute("lotsByWeek", lotsByWeek);
+
+//        model.addAttribute("parcel", lotDAO.receiveStatus());
+        return "parcel/receive";
+    }
+
     @GetMapping("/{id}")
     public String id(@PathVariable("id") UUID uuid, Model model){
         System.out.println("id " + uuid);
@@ -71,17 +105,9 @@ public class ParcelController {
         return "parcel/index";
     }
 
-    @GetMapping("/sent")
-    public String sent(Model model){
-        model.addAttribute("parcel", lotDAO.sentStatus());
-        return "parcel/sent";
-    }
 
-    @GetMapping("/receive")
-    public String receive(Model model){
-        model.addAttribute("parcel", lotDAO.receiveStatus());
-        return "parcel/receive";
-    }
+
+
 
     @GetMapping("/newLot")
     public String newLot(Model model){

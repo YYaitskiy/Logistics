@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <title>Відправлені</title>
 
+    <link rel="stylesheet" type="text/css" href="/static/styles.css">
+
+
     <style>
         .light-line {
             border: none;
@@ -61,7 +64,7 @@
 
         .edit-button {
             position: absolute;
-            left: 250px;
+            left: 80vw;
         }
 
         .delete-button {
@@ -75,30 +78,81 @@
 <h3 ><a href="/parcel" class="link-menu"><span style="font-size: 30px">&larr;</span> Повернутись на головну</a> <a href="/parcel/receive" style="margin-left: 25px" class="link-menu">Отримані &#11015;</a> <a href="/parcel/newLot" style="margin-left: 25px" class="link-menu">Створити &#10010;</a></h3>
 <h2>Відправлені:</h2>
 
-<div th:each="parcel : ${parcel}" class="parcel-item">
-
+<!-- Основной цикл для вывода посылок по неделям -->
+<div th:each="entry : ${lotsByWeek}">
+    <!-- Вывод номера недели и месяца -->
     <hr class="light-line"/>
+    <p style="font-size: 20px; text-align: center">
+        Тиждень: <span th:text="${entry.key} + ', ' "></span>
+        <!--        <span th:text="${#temporals.format(entry.value[0].getShippingDate(), 'MMMM yyyy')}" style="text-align: center" ></span>-->
+        <!--        <span th:if="${#temporals.format(entry.value[0].getShippingDate(), 'MMMM yyyy') != #temporals.format(entry.value[0].getShippingDate(), 'MMMM yyyy')}" th:text="${' / ' + #temporals.format(entry.value[0].getShippingDate(), 'MMMM yyyy')}"></span>-->
+        <!--    </p>-->
 
-    <div style="margin-bottom: 15px; margin-top: 10px;">
-    <a th:href="@{/parcel/{id}(id=${parcel.getId()})}" th:text="${parcel.getStatus()} + ' ' +  ${#temporals.format(parcel.getShippingDate(), 'dd-MM-yyyy')}" class="parcel-link">user</a>
+        <!-- Получаем первую и последнюю даты недели -->
+        <span th:with="firstDate=${entry.value[0].getShippingDate()}, lastDate=${entry.value[entry.value.size() - 1].getShippingDate()}">
+            <!-- Выводим первый месяц -->
+            <span th:text="${#temporals.format(firstDate, 'MMMM yyyy')}"></span>
 
-    <div class="button-container edit-button">
-    <form th:method="GET" th:action="@{/parcel/sent/{id}/editLot(id=${parcel.getId()})}">
-        <input type="submit" value="Редагувати" class="button-edit"/>
-    </form>
+            <!-- Если месяц первой и последней даты не совпадают, выводим последний месяц -->
+            <span th:if="${#temporals.format(firstDate, 'MMMM') != #temporals.format(lastDate, 'MMMM')}"
+                  th:text="${' / ' + #temporals.format(lastDate, 'MMMM yyyy')}"></span>
+    </span>
+
+    </p>
+
+    <!-- Цикл для вывода посылок внутри недели -->
+    <div th:each="parcel : ${entry.value}" class="parcel-item">
+        <hr class="light-line"/>
+        <div style="margin-bottom: 15px; margin-top: 10px;">
+            <!-- День недели и дата посылки -->
+            <b th:text="${#temporals.format(parcel.getShippingDate(), 'E') + ' | '}" style="font-size: 18px"></b>
+            <a th:href="@{/parcel/{id}(id=${parcel.getId()})}"
+               th:text="${parcel.getStatus()} + ' ' + ${#temporals.format(parcel.getShippingDate(), 'dd-MM-yyyy')}"
+               class="parcel-link"></a>
+
+            <!-- Кнопки Редагувати и Видалити -->
+            <div class="button-container edit-button">
+                <form th:method="GET" th:action="@{/parcel/{id}/editLot(id=${parcel.getId()})}">
+                    <input type="submit" value="Редагувати" class="button-edit"/>
+                </form>
+            </div>
+
+            <div class="button-container delete-button">
+                <form th:method="GET" th:action="@{/parcel/{id}/deleteLot(id=${parcel.getId()})}">
+                    <input type="submit" value="Видалити" class="button-delete"/>
+                </form>
+            </div>
+        </div>
     </div>
-
-    <div class="button-container delete-button">
-    <form th:method="GET" th:action="@{/parcel/sent/{id}/deleteLot(id=${parcel.getId()})}">
-        <input type="submit" value="Видалити" class="button-delete"/>
-    </form>
-    </div>
-
-
-    </div>
-
 </div>
+
+<!-- Горизонтальная линия внизу -->
 <hr class="light-line"/>
+
+<!--<div th:each="parcel : ${parcel}" class="parcel-item">-->
+
+<!--    <hr class="light-line"/>-->
+
+<!--    <div style="margin-bottom: 15px; margin-top: 10px;">-->
+<!--    <a th:href="@{/parcel/{id}(id=${parcel.getId()})}" th:text="${parcel.getStatus()} + ' ' +  ${#temporals.format(parcel.getShippingDate(), 'dd-MM-yyyy')}" class="parcel-link">user</a>-->
+
+<!--    <div class="button-container edit-button">-->
+<!--    <form th:method="GET" th:action="@{/parcel/sent/{id}/editLot(id=${parcel.getId()})}">-->
+<!--        <input type="submit" value="Редагувати" class="button-edit"/>-->
+<!--    </form>-->
+<!--    </div>-->
+
+<!--    <div class="button-container delete-button">-->
+<!--    <form th:method="GET" th:action="@{/parcel/sent/{id}/deleteLot(id=${parcel.getId()})}">-->
+<!--        <input type="submit" value="Видалити" class="button-delete"/>-->
+<!--    </form>-->
+<!--    </div>-->
+
+
+<!--    </div>-->
+
+<!--</div>-->
+<!--<hr class="light-line"/>-->
 
 </body>
 </html>
