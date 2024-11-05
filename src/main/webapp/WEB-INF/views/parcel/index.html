@@ -65,7 +65,7 @@
     <a href="/parcel/sent" style="margin-left: 25px" class="link-menu">Відправлені &#11014;</a>
     <a href="/parcel/receive" style="margin-left: 25px" class="link-menu">Отримані &#11015;</a>
 </h3>
-<h2 th:text="${parcel.getStatus()} + ' ' + ${#temporals.format(parcel.getShippingDate(), 'dd-MM-yyyy')}">VALUE</h2>
+<h2 th:text="${parcel.getStatus()} + ' ' + ${#temporals.format(parcel.getShippingDate(), 'dd-MM-yyyy, EEEE')}">VALUE</h2>
 
 <div th:with="parcelList=${parcel.getPackageList()}">
     <div th:each="package, iterStat : ${parcelList}">

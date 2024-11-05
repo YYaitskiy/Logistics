@@ -105,7 +105,7 @@
         <hr class="light-line"/>
         <div style="margin-bottom: 15px; margin-top: 10px;">
             <!-- День недели и дата посылки -->
-            <b th:text="${#temporals.format(parcel.getShippingDate(), 'E') + ' | '}" style="font-size: 18px"></b>
+            <b th:text="${#temporals.format(parcel.getShippingDate(), 'EEEE') + ' | '}" style="font-size: 18px"></b>
             <a th:href="@{/parcel/{id}(id=${parcel.getId()})}"
                th:text="${parcel.getStatus()} + ' ' + ${#temporals.format(parcel.getShippingDate(), 'dd-MM-yyyy')}"
                class="parcel-link"></a>

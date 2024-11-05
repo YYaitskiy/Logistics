@@ -24,34 +24,36 @@
             background-color: #d3d3d3; /* Светло-серый цвет */
         }
 
-        .button-do-not-delete{
-            font-size: 17px;
+        .button_edit{
+            font-size: 20px;
             border: 1px solid #9F9F9F; /* Базовая рамка для кнопок */
-            margin-right: 10px;
             cursor: pointer;
             padding: 2px 7px;
             border-radius: 10px;
-            position: absolute
+            position: absolute;
+            margin-top: 25px;
         }
 
-        .button-do-not-delete:hover{
+        .button_edit:hover{
             outline: none;
             color: #333; /* Цвет текста при наведении */
             border: 2px solid #333; /* Рамка при наведении */
             font-weight: bold;
         }
 
-        .button-yes-delete{
+        .button_delete{
             border: 1px solid #9F9F9F; /* Базовая рамка для кнопок */
-            margin-right: 10px;
             cursor: pointer;
             padding: 2px 7px;
             border-radius: 10px;
-            position: absolute
+            position: absolute;
+            margin-left: 200px;
+            margin-top: 25px;
+            font-size: 20px;
 
         }
 
-        .button-yes-delete:hover{
+        .button_delete:hover{
             outline: none;
             color: #333; /* Цвет текста при наведении */
             border: 2px solid #333; /* Рамка при наведении */
@@ -68,6 +70,17 @@
         .link-index:hover {
             text-decoration: underline;
             color: #333;
+        }
+
+        .info_package_descriptions{
+            font-size: 20px;
+            position: absolute;
+            left: 180px;
+        }
+
+        .info_package_headline{
+            font-size: 20px;
+            font-weight: bold;
         }
 
     </style>
@@ -99,44 +112,44 @@
     <img src="#" th:src="@{'/images/' + ${package.getCompanyName()} + '.png'}"   alt="logo McD" style="margin-left: 5px; width: auto; height: 25px;">
 </div>
 
-<p><a th:href="@{/parcel/{idLot}(idLot=${lot.getId()})}" th:text="${lot.getStatus()} + ' ' + ${#temporals.format(lot.getShippingDate(), 'dd-MM-yyyy')}"  class="link-index"></a></p>
+<p><a th:href="@{/parcel/{idLot}(idLot=${lot.getId()})}" th:text="${lot.getStatus()} + ' ' + ${#temporals.format(lot.getShippingDate(), 'dd-MM-yyyy, EEEE')}"  class="link-index"></a></p>
 
 <hr class="light-line">
 
 <div>
-    <span style="font-size: 22px">№ TTN:</span>
-    <SPAN th:text="${package.getParcelTrackingNumber()}" style="font-size: 22px;  position: absolute; left: 140px; font-weight: bold"></SPAN>
+    <span class="info_package_headline">№ TTN:</span>
+    <SPAN th:text="${package.getParcelTrackingNumber()}" class="info_package_descriptions"></SPAN>
 </div>
 
 <div style="margin-top: 10px">
-    <span style="font-size: 20px">Номер заявки:</span>
-    <span th:text="${package.getCardNumber()}" style="font-size: 20px;  position: absolute; left: 140px; font-weight: bold"></span>
+    <span class="info_package_headline">Номер заявки:</span>
+    <span th:text="${package.getCardNumber()}" class="info_package_descriptions"></span>
 </div >
 
 <div style="margin-top: 10px">
-    <span style="font-size: 20px">Замовник:</span>
-    <span th:text="${package.getClient()}" style="font-size: 20px;  position: absolute; left: 140px; font-weight: bold"></span>
+    <span class="info_package_headline">Замовник:</span>
+    <span th:text="${package.getClient()}" class="info_package_descriptions"></span>
 </div>
 
 <div style="margin-top: 10px">
-    <span style="font-size: 20px">Опис:</span>
-    <span th:text="${package.getDescriptions()}" style="font-size: 20px;  position: absolute; left: 140px; font-weight: bold"></span>
+    <span class="info_package_headline">Опис:</span>
+    <span th:text="${package.getDescriptions()}" class="info_package_descriptions"></span>
 </div>
 
 <div style="margin-top: 10px">
-    <span style="font-size: 20px">Ціна:</span>
-    <span th:text="${package.getDeliveryPrice()} + 'грн ' + '&#8372;'" style="font-size: 20px;  position: absolute; left: 140px; font-weight: bold"></span>
+    <span class="info_package_headline">Ціна:</span>
+    <span th:text="${package.getDeliveryPrice()} + 'грн ' + '&#8372;'" class="info_package_descriptions"></span>
 </div>
 
 
 <form th:method="get" th:action="@{/parcel/{idLot}/{idPackage}/{company}/editPackage(company=${company.getName()},  idLot=${idLot}, idPackage=${package.getId()} )}">
     <input type="hidden" th:name="from" th:value="${from}" />
-    <input type="submit" value="Редагувати" class="button-do-not-delete" style="margin-top: 25px; font-size: 20px"/>
+    <input type="submit" value="Редагувати" class="button_edit" />
 </form>
 
 <form th:method="get" th:action="@{/parcel/{idLot}/{idPackage}/deletePackage(idLot=${idLot}, idPackage=${package.getId()})}">
     <input type="hidden" th:name="from" th:value="${from}" />
-    <input type="submit" value="Видалити" class="button-yes-delete" style="margin-left: 200px; margin-top: 25px; font-size: 20px"/>
+    <input type="submit" value="Видалити" class="button_delete" />
 </form>
 
 <hr class="light-line">

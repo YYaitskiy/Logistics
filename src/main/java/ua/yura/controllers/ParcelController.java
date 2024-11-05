@@ -56,7 +56,6 @@ public class ParcelController {
 
         model.addAttribute("lotsByWeek", lotsByWeek);
 
-
         return "parcel/show";
 
     }
@@ -74,7 +73,6 @@ public class ParcelController {
 
         model.addAttribute("lotsByWeek", lotsByWeek);
 
-
         return "parcel/sent";
     }
 
@@ -91,13 +89,11 @@ public class ParcelController {
 
         model.addAttribute("lotsByWeek", lotsByWeek);
 
-//        model.addAttribute("parcel", lotDAO.receiveStatus());
         return "parcel/receive";
     }
 
     @GetMapping("/{id}")
     public String id(@PathVariable("id") UUID uuid, Model model){
-        System.out.println("id " + uuid);
         model.addAttribute("parcel", lotDAO.indexLot(uuid));
         model.addAttribute("companyNameMCD", companyDAO.getCompanyList().get(0).getName());
         model.addAttribute("companyNamePuma", companyDAO.getCompanyList().get(1).getName());
@@ -163,24 +159,10 @@ public class ParcelController {
         return "redirect:/parcel";
     }
 
-    @GetMapping("sent/{id}/editLot")
-    public String sentEditLot (@PathVariable("id") UUID uuid, Model model){
-        Lot lot = lotDAO.indexLot(uuid);
-        model.addAttribute("lot", lot);
-        return "parcel/sentEditLot";
-    }
-
     @PatchMapping("sent/{id}/update")
     public String sentUpdateLot(@ModelAttribute("lot") Lot lot){
         lotDAO.updateLot(lot);
         return "redirect:/parcel/sent";
-    }
-
-    @GetMapping("receive/{id}/editLot")
-    public String receiveSentEditLot (@PathVariable("id") UUID uuid, Model model){
-        Lot lot = lotDAO.indexLot(uuid);
-        model.addAttribute("lot", lot);
-        return "parcel/receiveEditLot";
     }
 
     @PatchMapping("receive/{id}/update")
@@ -202,24 +184,12 @@ public class ParcelController {
         return "redirect:/parcel";
     }
 
-    @GetMapping("/sent/{id}/deleteLot")
-    public String getSentDelete(@PathVariable("id") UUID uuid, Model model){
-        Lot lot = lotDAO.indexLot(uuid);
-        model.addAttribute("lot", lot);
-        return "parcel/sentDeleteLot";
-    }
+
 
     @DeleteMapping("sent/{id}/deleteLot")
     public String sentDelete(@PathVariable("id") UUID uuid){
         lotDAO.delete(uuid);
         return "redirect:/parcel/sent";
-    }
-
-    @GetMapping("/receive/{id}/deleteLot")
-    public String getReceiveDelete(@PathVariable("id") UUID uuid, Model model){
-        Lot lot = lotDAO.indexLot(uuid);
-        model.addAttribute("lot", lot);
-        return "parcel/receiveDeleteLot";
     }
 
     @DeleteMapping("receive/{id}/deleteLot")
@@ -274,7 +244,6 @@ public class ParcelController {
 
     @GetMapping("/{idLot}/{idPackage}/deletePackage")
     public String getDeletePackage(@PathVariable("idLot") UUID uuidLot, @PathVariable("idPackage") UUID uuidPackage, @RequestParam(value = "from", required = false) String from, Model model){
-        System.out.println("first getDeletePackage from= " + from);
         Lot lot = lotDAO.indexLot(uuidLot);
         Package p = lotDAO.indexPackage(uuidLot, uuidPackage);
         model.addAttribute("company", companyDAO.searchCompany(p.getCompanyName()));
@@ -282,7 +251,6 @@ public class ParcelController {
         model.addAttribute("idLot", uuidLot);
         model.addAttribute("from", from);
         model.addAttribute("lot", lot);
-        System.out.println("last getDeletePackage from= " + from);
         return "parcel/deletePackage";
     }
     @DeleteMapping("/{idLot}/{idPackage}/deletePackage")
@@ -298,13 +266,11 @@ public class ParcelController {
         String encodedClient = URLEncoder.encode(client, StandardCharsets.UTF_8.toString());
 
         lotDAO.deletePackage(uuidLot, uuidPackage);
-        System.out.println("from= " + from);
         // Если параметр "from" равен "companyInfo", перенаправляем обратно на страницу companyInfo
         if ("companyInfo".equals(from)) {
             return "redirect:/parcel/" + encodedCompanyName + '/' + encodedClient + "/company?idLot=" + uuidLot;
         }
 
-        // Если параметр "from" не передан, перенаправляем на страницу "id"
         return "redirect:/parcel/" + uuidLot;
     }
 
@@ -312,13 +278,11 @@ public class ParcelController {
     public String companyInfo(@PathVariable("companyName") String companyName,@PathVariable("subdivisionName") String subdivisionName, @RequestParam("idLot") UUID uuidLot, Model model) throws UnsupportedEncodingException {
         String decodedCompanyName = URLDecoder.decode(companyName, StandardCharsets.UTF_8.toString());
         String decodedSubdivisionName = URLDecoder.decode(subdivisionName, StandardCharsets.UTF_8.toString());
-//        Lot lot = lotDAO.indexLot(uuidLot);
-//        model.addAttribute("lot", lot);
+
         model.addAttribute("company", companyDAO.searchCompany(decodedCompanyName));
         model.addAttribute("subdivision", companyDAO.searchSubdivision(decodedCompanyName, decodedSubdivisionName));
         model.addAttribute("listAllParcelsSubdivision", lotDAO.findAllParcelsSubdivision(decodedSubdivisionName));
         model.addAttribute("idLot", uuidLot);
-        System.out.println("companyInfo uuidLot " + uuidLot);
         return "parcel/companyShow";
     }
 

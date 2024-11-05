@@ -66,7 +66,7 @@
     <img src="#" th:src="@{'/images/' + ${package.getCompanyName()} + '.png'}"   alt="logo McD" style="margin-left: 5px; width: auto; height: 25px;">
 </div>
 
-<p><a th:href="@{/parcel/{idLot}(idLot=${lot.getId()})}" th:text="${lot.getStatus()} + ' ' + ${#temporals.format(lot.getShippingDate(), 'dd-MM-yyyy')}"  class="link-index"></a></p>
+<p><a th:href="@{/parcel/{idLot}(idLot=${lot.getId()})}" th:text="${lot.getStatus()} + ' ' + ${#temporals.format(lot.getShippingDate(), 'dd-MM-yyyy, EEEE')}"  class="link-index"></a></p>
 
 <hr class="light-line">
 

@@ -67,6 +67,12 @@
             text-decoration: underline;
             color: #333;
         }
+
+        .info_package_descriptions_new_and_edit{
+            font-size: 20px;
+            display: inline-block;
+            position: absolute; left: 180px;
+        }
     </style>
 
 </head>
@@ -83,7 +89,7 @@
     <img src="#" th:src="@{'/images/' + ${package.getCompanyName()} + '.png'}"   alt="logo McD" style="margin-left: 5px; width: auto; height: 25px;">
 </div>
 
-<p><a th:href="@{/parcel/{idLot}(idLot=${lot.getId()})}" th:text="${lot.getStatus()} + ' ' + ${#temporals.format(lot.getShippingDate(), 'dd-MM-yyyy')}"  class="link-index"></a></p>
+<p><a th:href="@{/parcel/{idLot}(idLot=${lot.getId()})}" th:text="${lot.getStatus()} + ' ' + ${#temporals.format(lot.getShippingDate(), 'dd-MM-yyyy, EEEE')}"  class="link-index"></a></p>
 
 <hr class="light-line">
 
@@ -91,13 +97,13 @@
 
     <p>
         <label for="parcelTrackingNumber" style="font-size: 20px">Введіть TTN:</label>
-        <input type="text" th:field="*{parcelTrackingNumber}" id="parcelTrackingNumber" style="font-size: 20px; display: inline-block; position: absolute; left: 135px;" />
+        <input type="text" th:field="*{parcelTrackingNumber}" id="parcelTrackingNumber" class="info_package_descriptions_new_and_edit" />
     <div STYLE="color: red" th:if="${#fields.hasErrors('parcelTrackingNumber')}" th:errors="*{parcelTrackingNumber}"></div>
     </p>
 
     <p>
         <label for="cardNumber" style="font-size: 20px">Номер заявки:</label>
-        <input type="text" th:field="*{cardNumber}" id="cardNumber" style="font-size: 20px; display: inline-block; position: absolute; left: 135px;"/>
+        <input type="text" th:field="*{cardNumber}" id="cardNumber" class="info_package_descriptions_new_and_edit"/>
     <div STYLE="color: red" th:if="${#fields.hasErrors('cardNumber')}" th:errors="*{cardNumber}"></div>
     </p>
 
@@ -105,7 +111,7 @@
 
     <p>
         <label for="client" style="font-size: 20px;">Замовник: </label>
-        <select name="client" th:field="*{client}" id="client" style="font-size: 20px; display: inline-block; position: absolute; left: 135px;">
+        <select name="client" th:field="*{client}" id="client" class="info_package_descriptions_new_and_edit">
             <option value=""  ></option>
             <th:block th:each="subdivision : ${subdivisionDAO}" >
                 <option th:value="${subdivision.name}" th:text="${subdivision.numberSubdivision} + ' ' + ${subdivision.name}"></option>
@@ -115,13 +121,13 @@
 
     <p>
         <label for="descriptions" style="font-size: 20px">Опис:</label>
-        <input type="text" th:field="*{descriptions}" id="descriptions" style="font-size: 20px; display: inline-block; position: absolute; left: 135px;"/>
+        <input type="text" th:field="*{descriptions}" id="descriptions" class="info_package_descriptions_new_and_edit"/>
     <div STYLE="color: red" th:if="${#fields.hasErrors('descriptions')}" th:errors="*{descriptions}"></div>
     </p>
 
     <p>
         <label for="deliveryPrice" style="font-size: 20px">Ціна:</label>
-        <input type="number" th:field="*{deliveryPrice}" id="deliveryPrice" style="font-size: 20px; display: inline-block; position: absolute; left: 135px;"/>
+        <input type="number" th:field="*{deliveryPrice}" id="deliveryPrice" class="info_package_descriptions_new_and_edit"/>
     <div STYLE="color: red" th:if="${#fields.hasErrors('deliveryPrice')}" th:errors="*{deliveryPrice}"></div>
     </p>
 

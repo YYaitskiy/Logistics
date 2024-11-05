@@ -149,26 +149,8 @@ public class LotDAO {
                 break;
             }
         }
-        System.out.println("LotDao indexPackage " + packageId.getId());
         return packageId;
     }
-
-    public Package indexPackageCompany(UUID idPackageLot) {
-        Package packageId = new Package();
-        for (Lot lot : lotList) {
-                for (Package p : lot.getPackageList()) {
-                    if (p.getIdLot().equals(idPackageLot)) {
-                        packageId = p;
-                        break;
-                    }
-                }
-
-
-        }
-        System.out.println("LotDao indexPackageCompany " + packageId.getId());
-        return packageId;
-    }
-
 
     public List<Lot> sentStatus() {
         List<Lot> lotList1 = new ArrayList<>();

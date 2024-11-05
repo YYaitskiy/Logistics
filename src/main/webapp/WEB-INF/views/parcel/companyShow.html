@@ -103,7 +103,7 @@
                 <hr class="light-line" style=" margin-top: 15px"/>
 
                 <!-- Выводим ссылку на всю группу только один раз -->
-                <a th:href="@{/parcel/{idLot}(idLot=${parcelLot.getId()})}" th:text="${parcelLot.getStatus()} + ' ' + ${#temporals.format(parcelLot.getShippingDate(), 'dd-MM-yyyy')}" class="link-index" ></a>
+                <a th:href="@{/parcel/{idLot}(idLot=${parcelLot.getId()})}" th:text="${parcelLot.getStatus()} + ' ' + ${#temporals.format(parcelLot.getShippingDate(), 'dd-MM-yyyy, EEEE')}" class="link-index" ></a>
             </div>
 
             <!-- Выводим информацию о заявке -->
