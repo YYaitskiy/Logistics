@@ -23,33 +23,20 @@
             background-color: #d3d3d3; /* Светло-серый цвет */
         }
 
-        .button-to-create{
+
+
+        .button_edit{
             font-size: 20px;
             border: 1px solid #9F9F9F; /* Базовая рамка для кнопок */
             margin-right: 10px;
             cursor: pointer;
             padding: 2px 7px;
             border-radius: 10px;
+            position: absolute;
+            margin-top: 25px;
         }
 
-        .button-to-create:hover{
-            outline: none;
-            color: #333; /* Цвет текста при наведении */
-            border: 2px solid #333; /* Рамка при наведении */
-            font-weight: bold;
-        }
-
-        .button-do-not-delete{
-            font-size: 17px;
-            border: 1px solid #9F9F9F; /* Базовая рамка для кнопок */
-            margin-right: 10px;
-            cursor: pointer;
-            padding: 2px 7px;
-            border-radius: 10px;
-            position: absolute
-        }
-
-        .button-do-not-delete:hover{
+        .button_edit:hover{
             outline: none;
             color: #333; /* Цвет текста при наведении */
             border: 2px solid #333; /* Рамка при наведении */
@@ -72,6 +59,11 @@
             font-size: 20px;
             display: inline-block;
             position: absolute; left: 180px;
+        }
+
+        .info_package_headline{
+            font-size: 20px;
+            font-weight: bold;
         }
     </style>
 
@@ -96,13 +88,13 @@
 <form th:method="PATCH" th:action="@{/parcel/{idLot}/{id}/{companyName}/editPackage(idLot=${idLot}, id=${idPackage}, companyName=${company.getName()}, from=${from})}" th:object="${package}">
 
     <p>
-        <label for="parcelTrackingNumber" style="font-size: 20px">Введіть TTN:</label>
+        <label for="parcelTrackingNumber" class="info_package_headline">№ TTN:</label>
         <input type="text" th:field="*{parcelTrackingNumber}" id="parcelTrackingNumber" class="info_package_descriptions_new_and_edit" />
     <div STYLE="color: red" th:if="${#fields.hasErrors('parcelTrackingNumber')}" th:errors="*{parcelTrackingNumber}"></div>
     </p>
 
     <p>
-        <label for="cardNumber" style="font-size: 20px">Номер заявки:</label>
+        <label for="cardNumber" class="info_package_headline">Номер заявки:</label>
         <input type="text" th:field="*{cardNumber}" id="cardNumber" class="info_package_descriptions_new_and_edit"/>
     <div STYLE="color: red" th:if="${#fields.hasErrors('cardNumber')}" th:errors="*{cardNumber}"></div>
     </p>
@@ -110,7 +102,7 @@
     <input type="hidden" th:field="*{companyName}" />
 
     <p>
-        <label for="client" style="font-size: 20px;">Замовник: </label>
+        <label for="client" class="info_package_headline">Замовник: </label>
         <select name="client" th:field="*{client}" id="client" class="info_package_descriptions_new_and_edit">
             <option value=""  ></option>
             <th:block th:each="subdivision : ${subdivisionDAO}" >
@@ -120,19 +112,19 @@
     </p>
 
     <p>
-        <label for="descriptions" style="font-size: 20px">Опис:</label>
+        <label for="descriptions" class="info_package_headline">Опис:</label>
         <input type="text" th:field="*{descriptions}" id="descriptions" class="info_package_descriptions_new_and_edit"/>
     <div STYLE="color: red" th:if="${#fields.hasErrors('descriptions')}" th:errors="*{descriptions}"></div>
     </p>
 
     <p>
-        <label for="deliveryPrice" style="font-size: 20px">Ціна:</label>
+        <label for="deliveryPrice" class="info_package_headline">Ціна:</label>
         <input type="number" th:field="*{deliveryPrice}" id="deliveryPrice" class="info_package_descriptions_new_and_edit"/>
     <div STYLE="color: red" th:if="${#fields.hasErrors('deliveryPrice')}" th:errors="*{deliveryPrice}"></div>
     </p>
 
     <p>
-        <input type="submit" value="Редагувати" class="button-do-not-delete" style="margin-top: 25px; font-size: 20px"/>
+        <input type="submit" value="Редагувати" class="button_edit"/>
     </p>
 
 </form>

@@ -52,6 +52,17 @@
             background-color: #d3d3d3; /* Светло-серый цвет */
         }
 
+        .info_package_descriptions_new_and_edit{
+            font-size: 20px;
+            display: inline-block;
+            position: absolute; left: 180px;
+        }
+
+        .info_package_headline{
+            font-size: 20px;
+            font-weight: bold;
+        }
+
     </style>
 </head>
 <body>
@@ -73,21 +84,21 @@
 <form th:method="POST" th:action="@{/parcel/{id}(id=${package.getId()})}" th:object="${package}">
 
     <p>
-    <label for="parcelTrackingNumber" style="font-size: 20px">Введіть TTN:</label>
-    <input type="text" th:field="*{parcelTrackingNumber}" id="parcelTrackingNumber" style="font-size: 20px; display: inline-block; position: absolute; left: 135px;"  required/>
+    <label for="parcelTrackingNumber" class="info_package_headline">№ TTN:</label>
+    <input type="text" th:field="*{parcelTrackingNumber}" id="parcelTrackingNumber" class="info_package_descriptions_new_and_edit"  required/>
     <div STYLE="color: red" th:if="${#fields.hasErrors('parcelTrackingNumber')}" th:errors="*{parcelTrackingNumber}"></div>
     </p>
 
     <p>
-    <label for="cardNumber" style="font-size: 20px">Номер заявки:</label>
-    <input type="text" th:field="*{cardNumber}" id="cardNumber" style="font-size: 20px; display: inline-block; position: absolute; left: 135px;" required/>
+    <label for="cardNumber" class="info_package_headline">Номер заявки:</label>
+    <input type="text" th:field="*{cardNumber}" id="cardNumber" class="info_package_descriptions_new_and_edit" required/>
     <div STYLE="color: red" th:if="${#fields.hasErrors('cardNumber')}" th:errors="*{cardNumber}"></div>
     </p>
 
     <input type="hidden" th:field="*{companyName}" />
 
-    <label for="client" style="font-size: 20px;">Замовник: </label>
-    <select name="client" th:field="*{client}" id="client" style="font-size: 20px; display: inline-block; position: absolute; left: 135px;" required>
+    <label for="client" class="info_package_headline">Замовник: </label>
+    <select name="client" th:field="*{client}" id="client" class="info_package_descriptions_new_and_edit" required>
         <option value=""  ></option>
         <th:block th:each="subdivision : ${subdivisionDAO}" >
             <option th:value="${subdivision.name}" th:text="${subdivision.numberSubdivision} + ' ' + ${subdivision.name}"></option>
@@ -95,15 +106,15 @@
     </select>
 
     <p>
-    <label for="descriptions" style="font-size: 20px">Опис:</label>
-    <input type="text" th:field="*{descriptions}" id="descriptions" style="font-size: 20px; display: inline-block; position: absolute; left: 135px;" required/>
+    <label for="descriptions" class="info_package_headline">Опис:</label>
+    <input type="text" th:field="*{descriptions}" id="descriptions" class="info_package_descriptions_new_and_edit" required/>
     <div STYLE="color: red" th:if="${#fields.hasErrors('descriptions')}" th:errors="*{descriptions}"></div>
 
     </p>
 
     <p>
-    <label for="deliveryPrice" style="font-size: 20px">Ціна:</label>
-    <input type="number" th:field="*{deliveryPrice}" id="deliveryPrice" style="font-size: 20px; display: inline-block; position: absolute; left: 135px;"/>
+    <label for="deliveryPrice" class="info_package_headline">Ціна:</label>
+    <input type="number" th:field="*{deliveryPrice}" id="deliveryPrice" class="info_package_descriptions_new_and_edit"/>
     <div STYLE="color: red" th:if="${#fields.hasErrors('deliveryPrice')}" th:errors="*{deliveryPrice}"></div>
     </p>
 

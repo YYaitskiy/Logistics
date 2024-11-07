@@ -58,12 +58,13 @@
     <img src="#" th:src="@{'/images/' + ${package.getCompanyName()} + '.png'}" alt="logo McD" style="margin-left: 5px; width: auto; height: 25px;">
 
     <!-- Разделитель после логотипа -->
-    <span style="margin: 0 10px;">---</span>
+    <span style="margin: 0 10px;"></span>
+</div>
 
+<div style="display: flex; align-items: center; justify-content: center; text-align: center; font-size: 21px">
     <b>Опис:</b>&nbsp;
     <span th:text="${package.getDescriptions()}"></span>
 </div>
-
 
 
 <div style="margin-top: 10px">

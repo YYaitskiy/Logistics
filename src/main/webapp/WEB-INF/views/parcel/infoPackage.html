@@ -72,12 +72,6 @@
             color: #333;
         }
 
-        .info_package_descriptions{
-            font-size: 20px;
-            position: absolute;
-            left: 180px;
-        }
-
         .info_package_headline{
             font-size: 20px;
             font-weight: bold;
@@ -90,7 +84,7 @@
     <a th:if="${from == 'companyInfo'}"
        th:href="@{/parcel/{companyName}/{subdivisionName}/company(companyName=${company.name}, subdivisionName=${package.getClient()}, idLot=${idLot})}"
        class="link-menu">
-        <span style="font-size: 30px">&larr;</span> Повернутись до Company Info
+        <span style="font-size: 30px">&larr;</span> Повернутись
     </a>
 
     <a th:unless="${from == 'companyInfo'}"
@@ -118,27 +112,27 @@
 
 <div>
     <span class="info_package_headline">№ TTN:</span>
-    <SPAN th:text="${package.getParcelTrackingNumber()}" class="info_package_descriptions"></SPAN>
+    <SPAN th:text="${package.getParcelTrackingNumber()}" style="margin-left: 90px; font-size: 20px"></SPAN>
 </div>
 
 <div style="margin-top: 10px">
     <span class="info_package_headline">Номер заявки:</span>
-    <span th:text="${package.getCardNumber()}" class="info_package_descriptions"></span>
+    <span th:text="${package.getCardNumber()}" style="margin-left: 7px; font-size: 20px"></span>
 </div >
 
 <div style="margin-top: 10px">
     <span class="info_package_headline">Замовник:</span>
-    <span th:text="${package.getClient()}" class="info_package_descriptions"></span>
+    <span th:text="${package.getClient()}" style="margin-left: 55px; font-size: 20px"></span>
 </div>
 
 <div style="margin-top: 10px">
     <span class="info_package_headline">Опис:</span>
-    <span th:text="${package.getDescriptions()}" class="info_package_descriptions"></span>
+    <span th:text="${package.getDescriptions()}" style="margin-left: 105px; font-size: 20px"></span>
 </div>
 
 <div style="margin-top: 10px">
     <span class="info_package_headline">Ціна:</span>
-    <span th:text="${package.getDeliveryPrice()} + 'грн ' + '&#8372;'" class="info_package_descriptions"></span>
+    <span th:text="${package.getDeliveryPrice()} + 'грн ' + '&#8372;'"  style="margin-left: 105px; font-size: 20px"></span>
 </div>
 
 
